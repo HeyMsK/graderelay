@@ -205,95 +205,161 @@ const CATEGORY_META = {
 };
 
 const SUBJECTS = {
-  "── Required Core Classes ──": [
-    "English 9", "English 10", "English 11", "English 12",
-    "AP English Language & Composition", "AP English Literature & Composition",
-    "Algebra I", "Geometry", "Algebra II", "Pre-Calculus", "Calculus",
-    "AP Calculus AB", "AP Calculus BC", "AP Statistics",
-    "Earth Science", "Living Environment / Biology", "Chemistry", "Physics",
-    "AP Biology", "AP Chemistry", "AP Physics",
-    "Global History I", "Global History II", "US History & Government",
-    "AP US History", "AP World History", "AP Government & Politics",
-    "Health Education", "Physical Education",
-  ],
-  "── Electives ──": [
-    "Creative Writing", "Public Speaking", "Journalism", "Media Literacy",
-    "Economics", "Sociology", "Psychology", "Philosophy",
-    "Environmental Science", "Forensic Science",
-    "Statistics", "Financial Algebra", "Computer Applications",
-    "Graphic Design", "Digital Media Arts", "Web Design",
-    "Music Theory", "Band / Orchestra", "Choir / Vocal Music",
-    "Theater Arts / Drama", "Dance",
-    "Studio Art", "Drawing & Painting", "Sculpture",
-    "Foreign Language: Spanish", "Foreign Language: French",
-    "Foreign Language: Mandarin Chinese", "Foreign Language: Haitian Creole",
-    "Foreign Language: Arabic",
-    "Physical Education Elective", "Health & Wellness",
-    "Home Economics / Family & Consumer Sciences",
-    "Leadership & Community Service",
-  ],
-  "── AP Courses ──": [
-    "AP Art History", "AP Studio Art: Drawing",
-    "AP Studio Art: 2-D Design", "AP Studio Art: 3-D Design",
-    "AP Computer Science Principles", "AP Computer Science A",
-    "AP Environmental Science", "AP Human Geography",
-    "AP Psychology", "AP Economics: Macro", "AP Economics: Micro",
-    "AP Language & Composition", "AP Literature & Composition",
-    "AP Spanish Language", "AP French Language",
-    "AP Music Theory",
-    "AP African American Studies",
-  ],
-  "── Arts, Film & Photography ──": [
-    "Film Studies", "Film Production", "AP Film & Media Studies",
-    "Photography I", "Photography II", "Advanced Photography",
-    "Digital Photography", "Darkroom Photography",
-    "Video Production", "Documentary Filmmaking",
-    "Cinematography", "Screenwriting",
-    "Animation & Motion Graphics",
-    "Visual Arts", "Mixed Media Arts",
-  ],
-  "── Technology & Coding ──": [
-    "Introduction to Coding", "Computer Science I",
-    "Computer Science II", "AP Computer Science A",
-    "AP Computer Science Principles", "Python Programming",
-    "Web Development", "App Development",
-    "Robotics", "Game Design", "Cybersecurity Fundamentals",
-    "Data Science", "Artificial Intelligence & Machine Learning",
-    "3D Design & Printing",
-  ],
-  "── Guidance & Support Services ──": [
-    "Guidance / College Counseling",
-    "Academic Intervention Services (AIS)",
-    "Special Education — Resource Room",
-    "English as a New Language (ENL)",
-    "Social-Emotional Learning (SEL)",
-    "College & Career Readiness",
-    "Independent Study / Self-Directed Learning",
-    "Peer Mediation & Leadership",
-  ],
-  "── After School Programs ──": [
-    "After School Tutoring Program",
-    "After School Arts Program",
-    "After School Film Club",
-    "After School Photography Club",
-    "After School Coding Club",
-    "After School Newspaper / Journalism",
-    "After School Theater Program",
-    "After School Music Program",
-    "After School Sports / Athletics",
-    "After School Community Service",
-    "National Honor Society",
-    "Student Government / Leadership",
-    "STEM After School Program",
-    "College Prep After School Program",
-    "Summer Bridge Program",
-  ],
+  "🟡 ELEMENTARY SCHOOL": {
+    "── Core Subjects ──": [
+      "Reading / ELA", "English Language Arts", "Phonics & Literacy",
+      "Mathematics", "Science", "Social Studies",
+      "Writing Workshop", "Spelling & Vocabulary",
+    ],
+    "── Specials ──": [
+      "Art", "Music", "Physical Education", "Library",
+      "Technology / Computer Lab", "Dance",
+    ],
+    "── Support Services ──": [
+      "Academic Intervention Services (AIS)",
+      "Special Education — Resource Room",
+      "English as a New Language (ENL)",
+      "Social-Emotional Learning (SEL)",
+      "Speech & Language Therapy",
+      "Occupational Therapy",
+    ],
+    "── After School Programs ──": [
+      "After School Tutoring",
+      "After School Arts Program",
+      "After School Sports / Athletics",
+      "After School Community Service",
+      "Summer Bridge Program",
+    ],
+  },
+  "🟠 MIDDLE SCHOOL": {
+    "── Core Subjects ──": [
+      "English Language Arts 6", "English Language Arts 7", "English Language Arts 8",
+      "Mathematics 6", "Mathematics 7", "Pre-Algebra", "Algebra I",
+      "Earth Science", "Life Science", "Physical Science",
+      "Social Studies 6", "Social Studies 7", "US History 8",
+      "Health Education", "Physical Education",
+    ],
+    "── Electives ──": [
+      "Art", "Band / Orchestra", "Choir", "Theater Arts",
+      "Technology & Engineering", "Computer Science",
+      "Creative Writing", "Journalism / School Newspaper",
+      "Foreign Language: Spanish", "Foreign Language: French",
+      "Foreign Language: Mandarin Chinese",
+      "Home Economics / Family & Consumer Sciences",
+      "Leadership & Community Service",
+    ],
+    "── Support Services ──": [
+      "Guidance / Counseling",
+      "Academic Intervention Services (AIS)",
+      "Special Education — Resource Room",
+      "English as a New Language (ENL)",
+      "Social-Emotional Learning (SEL)",
+      "College & Career Readiness",
+    ],
+    "── After School Programs ──": [
+      "After School Tutoring",
+      "After School Arts Program",
+      "After School Coding Club",
+      "After School Newspaper / Journalism",
+      "After School Theater Program",
+      "After School Sports / Athletics",
+      "After School Community Service",
+      "Student Government / Leadership",
+      "STEM After School Program",
+      "Summer Bridge Program",
+    ],
+  },
+  "🔵 HIGH SCHOOL": {
+    "── Required Core Classes ──": [
+      "English 9", "English 10", "English 11", "English 12",
+      "AP English Language & Composition", "AP English Literature & Composition",
+      "Algebra I", "Geometry", "Algebra II", "Pre-Calculus", "Calculus",
+      "AP Calculus AB", "AP Calculus BC", "AP Statistics",
+      "Earth Science", "Living Environment / Biology", "Chemistry", "Physics",
+      "AP Biology", "AP Chemistry", "AP Physics",
+      "Global History I", "Global History II", "US History & Government",
+      "AP US History", "AP World History", "AP Government & Politics",
+      "Health Education", "Physical Education",
+    ],
+    "── Electives ──": [
+      "Creative Writing", "Public Speaking", "Journalism", "Media Literacy",
+      "Economics", "Sociology", "Psychology", "Philosophy",
+      "Environmental Science", "Forensic Science",
+      "Statistics", "Financial Algebra", "Computer Applications",
+      "Graphic Design", "Digital Media Arts", "Web Design",
+      "Music Theory", "Band / Orchestra", "Choir / Vocal Music",
+      "Theater Arts / Drama", "Dance",
+      "Studio Art", "Drawing & Painting", "Sculpture",
+      "Foreign Language: Spanish", "Foreign Language: French",
+      "Foreign Language: Mandarin Chinese", "Foreign Language: Haitian Creole",
+      "Foreign Language: Arabic",
+      "Physical Education Elective", "Health & Wellness",
+      "Home Economics / Family & Consumer Sciences",
+      "Leadership & Community Service",
+    ],
+    "── AP Courses ──": [
+      "AP Art History", "AP Studio Art: Drawing",
+      "AP Studio Art: 2-D Design", "AP Studio Art: 3-D Design",
+      "AP Computer Science Principles", "AP Computer Science A",
+      "AP Environmental Science", "AP Human Geography",
+      "AP Psychology", "AP Economics: Macro", "AP Economics: Micro",
+      "AP Language & Composition", "AP Literature & Composition",
+      "AP Spanish Language", "AP French Language",
+      "AP Music Theory", "AP African American Studies",
+    ],
+    "── Arts, Film & Photography ──": [
+      "Film Studies", "Film Production", "AP Film & Media Studies",
+      "Photography I", "Photography II", "Advanced Photography",
+      "Digital Photography", "Darkroom Photography",
+      "Video Production", "Documentary Filmmaking",
+      "Cinematography", "Screenwriting",
+      "Animation & Motion Graphics",
+      "Visual Arts", "Mixed Media Arts",
+    ],
+    "── Technology & Coding ──": [
+      "Introduction to Coding", "Computer Science I", "Computer Science II",
+      "AP Computer Science A", "AP Computer Science Principles",
+      "Python Programming", "Web Development", "App Development",
+      "Robotics", "Game Design", "Cybersecurity Fundamentals",
+      "Data Science", "Artificial Intelligence & Machine Learning",
+      "3D Design & Printing",
+    ],
+    "── Guidance & Support Services ──": [
+      "Guidance / College Counseling",
+      "Academic Intervention Services (AIS)",
+      "Special Education — Resource Room",
+      "English as a New Language (ENL)",
+      "Social-Emotional Learning (SEL)",
+      "College & Career Readiness",
+      "Independent Study / Self-Directed Learning",
+      "Peer Mediation & Leadership",
+    ],
+    "── After School Programs ──": [
+      "After School Tutoring Program",
+      "After School Arts Program",
+      "After School Film Club",
+      "After School Photography Club",
+      "After School Coding Club",
+      "After School Newspaper / Journalism",
+      "After School Theater Program",
+      "After School Music Program",
+      "After School Sports / Athletics",
+      "After School Community Service",
+      "National Honor Society",
+      "Student Government / Leadership",
+      "STEM After School Program",
+      "College Prep After School Program",
+      "Summer Bridge Program",
+    ],
+  },
 };
 
 function App() {
   const [step, setStep] = useState("form");
   const [reportFrequency, setReportFrequency] = useState("weekly"); // 'weekly' | 'daily'
+  const [schoolName, setSchoolName] = useState("");
   const [teacherName, setTeacherName] = useState("");
+  const [gradeLevel, setGradeLevel] = useState("");
   const [className, setClassName] = useState("");
   const [studentFirstName, setStudentFirstName] = useState("");
   const [studentLastInitial, setStudentLastInitial] = useState("");
@@ -322,6 +388,7 @@ function App() {
     const lines = [];
     const lastPart = studentLastInitial.trim() ? ` ${studentLastInitial.trim().charAt(0).toUpperCase()}.` : "";
     const sName = studentFirstName.trim() ? `${studentFirstName.trim()}${lastPart}` : "your student";
+    const schoolName2 = schoolName.trim() || "";
     const tName = teacherName.trim() || "Your Child's Teacher";
     const cName = className.trim() || "our class";
     const wOf = weekOf || "this week";
@@ -357,7 +424,7 @@ function App() {
       lines.push(`Additional note: ${customNote.trim()}\n`);
 
     lines.push(`Thank you for your continued support. Please don't hesitate to reach out with any questions.\n`);
-    lines.push(`Warm regards,\n${tName}\n${cName}${wOf ? `\nWeek of: ${wOf}` : ""}`);
+    lines.push(`Warm regards,\n${tName}\n${cName}${schoolName2 ? "\n" + schoolName2 : ""}${wOf ? `\nWeek of: ${wOf}` : ""}`);
 
     return lines.join("\n");
   };
@@ -375,6 +442,7 @@ function App() {
     const sName = studentFirstName.trim() ? `${studentFirstName.trim()}${lastPart}` : "your student";
     const tName = teacherName.trim() || "Teacher";
     const cName = className.trim() || "Class";
+    const sName2 = schoolName.trim() || "";
     const isDaily = reportFrequency === "daily";
     const wOf = weekOf
       ? new Date(weekOf + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
@@ -595,27 +663,44 @@ ${htmlParagraphs}
                   🔒 <strong>Privacy tip:</strong> ProgressPing only uses first name + last initial (e.g. "Jordan S.") to protect student identity in compliance with FERPA guidelines.
                 </div>
                 <div>
+                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>SCHOOL NAME</label>
+                  <input className="input-field" placeholder="e.g. Cyberarts Studio Academy" value={schoolName} onChange={e => setSchoolName(e.target.value)} />
+                </div>
+                <div>
                   <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>TEACHER NAME</label>
                   <input className="input-field" placeholder="e.g. Ms. Johnson" value={teacherName} onChange={e => setTeacherName(e.target.value)} />
                 </div>
                 <div>
-                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>CLASS / SUBJECT</label>
+                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>GRADE LEVEL & SUBJECT</label>
                   <select
                     className="input-field"
-                    value={className}
-                    onChange={e => setClassName(e.target.value)}
-                    style={{ cursor: "pointer", appearance: "auto" }}
+                    value={gradeLevel}
+                    onChange={e => { setGradeLevel(e.target.value); setClassName(""); }}
+                    style={{ cursor: "pointer", appearance: "auto", marginBottom: 8 }}
                   >
-                    <option value="">— Select a subject —</option>
-                    {Object.entries(SUBJECTS).map(([group, options]) => (
-                      <optgroup key={group} label={group}>
-                        {options.map(opt => (
-                          <option key={opt} value={opt}>{opt}</option>
-                        ))}
-                      </optgroup>
-                    ))}
-                    <option value="__custom__">✏️ Other / Type my own...</option>
+                    <option value="">— Select grade level —</option>
+                    <option value="🟡 ELEMENTARY SCHOOL">🟡 Elementary School</option>
+                    <option value="🟠 MIDDLE SCHOOL">🟠 Middle School</option>
+                    <option value="🔵 HIGH SCHOOL">🔵 High School</option>
                   </select>
+                  {gradeLevel && SUBJECTS[gradeLevel] && (
+                    <select
+                      className="input-field"
+                      value={className}
+                      onChange={e => setClassName(e.target.value)}
+                      style={{ cursor: "pointer", appearance: "auto" }}
+                    >
+                      <option value="">— Select a subject —</option>
+                      {Object.entries(SUBJECTS[gradeLevel]).map(([group, options]) => (
+                        <optgroup key={group} label={group}>
+                          {options.map(opt => (
+                            <option key={opt} value={opt}>{opt}</option>
+                          ))}
+                        </optgroup>
+                      ))}
+                      <option value="__custom__">✏️ Other / Type my own...</option>
+                    </select>
+                  )}
                   {className === "__custom__" && (
                     <input
                       className="input-field"
