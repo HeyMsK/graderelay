@@ -19,7 +19,7 @@
     &quot;theme_color&quot;: &quot;#2d1b69&quot;,
     &quot;orientation&quot;: &quot;portrait&quot;,
     &quot;icons&quot;: [{
-      &quot;src&quot;: &quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234c1d95'/%3E%3Ctext y='.9em' font-size='72' x='12'%3E%F0%9F%93%B6%3C/text%3E%3C/svg%3E&quot;,
+      &quot;src&quot;: &quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230a3d3d'/%3E%3Cstop offset='50%25' stop-color='%230e7490'/%3E%3Cstop offset='100%25' stop-color='%234a2d7a'/%3E%3C/linearGradient%3E%3ClinearGradient id='t' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232dd4c8'/%3E%3Cstop offset='100%25' stop-color='%230e9d8f'/%3E%3C/linearGradient%3E%3ClinearGradient id='p' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23bg)'/%3E%3Cellipse cx='26' cy='26' rx='20' ry='17' fill='url(%23t)'/%3E%3Cpolygon points='14,40 8,50 22,42' fill='%230e9d8f'/%3E%3Crect x='13' y='20' width='22' height='3.5' rx='1.75' fill='white' opacity='0.9'/%3E%3Crect x='13' y='27' width='16' height='3.5' rx='1.75' fill='white' opacity='0.7'/%3E%3Crect x='13' y='34' width='19' height='3.5' rx='1.75' fill='white' opacity='0.5'/%3E%3Cellipse cx='42' cy='38' rx='16' ry='13' fill='url(%23p)'/%3E%3Cpolygon points='50,48 56,56 44,50' fill='%237c3aed'/%3E%3Ccircle cx='34' cy='38' r='2.5' fill='white'/%3E%3Ccircle cx='42' cy='38' r='2.5' fill='white'/%3E%3Ccircle cx='50' cy='38' r='2.5' fill='white'/%3E%3C/svg%3E&quot;,
       &quot;sizes&quot;: &quot;any&quot;,
       &quot;type&quot;: &quot;image/svg+xml&quot;,
       &quot;purpose&quot;: &quot;any maskable&quot;
@@ -35,9 +35,9 @@
       background-color: #0a3d3d;
       background-image:
         radial-gradient(ellipse 80% 60% at 0% 0%, #0e7490 0%, transparent 60%),
-        radial-gradient(ellipse 60% 50% at 100% 20%, #4a2d7a 0%, transparent 55%),
+        radial-gradient(ellipse 60% 50% at 100% 20%, #7c3aed 0%, transparent 55%),
         radial-gradient(ellipse 50% 40% at 15% 100%, #2dd4c8 0%, transparent 50%),
-        radial-gradient(ellipse 45% 40% at 100% 90%, #301650 0%, transparent 55%),
+        radial-gradient(ellipse 45% 40% at 100% 90%, #6d28d9 0%, transparent 55%),
         radial-gradient(ellipse 35% 30% at 50% 50%, #0f766e 0%, transparent 60%);
       background-attachment: fixed;
       min-height: 100vh;
@@ -258,12 +258,12 @@ const PROMPTS = {
     "Please encourage continued reading and review at home.",
     "We look forward to seeing continued growth next week.",
     "Feel free to reach out if you have any questions or concerns.",
-    "It was a pleasure having such a great week with your student.",
-    "Please remind your student to bring all required materials daily.",
-    "We are here to support your student every step of the way.",
+    "It was a pleasure having such a great week with your child.",
+    "Please remind your child to bring all required materials daily.",
+    "We are here to support your child every step of the way.",
     "Your support at home makes a real difference — thank you!",
     "Please review and sign any returned work in their folder.",
-    "We encourage your student to attend our extra help sessions.",
+    "We encourage your child to attend our extra help sessions.",
     "Looking forward to a strong finish as we head into next week.",
     "Please ensure homework is being completed nightly.",
     "Your involvement in your child's education is truly valued.",
@@ -287,6 +287,27 @@ const CATEGORY_META = {
 };
 
 const SUBJECT_PROMPTS = {
+  "🌱 Pre-K & K": {
+    color: "#065f46", bg: "#d1fae5",
+    strengths: [
+      "is developing beautifully — showing curiosity, joy, and readiness to learn every day",
+      "demonstrates strong social-emotional skills — shares, takes turns, and shows kindness to peers",
+      "is building early literacy skills with growing confidence — loves stories and books",
+      "shows strong fine and gross motor development through play and creative activities",
+      "communicates needs, ideas, and feelings clearly and with growing vocabulary",
+      "transitions between activities smoothly and follows classroom routines with independence",
+      "is making wonderful strides in number recognition, counting, and early math concepts",
+    ],
+    growth: [
+      "is still developing the ability to regulate emotions during transitions and group activities",
+      "needs continued support building vocabulary and expressive language skills",
+      "working on sharing, taking turns, and cooperating with peers during play",
+      "fine motor skills — including pencil grip and scissor use — are still developing",
+      "needs gentle encouragement to engage during whole-group and circle time activities",
+      "is working on following multi-step directions independently",
+      "separation at arrival continues to be an adjustment — we are supporting this with care",
+    ],
+  },
   "📚 ELA": {
     color: "#1b4965", bg: "#caf0f8",
     strengths: [
@@ -298,7 +319,7 @@ const SUBJECT_PROMPTS = {
       "has shown remarkable growth in their writing craft this marking period",
     ],
     growth: [
-      "needs to provide more textual evidence to support their written arguments",
+      "needs to provide more textual evidence to support written arguments",
       "reading assignments are not being completed consistently — this is impacting comprehension",
       "written responses lack sufficient detail and development of ideas",
       "would benefit from additional support with grammar and sentence construction",
@@ -382,6 +403,44 @@ const SUBJECT_PROMPTS = {
       "is not using class time productively — studio focus needs significant improvement",
     ],
   },
+  "🏃 Phys Ed": {
+    color: "#065f46", bg: "#d1fae5",
+    strengths: [
+      "demonstrates excellent sportsmanship, teamwork, and respect for peers during all activities",
+      "arrives prepared, engaged, and brings a positive attitude to every class",
+      "shows strong physical fitness, coordination, and athletic skill development",
+      "is a natural leader during team activities — motivates and supports classmates",
+      "follows safety rules and class expectations consistently and independently",
+      "has shown impressive growth in physical endurance, strength, and skill this marking period",
+    ],
+    growth: [
+      "needs to arrive to class prepared with appropriate attire and footwear",
+      "sportsmanship and respect for peers during competitive activities need improvement",
+      "needs to participate more actively and with greater effort during all activities",
+      "struggles to follow safety rules and class expectations consistently",
+      "would benefit from developing more cooperative skills during team sports",
+      "engagement and attitude during class need significant improvement",
+    ],
+  },
+  "💚 SEL": {
+    color: "#4a1e6e", bg: "#ede9fe",
+    strengths: [
+      "demonstrates impressive self-awareness and the ability to name and manage their emotions",
+      "shows strong empathy and genuine care for the feelings and experiences of others",
+      "is developing excellent conflict resolution and problem-solving skills",
+      "builds positive, respectful relationships with peers and trusted adults",
+      "demonstrates responsible decision-making and thinks through consequences thoughtfully",
+      "is making meaningful progress in social-emotional growth — a true highlight this period",
+    ],
+    growth: [
+      "needs additional support identifying and regulating emotions in challenging moments",
+      "is working on building more positive and respectful peer relationships",
+      "conflict resolution skills are still developing — continued support and practice are recommended",
+      "needs encouragement to seek help from trusted adults when feeling overwhelmed",
+      "responsible decision-making in social situations requires continued growth and guidance",
+      "a check-in with the school counselor may be beneficial to support ongoing SEL development",
+    ],
+  },
   "🎓 AP": {
     color: "#1e3a5f", bg: "#dbeafe",
     strengths: [
@@ -398,7 +457,7 @@ const SUBJECT_PROMPTS = {
       "would benefit from additional exam preparation — practice free-response questions are strongly encouraged",
       "needs to engage more deeply with course content beyond surface-level understanding",
       "time management and meeting AP assignment deadlines require immediate attention",
-      "struggles to sustain the pace and rigor expected in this AP course — extra help is recommended",
+      "struggles to sustain the pace and rigor expected — extra help is recommended",
     ],
   },
   "🌐 ENL": {
@@ -433,7 +492,7 @@ const SUBJECT_PROMPTS = {
     growth: [
       "additional support is needed to make progress toward current IEP goals",
       "would benefit from more consistent use of provided accommodations and supports",
-      "a check-in meeting with the IEP team may be helpful to review current supports and strategies",
+      "a check-in meeting with the IEP team may be helpful to review current supports",
       "needs encouragement to self-advocate and ask for help when needed",
       "transitions between tasks and activities continue to be an area requiring additional support",
       "we recommend continued collaboration between home and school to reinforce strategies consistently",
@@ -459,6 +518,27 @@ const SUBJECT_PROMPTS = {
 };
 
 const SUBJECTS = {
+  "🌱 PRE-K & KINDERGARTEN": {
+    "── Learning Centers ──": [
+      "Dramatic Play", "Block Building & STEM", "Art & Creative Expression",
+      "Sensory Play", "Library & Literacy Corner", "Science Discovery Center",
+      "Math & Manipulatives", "Puzzles & Fine Motor",
+    ],
+    "── Core Learning Areas ──": [
+      "Early Literacy & Phonological Awareness", "Early Math & Number Sense",
+      "Social-Emotional Learning", "Language & Communication Development",
+      "Science Exploration", "Social Studies & Community",
+      "Movement & Physical Development", "Music & Rhythm",
+    ],
+    "── Support Services ──": [
+      "Special Education — Early Childhood",
+      "English as a New Language (ENL)",
+      "Speech & Language Therapy",
+      "Occupational Therapy",
+      "Physical Therapy",
+      "Early Intervention Services",
+    ],
+  },
   "🟡 ELEMENTARY SCHOOL": {
     "── Core Subjects ──": [
       "Reading / ELA", "English Language Arts", "Phonics & Literacy",
@@ -610,17 +690,19 @@ const SUBJECTS = {
 
 function App() {
   const [step, setStep] = useState("form");
-  const [reportFrequency, setReportFrequency] = useState("weekly"); // 'weekly' | 'daily'
   const [schoolName, setSchoolName] = useState("");
   const [teacherName, setTeacherName] = useState("");
   const [gradeLevel, setGradeLevel] = useState("");
   const [className, setClassName] = useState("");
-  const [studentFirstName, setStudentFirstName] = useState("");
-  const [studentLastInitial, setStudentLastInitial] = useState("");
+  const [nameBlank, setNameBlank] = useState(false);
+  const [studentGradeLevel, setStudentGradeLevel] = useState("");
   const [weekOf, setWeekOf] = useState("");
-  const [selectedPrompts, setSelectedPrompts] = useState({});
+  const [reportFrequency, setReportFrequency] = useState("weekly");
+  const [termType, setTermType] = useState("Marking Period");
+  const [markingPeriodDate, setMarkingPeriodDate] = useState("");
   const [activeSubject, setActiveSubject] = useState(null);
   const [selectedSubjectPrompts, setSelectedSubjectPrompts] = useState([]);
+  const [selectedPrompts, setSelectedPrompts] = useState({});
   const [customNote, setCustomNote] = useState("");
   const [gradeEstimate, setGradeEstimate] = useState("");
   const [customGrade, setCustomGrade] = useState("");
@@ -644,20 +726,27 @@ function App() {
 
   const generateReport = () => {
     const lines = [];
-    const lastPart = studentLastInitial.trim() ? ` ${studentLastInitial.trim().charAt(0).toUpperCase()}.` : "";
-    const sName = studentFirstName.trim() ? `${studentFirstName.trim()}${lastPart}` : "your student";
     const schoolName2 = schoolName.trim() || "";
+    const sName = nameBlank ? "your child, _______________," : "your child";
     const tName = teacherName.trim() || "Your Child's Teacher";
     const cName = className.trim() || "our class";
-    const wOf = weekOf || "this week";
+    const wOf = weekOf || "";
 
+    const isPreK = gradeLevel === "🌱 PRE-K & KINDERGARTEN";
     const isDaily = reportFrequency === "daily";
-    const periodWord = isDaily ? "today" : "this week";
-    const reportTypeLabel = isDaily ? "daily progress update" : "weekly progress report";
-    const dateLabel = isDaily ? "Date" : "Week of";
+    const isMarkingPeriod = reportFrequency === "marking_period";
+    const periodWord = isDaily ? "today" : isMarkingPeriod ? "this marking period" : "this week";
+    const reportTypeLabel = isDaily ? "daily progress update" : isMarkingPeriod ? "marking period progress report" : "weekly progress report";
 
     lines.push(`Dear Parent/Guardian,\n`);
-    lines.push(`This is a ${reportTypeLabel} to let you know how ${sName} is doing ${periodWord} in ${cName}. We value your partnership in your child's education and want to keep you informed of their progress.\n`);
+    if (isPreK) {
+      lines.push(`This is a ${reportTypeLabel} sharing how ${sName} is growing and developing ${periodWord} in ${cName}. We cherish your partnership and want to keep you connected to their early learning journey.\n`);
+    } else {
+      lines.push(`This is a ${reportTypeLabel} to let you know how ${sName} is doing ${periodWord} in ${cName}. We value your partnership in their education and want to keep you informed of their progress.\n`);
+    }
+
+    if (selectedSubjectPrompts.length > 0)
+      lines.push(`${activeSubject ? activeSubject + " — " : ""}${sName} ${selectedSubjectPrompts.join("; and ")}.\n`);
 
     const academic     = [...(selectedPrompts["positive_academic"] || []),          ...(selectedPrompts["needs_support_academic"] || [])];
     const participation= [...(selectedPrompts["positive_participation"] || []),     ...(selectedPrompts["needs_support_participation"] || [])];
@@ -666,8 +755,6 @@ function App() {
     const homework     = [...(selectedPrompts["positive_homework"] || []),          ...(selectedPrompts["needs_support_homework"] || [])];
     const general      = selectedPrompts["general"] || [];
 
-    if (selectedSubjectPrompts.length > 0)
-      lines.push(`${activeSubject ? activeSubject + " — " : ""}${sName} ${selectedSubjectPrompts.join("; and ")}.\n`);
     if (academic.length > 0)
       lines.push(`📚 Academically, ${sName} ${academic.join("; and ")}.\n`);
     if (participation.length > 0)
@@ -687,7 +774,13 @@ function App() {
       lines.push(`Additional note: ${customNote.trim()}\n`);
 
     lines.push(`Thank you for your continued support. Please don't hesitate to reach out with any questions.\n`);
-    lines.push(`Warm regards,\n${tName}\n${cName}${schoolName2 ? "\n" + schoolName2 : ""}${wOf ? `\nWeek of: ${wOf}` : ""}`);
+
+    const termLabel = isMarkingPeriod
+      ? (["Mid-Year","End of Year"].includes(termType) ? termType : termType === "Custom" ? wOf : `${termType}${wOf ? " " + wOf : ""}`)
+      : wOf;
+    const mpDate = markingPeriodDate ? new Date(markingPeriodDate + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";
+
+    lines.push(`Warm regards,\n${tName}\n${cName}${schoolName2 ? "\n" + schoolName2 : ""}${studentGradeLevel ? "\nStudent Grade: " + studentGradeLevel : ""}${termLabel ? `\n${isMarkingPeriod ? "Term" : isDaily ? "Date" : "Week of"}: ${termLabel}` : ""}${isMarkingPeriod && mpDate ? `\nDate Sent: ${mpDate}` : ""}`);
 
     return lines.join("\n");
   };
@@ -702,12 +795,12 @@ function App() {
   const [parentPhone, setParentPhone] = useState("");
 
   const getNames = () => {
-    const lastPart = studentLastInitial.trim() ? ` ${studentLastInitial.trim().charAt(0).toUpperCase()}.` : "";
-    const sName = studentFirstName.trim() ? `${studentFirstName.trim()}${lastPart}` : "your student";
+    const sName = "your child";
     const tName = teacherName.trim() || "Teacher";
     const cName = className.trim() || "Class";
     const sName2 = schoolName.trim() || "";
     const isDaily = reportFrequency === "daily";
+    const isMarkingPeriod = reportFrequency === "marking_period";
     const wOf = weekOf
       ? new Date(weekOf + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
       : new Date().toLocaleDateString();
@@ -740,11 +833,11 @@ function App() {
   // DOWNLOAD DOC: uses data: URI which works everywhere including iframes
   const handleDownloadDoc = () => {
     const { sName, tName, cName, wOf, isDaily } = getNames();
-    const reportLabel = isDaily ? "Daily Progress Update" : "Weekly Progress Report";
+    const reportLabel = isDaily ? "Daily Progress Update" : isMarkingPeriod ? "Marking Period Progress Report" : "Weekly Progress Report";
     const periodLabel = isDaily ? "Date" : "Week of";
     const docTitle = isDaily
-      ? `GradeRelay – ${sName} – ${wOf}`
-      : `GradeRelay – ${sName} – Week of ${wOf}`;
+      ? `GradeRelay – Progress Report – ${wOf}`
+      : `GradeRelay – Progress Report – Week of ${wOf}`;
 
     const htmlParagraphs = report
       .split("\n")
@@ -876,27 +969,23 @@ ${htmlParagraphs}
                   <stop offset="0%" stopColor="#a855f7"/>
                   <stop offset="100%" stopColor="#7c3aed"/>
                 </linearGradient>
-                <filter id="glow1">
-                  <feGaussianBlur stdDeviation="1.5" result="blur"/>
-                  <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-                </filter>
               </defs>
-              {/* rounded square background gradient */}
+              {/* rounded square background */}
               <rect width="64" height="64" rx="16" fill="url(#iconBg)"/>
-              {/* teal bubble — large, left/center, tail bottom-left */}
-              <ellipse cx="26" cy="26" rx="20" ry="17" fill="url(#tealBub)" filter="url(#glow1)"/>
+              {/* teal bubble — large, top-left */}
+              <ellipse cx="26" cy="26" rx="20" ry="17" fill="url(#tealBub)"/>
               <polygon points="14,40 8,50 22,42" fill="#0e9d8f"/>
-              {/* white border glow around teal bubble */}
-              <ellipse cx="26" cy="26" rx="20" ry="17" fill="none" stroke="white" strokeWidth="1.5" opacity="0.6"/>
+              {/* white glow border */}
+              <ellipse cx="26" cy="26" rx="20" ry="17" fill="none" stroke="white" strokeWidth="1.5" opacity="0.5"/>
               {/* text lines inside teal bubble */}
               <rect x="13" y="20" width="22" height="3.5" rx="1.75" fill="white" opacity="0.9"/>
               <rect x="13" y="27" width="16" height="3.5" rx="1.75" fill="white" opacity="0.7"/>
               <rect x="13" y="34" width="19" height="3.5" rx="1.75" fill="white" opacity="0.5"/>
-              {/* purple bubble — smaller, overlapping bottom-right, tail bottom-right */}
-              <ellipse cx="42" cy="38" rx="16" ry="13" fill="url(#purpBub)" filter="url(#glow1)"/>
+              {/* purple reply bubble — smaller, bottom-right */}
+              <ellipse cx="42" cy="38" rx="16" ry="13" fill="url(#purpBub)"/>
               <polygon points="50,48 56,56 44,50" fill="#7c3aed"/>
-              {/* white border glow around purple bubble */}
-              <ellipse cx="42" cy="38" rx="16" ry="13" fill="none" stroke="white" strokeWidth="1.5" opacity="0.6"/>
+              {/* white glow border */}
+              <ellipse cx="42" cy="38" rx="16" ry="13" fill="none" stroke="white" strokeWidth="1.5" opacity="0.5"/>
               {/* three dots inside purple bubble */}
               <circle cx="34" cy="38" r="2.5" fill="white" opacity="0.95"/>
               <circle cx="42" cy="38" r="2.5" fill="white" opacity="0.95"/>
@@ -926,14 +1015,14 @@ ${htmlParagraphs}
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: "#1f2937", margin: 0 }}>
                   Student & Class Info
                 </h2>
-                {/* Daily / Weekly Toggle */}
+                {/* Daily / Weekly / Marking Period Toggle */}
                 <div style={{ display: "flex", background: "#f3f4f6", borderRadius: 10, padding: 4, gap: 4 }}>
-                  {["daily", "weekly"].map(freq => (
+                  {["daily", "weekly", "marking_period"].map(freq => (
                     <button
                       key={freq}
                       onClick={() => setReportFrequency(freq)}
                       style={{
-                        padding: "8px 20px", border: "none", borderRadius: 8, cursor: "pointer",
+                        padding: "8px 14px", border: "none", borderRadius: 8, cursor: "pointer",
                         fontFamily: "'Source Serif 4', serif", fontSize: 13, fontWeight: 700,
                         transition: "all 0.2s",
                         background: reportFrequency === freq ? "linear-gradient(135deg, #3b0764, #4c1d95)" : "transparent",
@@ -941,35 +1030,38 @@ ${htmlParagraphs}
                         boxShadow: reportFrequency === freq ? "0 2px 8px rgba(0,0,0,0.2)" : "none",
                       }}
                     >
-                      {freq === "daily" ? "📅 Daily" : "📆 Weekly"}
+                      {freq === "daily" ? "📅 Daily" : freq === "weekly" ? "📆 Weekly" : "📋 Marking Period"}
                     </button>
                   ))}
                 </div>
               </div>
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
-                <div style={{ display: "flex", gap: 8, gridColumn: "1 / -1" }}>
-                  <div style={{ flex: 2 }}>
-                    <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>
-                      STUDENT FIRST NAME <span style={{ color: "#9ca3af", fontWeight: 400 }}>— first name only for privacy</span>
-                    </label>
-                    <input className="input-field" placeholder="e.g. Jordan" value={studentFirstName} onChange={e => setStudentFirstName(e.target.value)} />
-                  </div>
-                  <div style={{ flex: 1 }}>
-                    <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>
-                      LAST INITIAL
-                    </label>
-                    <input
-                      className="input-field"
-                      placeholder="e.g. S"
-                      maxLength={1}
-                      value={studentLastInitial}
-                      onChange={e => setStudentLastInitial(e.target.value.replace(/[^a-zA-Z]/g, ""))}
-                      style={{ textTransform: "uppercase" }}
-                    />
-                  </div>
+                <div style={{ gridColumn: "1 / -1", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 8, padding: "10px 14px", fontSize: 12.5, color: "#166534" }}>
+                  🔒 <strong>FERPA Notice:</strong> GradeRelay does not collect or store any student PII. Reports say your child throughout. Toggle below to add a fill-in blank for the name.
                 </div>
-                <div style={{ gridColumn: "1 / -1", background: "#eff6ff", border: "1px solid #bfdbfe", borderRadius: 8, padding: "8px 12px", fontSize: 12.5, color: "#1e40af" }}>
-                  🔒 <strong>Privacy tip:</strong> GradeRelay only uses first name + last initial (e.g. "Jordan S.") to protect student identity in compliance with FERPA guidelines.
+                <div style={{ gridColumn: "1 / -1" }}>
+                  <div onClick={() => setNameBlank(!nameBlank)} style={{
+                    display: "flex", alignItems: "center", gap: 12, cursor: "pointer",
+                    padding: "12px 16px", borderRadius: 10, marginTop: 4,
+                    background: nameBlank ? "#f0fdf4" : "#f9fafb",
+                    border: "2px solid " + (nameBlank ? "#22c55e" : "#e5e7eb"),
+                    transition: "all 0.2s",
+                  }}>
+                    <div style={{
+                      width: 44, height: 24, borderRadius: 12, position: "relative", flexShrink: 0,
+                      background: nameBlank ? "#22c55e" : "#d1d5db", transition: "background 0.2s",
+                    }}>
+                      <div style={{
+                        position: "absolute", top: 3, left: nameBlank ? 23 : 3,
+                        width: 18, height: 18, borderRadius: "50%", background: "white",
+                        transition: "left 0.2s", boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+                      }}/>
+                    </div>
+                    <div>
+                      <div style={{ fontSize: 14, fontWeight: 700, color: "#1f2937" }}>Add fill-in blank for student name</div>
+                      <div style={{ fontSize: 12, color: "#6b7280", marginTop: 2 }}>Report will show: your child, _______________, — perfect for printing</div>
+                    </div>
+                  </div>
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>SCHOOL NAME</label>
@@ -980,6 +1072,15 @@ ${htmlParagraphs}
                   <input className="input-field" placeholder="e.g. Ms. Johnson" value={teacherName} onChange={e => setTeacherName(e.target.value)} />
                 </div>
                 <div>
+                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>STUDENT GRADE LEVEL <span style={{ color: "#9ca3af", fontWeight: 400 }}>— optional</span></label>
+                  <select className="input-field" value={studentGradeLevel} onChange={e => setStudentGradeLevel(e.target.value)} style={{ cursor: "pointer", appearance: "auto" }}>
+                    <option value="">— Select grade —</option>
+                    <option value="Pre-K">Pre-K</option>
+                    <option value="Kindergarten">Kindergarten</option>
+                    {["1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"].map(g => <option key={g} value={g + " Grade"}>{g} Grade</option>)}
+                  </select>
+                </div>
+                <div>
                   <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>GRADE LEVEL & SUBJECT</label>
                   <select
                     className="input-field"
@@ -988,6 +1089,7 @@ ${htmlParagraphs}
                     style={{ cursor: "pointer", appearance: "auto", marginBottom: 8 }}
                   >
                     <option value="">— Select grade level —</option>
+                    <option value="🌱 PRE-K & KINDERGARTEN">🌱 Pre-K &amp; Kindergarten</option>
                     <option value="🟡 ELEMENTARY SCHOOL">🟡 Elementary School</option>
                     <option value="🟠 MIDDLE SCHOOL">🟠 Middle School</option>
                     <option value="🔵 HIGH SCHOOL">🔵 High School</option>
@@ -1021,8 +1123,43 @@ ${htmlParagraphs}
                   )}
                 </div>
                 <div>
-                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>{reportFrequency === "daily" ? "DATE" : "WEEK OF"}</label>
-                  <input className="input-field" type="date" value={weekOf} onChange={e => setWeekOf(e.target.value)} />
+                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>
+                    {reportFrequency === "daily" ? "DATE" : reportFrequency === "marking_period" ? "TERM / MARKING PERIOD" : "WEEK OF"}
+                  </label>
+                  {reportFrequency === "marking_period" ? (
+                    <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                      <div style={{ display: "flex", gap: 8 }}>
+                        <select className="input-field" value={termType} onChange={e => setTermType(e.target.value)} style={{ flex: 2 }}>
+                          <option value="Marking Period">Marking Period</option>
+                          <option value="Quarter">Quarter</option>
+                          <option value="Trimester">Trimester</option>
+                          <option value="Semester">Semester</option>
+                          <option value="Term">Term</option>
+                          <option value="Mid-Year">Mid-Year</option>
+                          <option value="End of Year">End of Year</option>
+                          <option value="Custom">Custom...</option>
+                        </select>
+                        {!["Mid-Year","End of Year"].includes(termType) && (
+                          termType === "Custom" ? (
+                            <input className="input-field" placeholder="e.g. Fall Term" value={weekOf} onChange={e => setWeekOf(e.target.value)} style={{ flex: 3 }} />
+                          ) : (
+                            <select className="input-field" value={weekOf} onChange={e => setWeekOf(e.target.value)} style={{ flex: 1 }}>
+                              <option value="">#</option>
+                              {termType === "Semester" ? ["1","2"].map(n => <option key={n} value={n}>{n}</option>) :
+                               termType === "Trimester" ? ["1","2","3"].map(n => <option key={n} value={n}>{n}</option>) :
+                               ["1","2","3","4"].map(n => <option key={n} value={n}>{n}</option>)}
+                            </select>
+                          )
+                        )}
+                      </div>
+                      <div>
+                        <label style={{ fontSize: 11, fontWeight: 700, color: "#9ca3af", display: "block", marginBottom: 4 }}>DATE SENT (optional)</label>
+                        <input className="input-field" type="date" value={markingPeriodDate} onChange={e => setMarkingPeriodDate(e.target.value)} />
+                      </div>
+                    </div>
+                  ) : (
+                    <input className="input-field" type="date" value={weekOf} onChange={e => setWeekOf(e.target.value)} />
+                  )}
                 </div>
               </div>
             </section>
@@ -1044,32 +1181,29 @@ ${htmlParagraphs}
                 Click any category to expand it, then select all prompts that apply to this student.
               </p>
 
-              {/* Subject-Specific Prompts Section */}
+              {/* Subject-Specific Prompts */}
               <div style={{ marginBottom: 24, border: "2px solid #e0e7ff", borderRadius: 14, padding: "18px 20px", background: "linear-gradient(135deg, #f0fdfa, #f5f3ff)" }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4 }}>
                   <span style={{ fontSize: 15, fontWeight: 700, color: "#1f2937" }}>Subject-Specific Prompts</span>
                   <span style={{ fontSize: 11, background: "#ede9fe", color: "#7c3aed", padding: "2px 8px", borderRadius: 99, fontWeight: 700 }}>NEW</span>
                 </div>
                 <p style={{ fontSize: 13, color: "#6b7280", margin: "0 0 14px 0" }}>Optional — pick your subject for targeted prompts, then combine with categories below.</p>
-                {/* Subject tabs */}
                 <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
                   {Object.keys(SUBJECT_PROMPTS).map(subj => (
-                    <button key={subj} onClick={() => setActiveSubject(activeSubject === subj ? null : subj)}
+                    <button key={subj} onClick={() => { setActiveSubject(activeSubject === subj ? null : subj); setSelectedSubjectPrompts([]); }}
                       style={{ padding: "6px 14px", borderRadius: 999, fontSize: 13, cursor: "pointer", fontFamily: "'Source Serif 4', serif",
                         border: activeSubject === subj ? "none" : "2px solid #e5e7eb",
                         background: activeSubject === subj ? "linear-gradient(135deg, #0e7490, #7c3aed)" : "white",
                         color: activeSubject === subj ? "white" : "#374151",
                         fontWeight: activeSubject === subj ? 700 : 400,
-                        transition: "all 0.15s",
                       }}>{subj}</button>
                   ))}
                 </div>
-                {/* Prompts for active subject */}
                 {activeSubject && (() => {
                   const subj = SUBJECT_PROMPTS[activeSubject];
                   return (
                     <div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: subj.color, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.5px" }}>✅ Strengths</div>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: subj.color, marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.5px" }}>Strengths</div>
                       <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 12 }}>
                         {subj.strengths.map((p, i) => {
                           const sel = selectedSubjectPrompts.includes(p);
@@ -1084,7 +1218,7 @@ ${htmlParagraphs}
                           );
                         })}
                       </div>
-                      <div style={{ fontSize: 12, fontWeight: 700, color: "#7c2d12", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.5px" }}>📈 Areas for Growth</div>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: "#7c2d12", marginBottom: 6, textTransform: "uppercase", letterSpacing: "0.5px" }}>Areas for Growth</div>
                       <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                         {subj.growth.map((p, i) => {
                           const sel = selectedSubjectPrompts.includes(p);
@@ -1211,16 +1345,12 @@ ${htmlParagraphs}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
               <div>
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, color: "#1f2937", margin: 0 }}>
-                  {reportFrequency === "daily" ? "Daily Update" : "Weekly Report"} Preview
-                  <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, padding: "3px 10px", borderRadius: 99, background: reportFrequency === "daily" ? "#ede9fe" : "#d8f3dc", color: reportFrequency === "daily" ? "#3b0764" : "#2d6a4f", verticalAlign: "middle" }}>
-                    {reportFrequency === "daily" ? "📅 Daily" : "📆 Weekly"}
+                  {reportFrequency === "daily" ? "Daily Update" : reportFrequency === "marking_period" ? "Marking Period Report" : "Weekly Report"} Preview
+                  <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, padding: "3px 10px", borderRadius: 99, background: reportFrequency === "daily" ? "#ede9fe" : reportFrequency === "marking_period" ? "#dbeafe" : "#d8f3dc", color: reportFrequency === "daily" ? "#3b0764" : reportFrequency === "marking_period" ? "#1e3a5f" : "#2d6a4f", verticalAlign: "middle" }}>
+                    {reportFrequency === "daily" ? "📅 Daily" : reportFrequency === "marking_period" ? "📋 Marking Period" : "📆 Weekly"}
                   </span>
                 </h2>
-                {studentFirstName && (
-                  <p style={{ color: "#6b7280", margin: "4px 0 0", fontSize: 14 }}>
-                    For: <strong>{studentFirstName}{studentLastInitial ? ` ${studentLastInitial.trim().charAt(0).toUpperCase()}.` : ""}</strong>{weekOf && ` · Week of ${weekOf}`}
-                  </p>
-                )}
+                {weekOf && <p style={{ color: "#6b7280", margin: "4px 0 0", fontSize: 14 }}>Week of: <strong>{weekOf}</strong></p>}
               </div>
               <button className="secondary-btn" onClick={() => setStep("form")}>← Edit</button>
             </div>
@@ -1345,7 +1475,7 @@ ${htmlParagraphs}
             {/* Formatted Report Panel */}
             {exportPanel === "formatted" && (() => {
               const { sName, tName, cName, wOf, isDaily } = getNames();
-              const reportLabel = isDaily ? "Daily Progress Update" : "Weekly Progress Report";
+              const reportLabel = isDaily ? "Daily Progress Update" : isMarkingPeriod ? "Marking Period Progress Report" : "Weekly Progress Report";
               const periodLabel = isDaily ? "Date" : "Week of";
               return (
                 <div style={{ marginTop: 14, border: "2px solid #7c3aed", borderRadius: 12, overflow: "hidden" }}>
