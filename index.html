@@ -19,7 +19,7 @@
     &quot;theme_color&quot;: &quot;#2d1b69&quot;,
     &quot;orientation&quot;: &quot;portrait&quot;,
     &quot;icons&quot;: [{
-      &quot;src&quot;: &quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='bg' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%230a3d3d'/%3E%3Cstop offset='50%25' stop-color='%230e7490'/%3E%3Cstop offset='100%25' stop-color='%234a2d7a'/%3E%3C/linearGradient%3E%3ClinearGradient id='t' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232dd4c8'/%3E%3Cstop offset='100%25' stop-color='%230e9d8f'/%3E%3C/linearGradient%3E%3ClinearGradient id='p' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23a855f7'/%3E%3Cstop offset='100%25' stop-color='%237c3aed'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23bg)'/%3E%3Cellipse cx='26' cy='26' rx='20' ry='17' fill='url(%23t)'/%3E%3Cpolygon points='14,40 8,50 22,42' fill='%230e9d8f'/%3E%3Crect x='13' y='20' width='22' height='3.5' rx='1.75' fill='white' opacity='0.9'/%3E%3Crect x='13' y='27' width='16' height='3.5' rx='1.75' fill='white' opacity='0.7'/%3E%3Crect x='13' y='34' width='19' height='3.5' rx='1.75' fill='white' opacity='0.5'/%3E%3Cellipse cx='42' cy='38' rx='16' ry='13' fill='url(%23p)'/%3E%3Cpolygon points='50,48 56,56 44,50' fill='%237c3aed'/%3E%3Ccircle cx='34' cy='38' r='2.5' fill='white'/%3E%3Ccircle cx='42' cy='38' r='2.5' fill='white'/%3E%3Ccircle cx='50' cy='38' r='2.5' fill='white'/%3E%3C/svg%3E&quot;,
+      &quot;src&quot;: &quot;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%234c1d95'/%3E%3Ctext y='.9em' font-size='72' x='12'%3E%F0%9F%93%B6%3C/text%3E%3C/svg%3E&quot;,
       &quot;sizes&quot;: &quot;any&quot;,
       &quot;type&quot;: &quot;image/svg+xml&quot;,
       &quot;purpose&quot;: &quot;any maskable&quot;
@@ -29,7 +29,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
-    html, body { margin: 0; padding: 0; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; max-width: 100vw; }
 
     body {
       background-color: #0a3d3d;
@@ -286,259 +286,7 @@ const CATEGORY_META = {
   general:                    { label: "💡 General Comments",                color: "#374151", bg: "#f3f4f6" },
 };
 
-const SUBJECT_PROMPTS = {
-  "🌱 Pre-K & K": {
-    color: "#065f46", bg: "#d1fae5",
-    strengths: [
-      "is developing beautifully — showing curiosity, joy, and readiness to learn every day",
-      "demonstrates strong social-emotional skills — shares, takes turns, and shows kindness to peers",
-      "is building early literacy skills with growing confidence — loves stories and books",
-      "shows strong fine and gross motor development through play and creative activities",
-      "communicates needs, ideas, and feelings clearly and with growing vocabulary",
-      "transitions between activities smoothly and follows classroom routines with independence",
-      "is making wonderful strides in number recognition, counting, and early math concepts",
-    ],
-    growth: [
-      "is still developing the ability to regulate emotions during transitions and group activities",
-      "needs continued support building vocabulary and expressive language skills",
-      "working on sharing, taking turns, and cooperating with peers during play",
-      "fine motor skills — including pencil grip and scissor use — are still developing",
-      "needs gentle encouragement to engage during whole-group and circle time activities",
-      "is working on following multi-step directions independently",
-      "separation at arrival continues to be an adjustment — we are supporting this with care",
-    ],
-  },
-  "📚 ELA": {
-    color: "#1b4965", bg: "#caf0f8",
-    strengths: [
-      "is demonstrating strong reading comprehension and makes meaningful connections to the text",
-      "writes with clarity, voice, and well-organized ideas",
-      "contributes thoughtful, text-based responses during class discussions",
-      "shows excellent command of grammar, punctuation, and sentence structure",
-      "is excelling in close reading and literary analysis",
-      "has shown remarkable growth in their writing craft this marking period",
-    ],
-    growth: [
-      "needs to provide more textual evidence to support written arguments",
-      "reading assignments are not being completed consistently — this is impacting comprehension",
-      "written responses lack sufficient detail and development of ideas",
-      "would benefit from additional support with grammar and sentence construction",
-      "needs to slow down and revise written work more carefully before submitting",
-      "struggles to identify key themes and central ideas in complex texts",
-    ],
-  },
-  "🔢 Math": {
-    color: "#3d5a00", bg: "#ecfccb",
-    strengths: [
-      "demonstrates strong number sense and mathematical reasoning",
-      "is excelling in problem-solving and consistently shows their work clearly",
-      "has shown impressive growth in computation accuracy this marking period",
-      "applies mathematical concepts independently and with confidence",
-      "is a strong contributor during math discussions and collaborative problem-solving",
-      "demonstrates deep conceptual understanding beyond procedural computation",
-    ],
-    growth: [
-      "needs more practice with fractions, decimals, and operations",
-      "struggles to complete multi-step problems independently",
-      "is not consistently showing work — this makes it difficult to identify errors",
-      "would benefit from additional support with word problems and real-world applications",
-      "needs to review foundational skills that are impacting current unit performance",
-      "rushing through problems is leading to careless errors — slowing down will help",
-    ],
-  },
-  "🔬 Science": {
-    color: "#065f46", bg: "#d1fae5",
-    strengths: [
-      "approaches science with genuine curiosity and strong analytical thinking",
-      "lab work is detailed, accurate, and reflects careful scientific observation",
-      "demonstrates excellent understanding of current science concepts and vocabulary",
-      "asks insightful questions that show deep engagement with scientific content",
-      "excels at connecting science concepts to real-world phenomena",
-      "is a strong collaborative partner during lab activities and experiments",
-    ],
-    growth: [
-      "science assignments are being rushed — more care and detail are needed",
-      "needs to review key vocabulary and concepts from the current unit",
-      "lab reports require more precise observations and detailed data recording",
-      "needs to engage more actively during science discussions and experiments",
-      "would benefit from reviewing class notes and textbook readings at home",
-      "struggles to apply scientific reasoning to explain observations and results",
-    ],
-  },
-  "🌍 Social Studies": {
-    color: "#7c2d12", bg: "#fef3c7",
-    strengths: [
-      "demonstrates strong knowledge of current social studies content and historical context",
-      "makes impressive connections between historical events and present-day issues",
-      "written work reflects thorough research and well-developed arguments",
-      "participates thoughtfully in discussions about history, civics, and culture",
-      "shows exceptional skill in analyzing primary sources and historical evidence",
-      "brings diverse perspectives to class discussions — a real asset to the group",
-    ],
-    growth: [
-      "social studies work does not yet reflect adequate research or preparation",
-      "needs to strengthen the use of evidence and specific examples in written responses",
-      "would benefit from reviewing class notes and completing assigned readings consistently",
-      "struggles to connect historical events to broader themes and patterns",
-      "needs to engage more actively in class discussions and document-based activities",
-      "map skills and geographic literacy need additional practice and review",
-    ],
-  },
-  "🎨 The Arts": {
-    color: "#4a1e6e", bg: "#e9d8fd",
-    strengths: [
-      "demonstrates exceptional creativity, originality, and artistic vision",
-      "shows strong technical skill and intentional craft in their work",
-      "takes creative risks and pushes their practice in exciting new directions",
-      "approaches every project with focus, care, and genuine artistic investment",
-      "portfolio work reflects meaningful growth and a developing artistic voice",
-      "is an inspiring presence in the studio — leads by example through effort and enthusiasm",
-    ],
-    growth: [
-      "arts assignments are being submitted incomplete or without sufficient effort",
-      "needs to slow down and invest more time and intention in the creative process",
-      "would benefit from experimenting more and taking creative risks",
-      "technical skills need further development — extra practice and revision are encouraged",
-      "needs to engage more actively during critique and class discussion",
-      "is not using class time productively — studio focus needs significant improvement",
-    ],
-  },
-  "🏃 Phys Ed": {
-    color: "#065f46", bg: "#d1fae5",
-    strengths: [
-      "demonstrates excellent sportsmanship, teamwork, and respect for peers during all activities",
-      "arrives prepared, engaged, and brings a positive attitude to every class",
-      "shows strong physical fitness, coordination, and athletic skill development",
-      "is a natural leader during team activities — motivates and supports classmates",
-      "follows safety rules and class expectations consistently and independently",
-      "has shown impressive growth in physical endurance, strength, and skill this marking period",
-    ],
-    growth: [
-      "needs to arrive to class prepared with appropriate attire and footwear",
-      "sportsmanship and respect for peers during competitive activities need improvement",
-      "needs to participate more actively and with greater effort during all activities",
-      "struggles to follow safety rules and class expectations consistently",
-      "would benefit from developing more cooperative skills during team sports",
-      "engagement and attitude during class need significant improvement",
-    ],
-  },
-  "💚 SEL": {
-    color: "#4a1e6e", bg: "#ede9fe",
-    strengths: [
-      "demonstrates impressive self-awareness and the ability to name and manage their emotions",
-      "shows strong empathy and genuine care for the feelings and experiences of others",
-      "is developing excellent conflict resolution and problem-solving skills",
-      "builds positive, respectful relationships with peers and trusted adults",
-      "demonstrates responsible decision-making and thinks through consequences thoughtfully",
-      "is making meaningful progress in social-emotional growth — a true highlight this period",
-    ],
-    growth: [
-      "needs additional support identifying and regulating emotions in challenging moments",
-      "is working on building more positive and respectful peer relationships",
-      "conflict resolution skills are still developing — continued support and practice are recommended",
-      "needs encouragement to seek help from trusted adults when feeling overwhelmed",
-      "responsible decision-making in social situations requires continued growth and guidance",
-      "a check-in with the school counselor may be beneficial to support ongoing SEL development",
-    ],
-  },
-  "🎓 AP": {
-    color: "#1e3a5f", bg: "#dbeafe",
-    strengths: [
-      "is performing at a high level and demonstrates true college-readiness in this AP course",
-      "written work reflects sophisticated analysis, strong argumentation, and original thinking",
-      "consistently engages with complex texts, data, and primary sources at an exceptional level",
-      "is well-prepared for the AP exam and demonstrates mastery of course concepts",
-      "takes intellectual risks and contributes insights that elevate the entire class discussion",
-      "manages the rigor and workload of this AP course with impressive maturity and discipline",
-    ],
-    growth: [
-      "needs to strengthen thesis development and the use of evidence in extended responses",
-      "AP-level reading and annotation skills need more consistent practice and depth",
-      "would benefit from additional exam preparation — practice free-response questions are strongly encouraged",
-      "needs to engage more deeply with course content beyond surface-level understanding",
-      "time management and meeting AP assignment deadlines require immediate attention",
-      "struggles to sustain the pace and rigor expected — extra help is recommended",
-    ],
-  },
-  "🌐 ENL": {
-    color: "#065f46", bg: "#d1fae5",
-    strengths: [
-      "is making impressive strides in English language acquisition and communication",
-      "demonstrates growing confidence in speaking, reading, and writing in English",
-      "actively participates in class and makes excellent use of language supports and scaffolds",
-      "vocabulary development is strong — applies new academic language with increasing accuracy",
-      "writing in English is becoming more organized, detailed, and expressive",
-      "shows remarkable perseverance and a genuine commitment to language learning",
-    ],
-    growth: [
-      "needs additional support building academic English vocabulary across content areas",
-      "reading comprehension in English requires continued scaffolding and practice",
-      "would benefit from more structured opportunities to practice speaking and listening in English",
-      "written English needs further development — sentence structure and grammar support are recommended",
-      "needs encouragement to take more risks using English during class discussions",
-      "additional home practice with English reading and vocabulary will accelerate growth significantly",
-    ],
-  },
-  "💡 SpEd": {
-    color: "#4a1e6e", bg: "#ede9fe",
-    strengths: [
-      "is making meaningful progress toward their IEP goals this marking period",
-      "demonstrates strong self-advocacy and uses accommodations effectively and independently",
-      "shows impressive growth in the areas targeted by their individualized learning plan",
-      "is building confidence and independence in a way that is genuinely exciting to observe",
-      "responds exceptionally well to support strategies and applies them with consistency",
-      "the progress made this period reflects real dedication — we are proud of this growth",
-    ],
-    growth: [
-      "additional support is needed to make progress toward current IEP goals",
-      "would benefit from more consistent use of provided accommodations and supports",
-      "a check-in meeting with the IEP team may be helpful to review current supports",
-      "needs encouragement to self-advocate and ask for help when needed",
-      "transitions between tasks and activities continue to be an area requiring additional support",
-      "we recommend continued collaboration between home and school to reinforce strategies consistently",
-    ],
-  },
-  "🔵 General": {
-    color: "#374151", bg: "#f3f4f6",
-    strengths: [
-      "is having an excellent week across all subject areas",
-      "demonstrates strong cross-curricular skills and a love of learning",
-      "brings consistent effort and a positive attitude to every class",
-      "is a pleasure to work with — engaged, focused, and always prepared",
-      "shows impressive growth that reflects dedication both in and out of school",
-    ],
-    growth: [
-      "would benefit from additional support across multiple subject areas",
-      "extra help sessions are strongly recommended to build confidence and skills",
-      "needs to bring greater focus and effort across all classes",
-      "organizational skills — including materials, assignments, and deadlines — need attention",
-      "a parent-teacher conference would be helpful to discuss a support plan",
-    ],
-  },
-};
-
 const SUBJECTS = {
-  "🌱 PRE-K & KINDERGARTEN": {
-    "── Learning Centers ──": [
-      "Dramatic Play", "Block Building & STEM", "Art & Creative Expression",
-      "Sensory Play", "Library & Literacy Corner", "Science Discovery Center",
-      "Math & Manipulatives", "Puzzles & Fine Motor",
-    ],
-    "── Core Learning Areas ──": [
-      "Early Literacy & Phonological Awareness", "Early Math & Number Sense",
-      "Social-Emotional Learning", "Language & Communication Development",
-      "Science Exploration", "Social Studies & Community",
-      "Movement & Physical Development", "Music & Rhythm",
-    ],
-    "── Support Services ──": [
-      "Special Education — Early Childhood",
-      "English as a New Language (ENL)",
-      "Speech & Language Therapy",
-      "Occupational Therapy",
-      "Physical Therapy",
-      "Early Intervention Services",
-    ],
-  },
   "🟡 ELEMENTARY SCHOOL": {
     "── Core Subjects ──": [
       "Reading / ELA", "English Language Arts", "Phonics & Literacy",
@@ -688,8 +436,206 @@ const SUBJECTS = {
   },
 };
 
+const SUBJECT_PROMPTS = {
+  "🌱 Pre-K": {
+    color: "#065f46", bg: "#d1fae5",
+    strengths: [
+      "is developing beautifully — showing curiosity, joy, and readiness to learn every day",
+      "demonstrates strong social-emotional skills — shares, takes turns, and shows kindness to peers",
+      "is building early literacy skills with growing confidence",
+      "shows strong fine and gross motor development through play and creative activities",
+      "communicates needs, ideas, and feelings clearly and with growing vocabulary",
+      "is making wonderful strides in number recognition, counting, and early math concepts",
+    ],
+    growth: [
+      "is still developing the ability to regulate emotions during transitions",
+      "needs continued support building vocabulary and expressive language skills",
+      "working on sharing, taking turns, and cooperating with peers during play",
+      "fine motor skills — including pencil grip and scissor use — are still developing",
+      "needs gentle encouragement to engage during whole-group and circle time activities",
+      "would benefit from additional practice with letter and number recognition at home",
+    ],
+  },
+  "📚 ELA": {
+    color: "#1b4965", bg: "#caf0f8",
+    strengths: [
+      "is demonstrating strong reading comprehension and makes meaningful connections to the text",
+      "writes with clarity, voice, and well-organized ideas",
+      "contributes thoughtful, text-based responses during class discussions",
+      "shows excellent command of grammar, punctuation, and sentence structure",
+      "is excelling in close reading and literary analysis",
+      "has shown remarkable growth in their writing craft this marking period",
+    ],
+    growth: [
+      "needs to provide more textual evidence to support written arguments",
+      "reading assignments are not being completed consistently",
+      "written responses lack sufficient detail and development of ideas",
+      "would benefit from additional support with grammar and sentence construction",
+      "needs to slow down and revise written work more carefully before submitting",
+      "struggles to identify key themes and central ideas in complex texts",
+    ],
+  },
+  "🔢 Math": {
+    color: "#3d5a00", bg: "#ecfccb",
+    strengths: [
+      "demonstrates strong number sense and mathematical reasoning",
+      "is excelling in problem-solving and consistently shows their work clearly",
+      "has shown impressive growth in computation accuracy this marking period",
+      "applies mathematical concepts independently and with confidence",
+      "demonstrates deep conceptual understanding beyond procedural computation",
+    ],
+    growth: [
+      "needs more practice with fractions, decimals, and operations",
+      "struggles to complete multi-step problems independently",
+      "is not consistently showing work — this makes it difficult to identify errors",
+      "would benefit from additional support with word problems",
+      "rushing through problems is leading to careless errors — slowing down will help",
+    ],
+  },
+  "🔬 Science": {
+    color: "#065f46", bg: "#d1fae5",
+    strengths: [
+      "approaches science with genuine curiosity and strong analytical thinking",
+      "lab work is detailed, accurate, and reflects careful scientific observation",
+      "demonstrates excellent understanding of current science concepts and vocabulary",
+      "excels at connecting science concepts to real-world phenomena",
+    ],
+    growth: [
+      "science assignments are being rushed — more care and detail are needed",
+      "needs to review key vocabulary and concepts from the current unit",
+      "lab reports require more precise observations and detailed data recording",
+      "struggles to apply scientific reasoning to explain observations and results",
+    ],
+  },
+  "🌍 Social Studies": {
+    color: "#7c2d12", bg: "#fef3c7",
+    strengths: [
+      "demonstrates strong knowledge of current content and historical context",
+      "makes impressive connections between historical events and present-day issues",
+      "written work reflects thorough research and well-developed arguments",
+      "shows exceptional skill in analyzing primary sources and historical evidence",
+    ],
+    growth: [
+      "social studies work does not yet reflect adequate research or preparation",
+      "needs to strengthen the use of evidence and specific examples in written responses",
+      "struggles to connect historical events to broader themes and patterns",
+      "needs to engage more actively in class discussions and document-based activities",
+    ],
+  },
+  "🎨 The Arts": {
+    color: "#4a1e6e", bg: "#e9d8fd",
+    strengths: [
+      "demonstrates exceptional creativity, originality, and artistic vision",
+      "shows strong technical skill and intentional craft in their work",
+      "takes creative risks and pushes their practice in exciting new directions",
+      "portfolio work reflects meaningful growth and a developing artistic voice",
+    ],
+    growth: [
+      "arts assignments are being submitted incomplete or without sufficient effort",
+      "needs to slow down and invest more time and intention in the creative process",
+      "technical skills need further development — extra practice and revision are encouraged",
+      "is not using class time productively — studio focus needs significant improvement",
+    ],
+  },
+  "🏃 Phys Ed": {
+    color: "#065f46", bg: "#d1fae5",
+    strengths: [
+      "demonstrates excellent sportsmanship, teamwork, and respect for peers",
+      "arrives prepared and brings a positive attitude to every class",
+      "shows strong physical fitness, coordination, and athletic skill development",
+      "is a natural leader during team activities — motivates and supports classmates",
+    ],
+    growth: [
+      "needs to arrive to class prepared with appropriate attire and footwear",
+      "sportsmanship and respect for peers during competitive activities need improvement",
+      "needs to participate more actively and with greater effort",
+      "engagement and attitude during class need significant improvement",
+    ],
+  },
+  "💚 SEL": {
+    color: "#4a1e6e", bg: "#ede9fe",
+    strengths: [
+      "demonstrates impressive self-awareness and the ability to name and manage their emotions",
+      "shows strong empathy and genuine care for the feelings of others",
+      "is developing excellent conflict resolution and problem-solving skills",
+      "builds positive, respectful relationships with peers and trusted adults",
+      "is making meaningful progress in social-emotional growth this period",
+    ],
+    growth: [
+      "needs additional support identifying and regulating emotions in challenging moments",
+      "is working on building more positive and respectful peer relationships",
+      "conflict resolution skills are still developing — continued support is recommended",
+      "a check-in with the school counselor may be beneficial",
+    ],
+  },
+  "🎓 AP": {
+    color: "#1e3a5f", bg: "#dbeafe",
+    strengths: [
+      "is performing at a high level and demonstrates true college-readiness",
+      "written work reflects sophisticated analysis and original thinking",
+      "manages the rigor of this AP course with impressive maturity and discipline",
+      "takes intellectual risks and contributes insights that elevate class discussion",
+    ],
+    growth: [
+      "needs to strengthen thesis development and the use of evidence",
+      "would benefit from additional exam preparation — practice responses are encouraged",
+      "time management and meeting AP assignment deadlines require immediate attention",
+      "struggles to sustain the pace and rigor expected — extra help is recommended",
+    ],
+  },
+  "🌐 ENL": {
+    color: "#065f46", bg: "#d1fae5",
+    strengths: [
+      "is making impressive strides in English language acquisition and communication",
+      "demonstrates growing confidence in speaking, reading, and writing in English",
+      "vocabulary development is strong — applies new academic language with accuracy",
+      "shows remarkable perseverance and a genuine commitment to language learning",
+    ],
+    growth: [
+      "needs additional support building academic English vocabulary",
+      "reading comprehension in English requires continued scaffolding and practice",
+      "written English needs further development — sentence structure support is recommended",
+      "needs encouragement to take more risks using English during class discussions",
+    ],
+  },
+  "💡 SpEd": {
+    color: "#4a1e6e", bg: "#ede9fe",
+    strengths: [
+      "is making meaningful progress toward their IEP goals this marking period",
+      "demonstrates strong self-advocacy and uses accommodations effectively",
+      "shows impressive growth in the areas targeted by their learning plan",
+      "the progress made this period reflects real dedication — we are proud",
+    ],
+    growth: [
+      "additional support is needed to make progress toward current IEP goals",
+      "would benefit from more consistent use of provided accommodations and supports",
+      "a check-in meeting with the IEP team may be helpful to review current supports",
+      "we recommend continued collaboration between home and school to reinforce strategies",
+    ],
+  },
+  "🔵 General": {
+    color: "#374151", bg: "#f3f4f6",
+    strengths: [
+      "is having an excellent week across all subject areas",
+      "brings consistent effort and a positive attitude to every class",
+      "is a pleasure to work with — engaged, focused, and always prepared",
+      "shows impressive growth that reflects dedication both in and out of school",
+    ],
+    growth: [
+      "would benefit from additional support across multiple subject areas",
+      "extra help sessions are strongly recommended to build confidence and skills",
+      "organizational skills — including materials, assignments, and deadlines — need attention",
+      "a parent-teacher conference would be helpful to discuss a support plan",
+    ],
+  },
+};
+
+
 function App() {
   const [step, setStep] = useState("form");
+  const [reportFrequency, setReportFrequency] = useState("weekly");
+  const [termType, setTermType] = useState("Marking Period");
+  const [markingPeriodDate, setMarkingPeriodDate] = useState("");
   const [schoolName, setSchoolName] = useState("");
   const [teacherName, setTeacherName] = useState("");
   const [gradeLevel, setGradeLevel] = useState("");
@@ -697,12 +643,9 @@ function App() {
   const [nameBlank, setNameBlank] = useState(false);
   const [studentGradeLevel, setStudentGradeLevel] = useState("");
   const [weekOf, setWeekOf] = useState("");
-  const [reportFrequency, setReportFrequency] = useState("weekly");
-  const [termType, setTermType] = useState("Marking Period");
-  const [markingPeriodDate, setMarkingPeriodDate] = useState("");
+  const [selectedPrompts, setSelectedPrompts] = useState({});
   const [activeSubject, setActiveSubject] = useState(null);
   const [selectedSubjectPrompts, setSelectedSubjectPrompts] = useState([]);
-  const [selectedPrompts, setSelectedPrompts] = useState({});
   const [customNote, setCustomNote] = useState("");
   const [gradeEstimate, setGradeEstimate] = useState("");
   const [customGrade, setCustomGrade] = useState("");
@@ -726,27 +669,19 @@ function App() {
 
   const generateReport = () => {
     const lines = [];
-    const schoolName2 = schoolName.trim() || "";
     const sName = nameBlank ? "your child, _______________," : "your child";
+    const schoolName2 = schoolName.trim() || "";
     const tName = teacherName.trim() || "Your Child's Teacher";
     const cName = className.trim() || "our class";
-    const wOf = weekOf || "";
+    const wOf = weekOf || "this week";
 
-    const isPreK = gradeLevel === "🌱 PRE-K & KINDERGARTEN";
     const isDaily = reportFrequency === "daily";
     const isMarkingPeriod = reportFrequency === "marking_period";
     const periodWord = isDaily ? "today" : isMarkingPeriod ? "this marking period" : "this week";
     const reportTypeLabel = isDaily ? "daily progress update" : isMarkingPeriod ? "marking period progress report" : "weekly progress report";
 
     lines.push(`Dear Parent/Guardian,\n`);
-    if (isPreK) {
-      lines.push(`This is a ${reportTypeLabel} sharing how ${sName} is growing and developing ${periodWord} in ${cName}. We cherish your partnership and want to keep you connected to their early learning journey.\n`);
-    } else {
-      lines.push(`This is a ${reportTypeLabel} to let you know how ${sName} is doing ${periodWord} in ${cName}. We value your partnership in their education and want to keep you informed of their progress.\n`);
-    }
-
-    if (selectedSubjectPrompts.length > 0)
-      lines.push(`${activeSubject ? activeSubject + " — " : ""}${sName} ${selectedSubjectPrompts.join("; and ")}.\n`);
+    lines.push(`This is a ${reportTypeLabel} to let you know how ${sName} is doing ${periodWord} in ${cName}. We value your partnership in their education and want to keep you informed of their progress.\n`);
 
     const academic     = [...(selectedPrompts["positive_academic"] || []),          ...(selectedPrompts["needs_support_academic"] || [])];
     const participation= [...(selectedPrompts["positive_participation"] || []),     ...(selectedPrompts["needs_support_participation"] || [])];
@@ -755,6 +690,8 @@ function App() {
     const homework     = [...(selectedPrompts["positive_homework"] || []),          ...(selectedPrompts["needs_support_homework"] || [])];
     const general      = selectedPrompts["general"] || [];
 
+    if (selectedSubjectPrompts.length > 0)
+      lines.push(`${activeSubject ? activeSubject + " — " : ""}${sName} ${selectedSubjectPrompts.join("; and ")}.\n`);
     if (academic.length > 0)
       lines.push(`📚 Academically, ${sName} ${academic.join("; and ")}.\n`);
     if (participation.length > 0)
@@ -774,13 +711,11 @@ function App() {
       lines.push(`Additional note: ${customNote.trim()}\n`);
 
     lines.push(`Thank you for your continued support. Please don't hesitate to reach out with any questions.\n`);
-
     const termLabel = isMarkingPeriod
-      ? (["Mid-Year","End of Year"].includes(termType) ? termType : termType === "Custom" ? wOf : `${termType}${wOf ? " " + wOf : ""}`)
+      ? (["Mid-Year","End of Year"].includes(termType) ? termType : termType === "Custom" ? weekOf : `${termType}${weekOf ? " " + weekOf : ""}`)
       : wOf;
     const mpDate = markingPeriodDate ? new Date(markingPeriodDate + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" }) : "";
-
-    lines.push(`Warm regards,\n${tName}\n${cName}${schoolName2 ? "\n" + schoolName2 : ""}${studentGradeLevel ? "\nStudent Grade: " + studentGradeLevel : ""}${termLabel ? `\n${isMarkingPeriod ? "Term" : isDaily ? "Date" : "Week of"}: ${termLabel}` : ""}${isMarkingPeriod && mpDate ? `\nDate Sent: ${mpDate}` : ""}`);
+    lines.push(`Warm regards,\n${tName}\n${cName}${schoolName2 ? "\n" + schoolName2 : ""}${studentGradeLevel ? "\nStudent Grade: " + studentGradeLevel : ""}${termLabel ? "\n" + (isMarkingPeriod ? "Term" : isDaily ? "Date" : "Week of") + ": " + termLabel : ""}${isMarkingPeriod && mpDate ? "\nDate Sent: " + mpDate : ""}`);
 
     return lines.join("\n");
   };
@@ -795,12 +730,11 @@ function App() {
   const [parentPhone, setParentPhone] = useState("");
 
   const getNames = () => {
-    const sName = "your child";
+    const sName = nameBlank ? "your child, _______________," : "your child";
     const tName = teacherName.trim() || "Teacher";
     const cName = className.trim() || "Class";
     const sName2 = schoolName.trim() || "";
     const isDaily = reportFrequency === "daily";
-    const isMarkingPeriod = reportFrequency === "marking_period";
     const wOf = weekOf
       ? new Date(weekOf + "T12:00:00").toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })
       : new Date().toLocaleDateString();
@@ -833,17 +767,11 @@ function App() {
   // DOWNLOAD DOC: uses data: URI which works everywhere including iframes
   const handleDownloadDoc = () => {
     const { sName, tName, cName, wOf, isDaily } = getNames();
-    const isMarkingPeriod = reportFrequency === "marking_period";
-    const reportLabel = isDaily ? "Daily Progress Update" : isMarkingPeriod ? "Marking Period Progress Report" : "Weekly Progress Report";
-    const periodLabel = isMarkingPeriod ? "Term" : isDaily ? "Date" : "Week of";
-    const termLabel = isMarkingPeriod
-      ? (["Mid-Year","End of Year"].includes(termType) ? termType : termType === "Custom" ? wOf : `${termType}${wOf ? " " + wOf : ""}`)
-      : wOf;
-    const docTitle = isMarkingPeriod
-      ? `GradeRelay – ${termLabel} – Progress Report`
-      : isDaily
-        ? `GradeRelay – Progress Report – ${wOf}`
-        : `GradeRelay – Progress Report – Week of ${wOf}`;
+    const reportLabel = isDaily ? "Daily Progress Update" : "Weekly Progress Report";
+    const periodLabel = isDaily ? "Date" : "Week of";
+    const docTitle = isDaily
+      ? `GradeRelay – Progress Report – ${wOf}`
+      : `GradeRelay – Progress Report – Week of ${wOf}`;
 
     const htmlParagraphs = report
       .split("\n")
@@ -863,15 +791,15 @@ h1{font-size:18pt;color:#4c1d95;margin-bottom:6pt}
 .footer{font-size:9pt;color:#aaa;border-top:1pt solid #eee;margin-top:24pt;padding-top:8pt}</style>
 </head><body>
 <h1>GradeRelay — ${reportLabel}</h1>
-<div class="meta">
+<div class="meta"><strong>Student:</strong> ${sName} &nbsp;&nbsp;
 <strong>Teacher:</strong> ${tName} &nbsp;&nbsp;
 <strong>Class:</strong> ${cName} &nbsp;&nbsp;
-<strong>${periodLabel}:</strong> ${termLabel}${studentGradeLevel ? ` &nbsp;&nbsp;<strong>Grade:</strong> ${studentGradeLevel}` : ""}
-</div>
+<strong>${periodLabel}:</strong> ${wOf}</div>
 ${htmlParagraphs}
-<div class="footer">Generated by GradeRelay · graderelay.com · Khali Gap Media LLC</div>
+<div class="footer">Generated by GradeRelay · Khali Gap Media LLC</div>
 </body></html>`;
 
+    // data: URI works in all environments including sandboxed iframes
     const dataUri = "data:application/msword;charset=utf-8," + encodeURIComponent(docHTML);
     const a = document.createElement("a");
     a.href = dataUri;
@@ -961,38 +889,23 @@ ${htmlParagraphs}
         <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 12, marginBottom: 6 }}>
           <div style={{ width: 64, height: 64, borderRadius: "18px", display: "flex", alignItems: "center", justifyContent: "center" }}>
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="64" height="64" rx="16" fill="#0a3d3d"/>
+              <rect width="64" height="64" rx="16" fill="url(#gr1)" opacity="0.8"/>
               <defs>
-                <linearGradient id="iconBg" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#0a3d3d"/>
-                  <stop offset="50%" stopColor="#0e7490"/>
+                <linearGradient id="gr1" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#0e7490"/>
                   <stop offset="100%" stopColor="#4a2d7a"/>
                 </linearGradient>
-                <linearGradient id="tealBub" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#2dd4c8"/>
-                  <stop offset="100%" stopColor="#0e9d8f"/>
-                </linearGradient>
-                <linearGradient id="purpBub" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="#a855f7"/>
-                  <stop offset="100%" stopColor="#7c3aed"/>
-                </linearGradient>
               </defs>
-              {/* rounded square background */}
-              <rect width="64" height="64" rx="16" fill="url(#iconBg)"/>
-              {/* teal bubble — large, top-left */}
-              <ellipse cx="26" cy="26" rx="20" ry="17" fill="url(#tealBub)"/>
+              <ellipse cx="26" cy="26" rx="20" ry="17" fill="#2dd4c8"/>
               <polygon points="14,40 8,50 22,42" fill="#0e9d8f"/>
-              {/* white glow border */}
               <ellipse cx="26" cy="26" rx="20" ry="17" fill="none" stroke="white" strokeWidth="1.5" opacity="0.5"/>
-              {/* text lines inside teal bubble */}
               <rect x="13" y="20" width="22" height="3.5" rx="1.75" fill="white" opacity="0.9"/>
               <rect x="13" y="27" width="16" height="3.5" rx="1.75" fill="white" opacity="0.7"/>
               <rect x="13" y="34" width="19" height="3.5" rx="1.75" fill="white" opacity="0.5"/>
-              {/* purple reply bubble — smaller, bottom-right */}
-              <ellipse cx="42" cy="38" rx="16" ry="13" fill="url(#purpBub)"/>
-              <polygon points="50,48 56,56 44,50" fill="#7c3aed"/>
-              {/* white glow border */}
+              <ellipse cx="42" cy="38" rx="16" ry="13" fill="#7c3aed"/>
+              <polygon points="50,48 56,56 44,50" fill="#6d28d9"/>
               <ellipse cx="42" cy="38" rx="16" ry="13" fill="none" stroke="white" strokeWidth="1.5" opacity="0.5"/>
-              {/* three dots inside purple bubble */}
               <circle cx="34" cy="38" r="2.5" fill="white" opacity="0.95"/>
               <circle cx="42" cy="38" r="2.5" fill="white" opacity="0.95"/>
               <circle cx="50" cy="38" r="2.5" fill="white" opacity="0.95"/>
@@ -1006,8 +919,8 @@ ${htmlParagraphs}
             Grade<span style={{ color: "#2dd4c8" }}>Relay</span>
           </h1>
         </div>
-        <p style={{ color: "#c4b5fd", marginTop: 4, fontSize: 15, fontFamily: "'Source Serif 4', serif", letterSpacing: "0.5px" }}>
-          Connecting Teachers & Families · One Report at a Time
+        <p style={{ color: "rgba(255,255,255,0.85)", marginTop: 4, fontSize: 15, fontFamily: "'Source Serif 4', serif", letterSpacing: "0.5px" }}>
+          Connecting Teachers &amp; Families · One Report at a Time
         </p>
       </div>
 
@@ -1019,7 +932,7 @@ ${htmlParagraphs}
             <section style={{ marginBottom: 32 }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 12 }}>
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 22, color: "#1f2937", margin: 0 }}>
-                  Student & Class Info
+                  Student &amp; Class Info
                 </h2>
                 {/* Daily / Weekly / Marking Period Toggle */}
                 <div style={{ display: "flex", background: "#f3f4f6", borderRadius: 10, padding: 4, gap: 4 }}>
@@ -1028,8 +941,8 @@ ${htmlParagraphs}
                       key={freq}
                       onClick={() => setReportFrequency(freq)}
                       style={{
-                        padding: "8px 14px", border: "none", borderRadius: 8, cursor: "pointer",
-                        fontFamily: "'Source Serif 4', serif", fontSize: 13, fontWeight: 700,
+                        padding: "8px 12px", border: "none", borderRadius: 8, cursor: "pointer",
+                        fontFamily: "'Source Serif 4', serif", fontSize: 12, fontWeight: 700,
                         transition: "all 0.2s",
                         background: reportFrequency === freq ? "linear-gradient(135deg, #3b0764, #4c1d95)" : "transparent",
                         color: reportFrequency === freq ? "white" : "#6b7280",
@@ -1041,9 +954,9 @@ ${htmlParagraphs}
                   ))}
                 </div>
               </div>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))", gap: 12 }}>
                 <div style={{ gridColumn: "1 / -1", background: "#f0fdf4", border: "1px solid #bbf7d0", borderRadius: 8, padding: "10px 14px", fontSize: 12.5, color: "#166534" }}>
-                  🔒 <strong>FERPA Notice:</strong> GradeRelay does not collect or store any student PII. Reports say your child throughout. Toggle below to add a fill-in blank for the name.
+                  🔒 <strong>FERPA Notice:</strong> GradeRelay does not collect or store any student PII. Reports address "your child" throughout. Use the toggle below to add a fill-in blank for printing.
                 </div>
                 <div style={{ gridColumn: "1 / -1" }}>
                   <div onClick={() => setNameBlank(!nameBlank)} style={{
@@ -1065,9 +978,29 @@ ${htmlParagraphs}
                     </div>
                     <div>
                       <div style={{ fontSize: 14, fontWeight: 700, color: "#1f2937" }}>Add fill-in blank for student name</div>
-                      <div style={{ fontSize: 12, color: "#6b7280", marginTop: 2 }}>Report will show: your child, _______________, — perfect for printing</div>
+                      <div style={{ fontSize: 12, color: "#6b7280", marginTop: 2 }}>Report will show: your child, _______________ — perfect for printing</div>
                     </div>
                   </div>
+                </div>
+                <div>
+                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>STUDENT GRADE LEVEL <span style={{ color: "#9ca3af", fontWeight: 400 }}>— optional</span></label>
+                  <select className="input-field" value={studentGradeLevel} onChange={e => setStudentGradeLevel(e.target.value)} style={{ cursor: "pointer", appearance: "auto" }}>
+                    <option value="">— Select grade —</option>
+                    <option value="Pre-K">Pre-K</option>
+                    <option value="Kindergarten">Kindergarten</option>
+                    <option value="1st Grade">1st Grade</option>
+                    <option value="2nd Grade">2nd Grade</option>
+                    <option value="3rd Grade">3rd Grade</option>
+                    <option value="4th Grade">4th Grade</option>
+                    <option value="5th Grade">5th Grade</option>
+                    <option value="6th Grade">6th Grade</option>
+                    <option value="7th Grade">7th Grade</option>
+                    <option value="8th Grade">8th Grade</option>
+                    <option value="9th Grade">9th Grade</option>
+                    <option value="10th Grade">10th Grade</option>
+                    <option value="11th Grade">11th Grade</option>
+                    <option value="12th Grade">12th Grade</option>
+                  </select>
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>SCHOOL NAME</label>
@@ -1078,17 +1011,6 @@ ${htmlParagraphs}
                   <input className="input-field" placeholder="e.g. Ms. Johnson" value={teacherName} onChange={e => setTeacherName(e.target.value)} />
                 </div>
                 <div>
-                  <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>STUDENT GRADE LEVEL <span style={{ color: "#9ca3af", fontWeight: 400 }}>— optional</span></label>
-                  <select className="input-field" value={studentGradeLevel} onChange={e => setStudentGradeLevel(e.target.value)} style={{ cursor: "pointer", appearance: "auto" }}>
-                    <option value="">— Select grade —</option>
-                    <option value="Pre-K">Pre-K</option>
-                    <option value="Kindergarten">Kindergarten</option>
-                    {["1st","2nd","3rd","4th","5th","6th","7th","8th","9th","10th","11th","12th"].map(g => (
-                      <option key={g} value={g + " Grade"}>{g} Grade</option>
-                    ))}
-                  </select>
-                </div>
-                <div>
                   <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>GRADE LEVEL & SUBJECT</label>
                   <select
                     className="input-field"
@@ -1097,7 +1019,7 @@ ${htmlParagraphs}
                     style={{ cursor: "pointer", appearance: "auto", marginBottom: 8 }}
                   >
                     <option value="">— Select grade level —</option>
-                    <option value="🌱 PRE-K & KINDERGARTEN">🌱 Pre-K &amp; Kindergarten</option>
+                    <option value="🌱 PRE-K &amp; KINDERGARTEN">🌱 Pre-K &amp; Kindergarten</option>
                     <option value="🟡 ELEMENTARY SCHOOL">🟡 Elementary School</option>
                     <option value="🟠 MIDDLE SCHOOL">🟠 Middle School</option>
                     <option value="🔵 HIGH SCHOOL">🔵 High School</option>
@@ -1132,7 +1054,7 @@ ${htmlParagraphs}
                 </div>
                 <div>
                   <label style={{ fontSize: 13, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 4 }}>
-                    {reportFrequency === "daily" ? "DATE" : reportFrequency === "marking_period" ? "TERM / MARKING PERIOD" : "WEEK OF"}
+                    {reportFrequency === "daily" ? "DATE" : reportFrequency === "marking_period" ? "TERM" : "WEEK OF"}
                   </label>
                   {reportFrequency === "marking_period" ? (
                     <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
@@ -1147,15 +1069,16 @@ ${htmlParagraphs}
                           <option value="End of Year">End of Year</option>
                           <option value="Custom">Custom...</option>
                         </select>
-                        {!["Mid-Year","End of Year"].includes(termType) && (
+                        {termType !== "Mid-Year" && termType !== "End of Year" && (
                           termType === "Custom" ? (
                             <input className="input-field" placeholder="e.g. Fall Term" value={weekOf} onChange={e => setWeekOf(e.target.value)} style={{ flex: 3 }} />
                           ) : (
                             <select className="input-field" value={weekOf} onChange={e => setWeekOf(e.target.value)} style={{ flex: 1 }}>
                               <option value="">#</option>
-                              {(termType === "Semester" ? ["1","2"] : termType === "Trimester" ? ["1","2","3"] : ["1","2","3","4"]).map(n => (
-                                <option key={n} value={n}>{n}</option>
-                              ))}
+                              <option value="1">1</option>
+                              <option value="2">2</option>
+                              <option value="3">3</option>
+                              <option value="4">4</option>
                             </select>
                           )
                         )}
@@ -1188,6 +1111,7 @@ ${htmlParagraphs}
               <p style={{ color: "#6b7280", fontSize: 14, marginTop: -8, marginBottom: 16 }}>
                 Click any category to expand it, then select all prompts that apply to this student.
               </p>
+
 
               {/* Subject-Specific Prompts */}
               <div style={{ marginBottom: 24, border: "2px solid #e0e7ff", borderRadius: 14, padding: "18px 20px", background: "linear-gradient(135deg, #f0fdfa, #f5f3ff)" }}>
@@ -1353,12 +1277,12 @@ ${htmlParagraphs}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
               <div>
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, color: "#1f2937", margin: 0 }}>
-                  {reportFrequency === "daily" ? "Daily Update" : reportFrequency === "marking_period" ? "Marking Period Report" : "Weekly Report"} Preview
-                  <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, padding: "3px 10px", borderRadius: 99, background: reportFrequency === "daily" ? "#ede9fe" : reportFrequency === "marking_period" ? "#dbeafe" : "#d8f3dc", color: reportFrequency === "daily" ? "#3b0764" : reportFrequency === "marking_period" ? "#1e3a5f" : "#2d6a4f", verticalAlign: "middle" }}>
-                    {reportFrequency === "daily" ? "📅 Daily" : reportFrequency === "marking_period" ? "📋 Marking Period" : "📆 Weekly"}
+                  {reportFrequency === "daily" ? "Daily Update" : "Weekly Report"} Preview
+                  <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, padding: "3px 10px", borderRadius: 99, background: reportFrequency === "daily" ? "#ede9fe" : "#d8f3dc", color: reportFrequency === "daily" ? "#3b0764" : "#2d6a4f", verticalAlign: "middle" }}>
+                    {reportFrequency === "daily" ? "📅 Daily" : "📆 Weekly"}
                   </span>
                 </h2>
-                {weekOf && <p style={{ color: "#6b7280", margin: "4px 0 0", fontSize: 14 }}>Week of: <strong>{weekOf}</strong></p>}
+                {studentGradeLevel && <p style={{ color: "#6b7280", margin: "4px 0 0", fontSize: 14 }}>Grade: <strong>{studentGradeLevel}</strong></p>}
               </div>
               <button className="secondary-btn" onClick={() => setStep("form")}>← Edit</button>
             </div>
@@ -1483,12 +1407,8 @@ ${htmlParagraphs}
             {/* Formatted Report Panel */}
             {exportPanel === "formatted" && (() => {
               const { sName, tName, cName, wOf, isDaily } = getNames();
-              const isMarkingPeriod = reportFrequency === "marking_period";
-              const termLabel = isMarkingPeriod
-                ? (["Mid-Year","End of Year"].includes(termType) ? termType : termType === "Custom" ? wOf : `${termType}${wOf ? " " + wOf : ""}`)
-                : wOf;
-              const reportLabel = isDaily ? "Daily Progress Update" : isMarkingPeriod ? "Marking Period Progress Report" : "Weekly Progress Report";
-              const periodLabel = isMarkingPeriod ? "Term" : isDaily ? "Date" : "Week of";
+              const reportLabel = isDaily ? "Daily Progress Update" : "Weekly Progress Report";
+              const periodLabel = isDaily ? "Date" : "Week of";
               return (
                 <div style={{ marginTop: 14, border: "2px solid #7c3aed", borderRadius: 12, overflow: "hidden" }}>
                   {/* Toolbar */}
@@ -1532,8 +1452,7 @@ ${htmlParagraphs}
                         <div style={{ fontSize: 10, color: "#555", fontFamily: "Arial, sans-serif" }}>
                           <strong>Teacher:</strong> {tName} &nbsp;|&nbsp;
                           <strong>Class:</strong> {cName} &nbsp;|&nbsp;
-                          <strong>{periodLabel}:</strong> {termLabel}{studentGradeLevel ? <span> &nbsp;|&nbsp;<strong>Grade:</strong> {studentGradeLevel}</span> : ""}
-                        </div>
+                          <strong>{periodLabel}:</strong> {wOf}
                         </div>
                       </div>
                       <div style={{ fontFamily: "Georgia, serif", fontSize: 12, lineHeight: 1.85, color: "#1a1a1a" }}>
@@ -1584,7 +1503,7 @@ ${htmlParagraphs}
         )}
 
         <p style={{ textAlign: "center", color: "#64748b", fontSize: 12, marginTop: 20, fontFamily: "'Source Serif 4', serif", lineHeight: 2 }}>
-          📶 GradeRelay · Connecting Teachers & Families · {new Date().getFullYear()}
+          📶 GradeRelay · Connecting Teachers &amp; Families · {new Date().getFullYear()}
           <br />
           <a href="mailto:support@graderelay.com" style={{ color: "#2dd4c8", textDecoration: "none", fontWeight: 600 }}>
             support@graderelay.com
