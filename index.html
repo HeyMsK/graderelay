@@ -153,7 +153,7 @@ const PROMPTS = {
     "struggles with self-regulation during certain activities",
     "is working on managing frustration more constructively",
     "requires additional support following classroom routines",
-    "behavior this week has impacted their own learning",
+    "has shown behavior this week that has impacted their own learning",
     "is working with us to improve conduct in class",
     "had a disciplinary situation this week — a follow-up conversation is recommended",
   ],
@@ -166,8 +166,8 @@ const PROMPTS = {
     "has been frequently arriving late to class",
     "tardiness is beginning to affect their ability to keep up",
     "attendance has been inconsistent and is a growing concern",
-    "despite recent absences, has worked hard to stay on track",
-    "we encourage more consistent attendance to support their progress",
+    "has worked hard to stay on track despite recent absences",
+    "would benefit from more consistent attendance to support their progress",
   ],
   attendance_daily: [
     "was absent from class today",
@@ -613,6 +613,29 @@ const SUBJECT_PROMPTS = {
       "we recommend continued collaboration between home and school to reinforce strategies",
     ],
   },
+  "🌎 Foreign Language": {
+    color: "#1b4965", bg: "#caf0f8",
+    strengths: [
+      "is making impressive progress in acquiring new vocabulary and language structures",
+      "demonstrates strong pronunciation, fluency, and confidence when speaking the target language",
+      "consistently completes foreign language assignments with care and attention to detail",
+      "shows genuine enthusiasm and curiosity for language learning and cultural exploration",
+      "applies grammar rules and vocabulary accurately in both written and spoken work",
+      "has shown remarkable growth in reading and writing in the target language this marking period",
+      "participates actively in language activities, conversations, and cultural discussions",
+      "retains new vocabulary and structures with impressive consistency",
+    ],
+    growth: [
+      "needs more consistent practice with vocabulary and grammar at home",
+      "written work in the target language contains frequent errors that need additional review",
+      "needs to participate more actively during oral language practice and conversations",
+      "foreign language homework needs more consistent completion and effort",
+      "would benefit from daily review of vocabulary and language structures outside of class",
+      "struggles to retain new vocabulary — flashcard practice at home is strongly encouraged",
+      "needs to take more risks speaking in the target language during class",
+      "reading comprehension in the target language requires additional practice and support",
+    ],
+  },
   "🔵 General": {
     color: "#374151", bg: "#f3f4f6",
     strengths: [
@@ -898,8 +921,11 @@ function App() {
     const homework     = [...(selectedPrompts["positive_homework"] || []),          ...(selectedPrompts["needs_support_homework"] || [])];
     const general      = selectedPrompts["general"] || [];
 
-    if (selectedSubjectPrompts.length > 0)
-      lines.push(`${activeSubject ? activeSubject + " — " : ""}${sName} ${selectedSubjectPrompts.join("; and ")}.\n`);
+    if (selectedSubjectPrompts.length > 0) {
+      const subjLabel = activeSubject ? activeSubject.replace(/^[^a-zA-Z]+/, "").trim() : "";
+      const subjPrefix = subjLabel ? `In ${subjLabel}, ` : "";
+      lines.push(`${subjPrefix}${sName} ${selectedSubjectPrompts.join("; and ")}.\n`);
+    }
     if (academic.length > 0)
       lines.push(`📚 ${T.academic} ${sName} ${academic.join("; and ")}.\n`);
     if (participation.length > 0)
@@ -1828,13 +1854,33 @@ ${htmlParagraphs}
                         href="https://docs.google.com/document/create"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => {
+                          const text = editedReport || report;
+                          if (navigator.clipboard && navigator.clipboard.writeText) {
+                            navigator.clipboard.writeText(text).catch(() => {
+                              const ta = document.createElement("textarea");
+                              ta.value = text;
+                              document.body.appendChild(ta);
+                              ta.select();
+                              document.execCommand("copy");
+                              document.body.removeChild(ta);
+                            });
+                          } else {
+                            const ta = document.createElement("textarea");
+                            ta.value = text;
+                            document.body.appendChild(ta);
+                            ta.select();
+                            document.execCommand("copy");
+                            document.body.removeChild(ta);
+                          }
+                        }}
                         style={{ padding: "7px 14px", background: "white", color: "#3b0764", border: "none", borderRadius: 6, cursor: "pointer", fontWeight: 700, fontSize: 13, textDecoration: "none" }}
-                      >🗂 Open Google Drive</a>
+                      >🗂 Open Google Docs</a>
                     </div>
                   </div>
                   {/* Hint */}
                   <div style={{ background: "#fffbeb", padding: "10px 20px", fontSize: 13, color: "#92400e", fontFamily: "'Source Serif 4', serif" }}>
-                    💡 Click <strong>Select &amp; Copy</strong>, then open Google Docs and press <strong>⌘V / Ctrl+V</strong> to paste with formatting.
+                    💡 <strong>Two ways to get to Google Docs:</strong> Click <strong>Select &amp; Copy</strong> then paste into an existing doc — OR click <strong>Open Google Docs</strong> which copies the report automatically and opens a new doc. Just press <strong>⌘V / Ctrl+V</strong> to paste.
                   </div>
                   {/* Document body */}
                   <div style={{ background: "#f5f5f5", padding: "20px" }}>
@@ -1843,13 +1889,14 @@ ${htmlParagraphs}
                         <div style={{ fontSize: 10, fontWeight: 700, color: "#2dd4c8", letterSpacing: 2, fontFamily: "Arial, sans-serif", marginBottom: 4 }}>💬 GRADERELAY</div>
                         <div style={{ fontSize: 20, fontWeight: 700, color: "#3b0764", fontFamily: "Georgia, serif", marginBottom: 10 }}>{reportLabel}</div>
                         <div style={{ fontSize: 10, color: "#555", fontFamily: "Arial, sans-serif" }}>
+                          <strong>Student:</strong> _______________ &nbsp;|&nbsp;
                           <strong>Teacher:</strong> {tName} &nbsp;|&nbsp;
                           <strong>Class:</strong> {cName} &nbsp;|&nbsp;
-                          <strong>{periodLabel}:</strong> {wOf}
+                          <strong>{periodLabel}:</strong> {termLabel || wOf}
                         </div>
                       </div>
                       <div style={{ fontFamily: "Georgia, serif", fontSize: 12, lineHeight: 1.85, color: "#1a1a1a" }}>
-                        {report.split("\n").map((line, i) =>
+                        {(editedReport || report).split("\n").map((line, i) =>
                           line.trim() === ""
                             ? <div key={i} style={{ height: 8 }} />
                             : <p key={i} style={{ margin: "0 0 8px 0" }}>{line}</p>
@@ -1877,17 +1924,11 @@ ${htmlParagraphs}
 
 
 
-            <div style={{ marginTop: 12, padding: 14, background: "#f0fdf4", borderRadius: 10, border: "1px solid #bbf7d0" }}>
-              <p style={{ margin: 0, fontSize: 12.5, color: "#166534", fontFamily: "'Source Serif 4', serif", lineHeight: 1.75 }}>
-                <strong>📋 Copy Text</strong> — paste into email, ClassDojo, Remind, or Seesaw. &nbsp;
-                <strong>📝 Open Report</strong> — opens a formatted, printable report page with one-click copy &amp; Google Drive button. &nbsp;
-                <strong>📄 Download .doc</strong> — saves a Word file to your computer.
-              </p>
-            </div>
+
 
             <div style={{ textAlign: "center", marginTop: 24 }}>
               <button className="primary-btn" onClick={() => {
-                setStudentFirstName(""); setStudentLastInitial(""); setSelectedPrompts({}); setCustomNote(""); setReportFrequency("weekly"); setStep("form");
+                setSelectedPrompts({}); setSelectedSubjectPrompts([]); setActiveSubject(null); setCustomNote(""); setGradeEstimate(""); setCustomGrade(""); setEditedReport(""); setTranslatedReport(""); setReportFrequency("weekly"); setStep("form");
               }}>
                 + New Report for Another Student
               </button>
