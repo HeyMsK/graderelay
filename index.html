@@ -97,6 +97,7 @@ const PROMPTS = {
     "shows genuine enthusiasm for learning new material",
   ],
   needs_support_academic: [
+    "has the ability to do much better in this course and we encourage a renewed focus and effort",
     "needs additional support with recent assignments",
     "is working toward meeting grade-level expectations",
     "has difficulty understanding this week's concepts",
@@ -253,6 +254,14 @@ const PROMPTS = {
     "arts assignments are being submitted incomplete or without sufficient effort",
     "reading log has not been completed — nightly independent reading is strongly encouraged",
   ],
+  general_mp: [
+    "Overall, this has been a meaningful marking period and we are proud of the growth shown.",
+    "We look forward to building on the progress made this marking period in the weeks ahead.",
+    "Thank you for your continued partnership — your involvement makes a real difference in your child's success.",
+    "Please don't hesitate to reach out to schedule a conference to discuss this marking period in more detail.",
+    "This marking period has presented some challenges — we are committed to working together to support a stronger next period.",
+    "We are concerned about the progress made this marking period and strongly encourage a parent-teacher conference to develop a plan moving forward.",
+  ],
   general: [
     "We are proud of the effort shown this week.",
     "Please encourage continued reading and review at home.",
@@ -283,6 +292,7 @@ const CATEGORY_META = {
   attendance_daily:           { label: "📅 Attendance — Today",              color: "#1e4d6b", bg: "#ede9fe", dailyOnly: true },
   positive_homework:          { label: "✏️ Homework & Assignment Strengths", color: "#3d5a00", bg: "#ecfccb" },
   needs_support_homework:     { label: "📝 Homework & Assignment Concerns",  color: "#7c2d12", bg: "#fef3c7" },
+  general_mp:                 { label: "📋 Marking Period Comments",          color: "#1e3a5f", bg: "#dbeafe", mpOnly: true },
   general:                    { label: "💡 General Comments",                color: "#374151", bg: "#f3f4f6" },
 };
 
@@ -919,6 +929,7 @@ function App() {
     const behavior     = [...(selectedPrompts["positive_behavior"] || []),          ...(selectedPrompts["needs_support_behavior"] || [])];
     const attendance   = [...(selectedPrompts["attendance"] || []), ...(selectedPrompts["attendance_daily"] || [])];
     const homework     = [...(selectedPrompts["positive_homework"] || []),          ...(selectedPrompts["needs_support_homework"] || [])];
+    const general_mp   = selectedPrompts["general_mp"] || [];
     const general      = selectedPrompts["general"] || [];
 
     if (selectedSubjectPrompts.length > 0) {
@@ -936,6 +947,8 @@ function App() {
       lines.push(`📅 ${T.attendance} ${sName} ${attendance.join("; ")}.\n`);
     if (homework.length > 0)
       lines.push(`✏️ ${T.homework} ${sName} ${homework.join("; and ")}.\n`);
+    if (general_mp.length > 0)
+      lines.push(general_mp.join(" ") + "\n");
     if (general.length > 0)
       lines.push(general.join(" ") + "\n");
     const gradeDisplay = gradeEstimate === "other" ? customGrade.trim() : gradeEstimate;
@@ -1447,8 +1460,8 @@ ${htmlParagraphs}
               </div>
 
               {Object.entries(CATEGORY_META).filter(([key, meta]) => {
-
-                if (meta.dailyOnly && reportFrequency === "weekly") return false;
+                if (meta.dailyOnly && reportFrequency !== "daily") return false;
+                if (meta.mpOnly && reportFrequency !== "marking_period") return false;
                 return true;
               }).map(([key, meta]) => {
                 const isOpen = openCategory === key;
@@ -1547,9 +1560,12 @@ ${htmlParagraphs}
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 24, flexWrap: "wrap", gap: 12 }}>
               <div>
                 <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: 24, color: "#1f2937", margin: 0 }}>
-                  {reportFrequency === "daily" ? "Daily Update" : "Weekly Report"} Preview
-                  <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, padding: "3px 10px", borderRadius: 99, background: reportFrequency === "daily" ? "#ede9fe" : "#d8f3dc", color: reportFrequency === "daily" ? "#3b0764" : "#2d6a4f", verticalAlign: "middle" }}>
-                    {reportFrequency === "daily" ? "📅 Daily" : "📆 Weekly"}
+                  {reportFrequency === "daily" ? "Daily Update" : reportFrequency === "marking_period" ? "Marking Period Report" : "Weekly Report"} Preview
+                  <span style={{ marginLeft: 10, fontSize: 13, fontWeight: 700, padding: "3px 10px", borderRadius: 99,
+                    background: reportFrequency === "daily" ? "#ede9fe" : reportFrequency === "marking_period" ? "#dbeafe" : "#d8f3dc",
+                    color: reportFrequency === "daily" ? "#3b0764" : reportFrequency === "marking_period" ? "#1e3a5f" : "#2d6a4f",
+                    verticalAlign: "middle" }}>
+                    {reportFrequency === "daily" ? "📅 Daily" : reportFrequency === "marking_period" ? "📋 Marking Period" : "📆 Weekly"}
                   </span>
                 </h2>
                 {studentGradeLevel && <p style={{ color: "#6b7280", margin: "4px 0 0", fontSize: 14 }}>Grade: <strong>{studentGradeLevel}</strong></p>}
