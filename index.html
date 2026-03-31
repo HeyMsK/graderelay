@@ -76,7 +76,7 @@
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
   
-<script type="text/babel" data-presets="react">
+<script type="text/babel" data-presets="react"> data-presets="react">
     const { useState } = React;
 
 const PROMPTS = {
@@ -2186,12 +2186,6 @@ ${htmlParagraphs}
         </p>
       </div>
   );
-}
-
-    const container = document.getElementById('root');
-    const root = ReactDOM.createRoot(container);
-    root.render(React.createElement(App));
-  
 
     const container = document.getElementById('root');
     const root = ReactDOM.createRoot(container);
