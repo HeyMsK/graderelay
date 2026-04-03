@@ -97,8 +97,8 @@
       + '</div>'
       + '<h1 style="font-family:Georgia,serif;font-size:28px;font-weight:800;color:#1e1b4b;margin:0 0 10px 0;line-height:1.1;">' + rType + '</h1>'
       + '<table style="border-collapse:collapse;margin-bottom:6px;font-family:Arial,sans-serif;font-size:13px;">'
-        + '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;padding-bottom:1px;white-space:nowrap;">STUDENT</td>'
-        + '<td style="padding-bottom:1px;"><div style="width:260px;height:1px;background:#1e1b4b;margin-top:14px;"></div></td></tr>'
+        + '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;padding-bottom:4px;white-space:nowrap;vertical-align:middle;">STUDENT</td>'
+        + '<td style="padding-bottom:4px;vertical-align:middle;font-family:Arial,sans-serif;font-size:13px;color:#1f2937;letter-spacing:2px;">___________________________________</td></tr>'
         + (tName ? '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;padding-bottom:1px;white-space:nowrap;min-width:90px;">TEACHER</td><td style="padding-bottom:1px;color:#1f2937;">' + tName + '</td></tr>' : '')
         + (cName ? '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;padding-bottom:1px;white-space:nowrap;min-width:90px;">CLASS</td><td style="padding-bottom:1px;color:#1f2937;">' + cName + '</td></tr>' : '')
         + (termLabel ? '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;white-space:nowrap;min-width:90px;">' + pWord.toUpperCase() + '</td><td style="color:#1f2937;">' + termLabel + '</td></tr>' : '')
@@ -1268,7 +1268,19 @@ function App() {
       }
       const data = await res.json();
       if (data.translated || data.translation) {
-        setTranslatedReport(data.translated || data.translation);
+        const translatedBody = data.translated || data.translation;
+        const { tName, cName, termLabel } = getNames();
+        const rType = isMarkingPeriod ? "Marking Period Progress Report" : isDaily ? "Daily Progress Update" : "Weekly Progress Report";
+        const pWord = isMarkingPeriod ? "Term" : isDaily ? "Date" : "Week of";
+        const langName2 = LANGUAGES[lang]?.label || lang;
+        const divider = "─".repeat(38);
+        let header = "GradeRelay — " + rType + " (" + langName2 + ")\n" + divider + "\n";
+        header += "Student: ________________________________________________\n";
+        if (tName) header += "Teacher: " + tName + "\n";
+        if (cName) header += "Class: " + cName + "\n";
+        if (termLabel) header += pWord + ": " + termLabel + "\n";
+        header += divider + "\n\n";
+        setTranslatedReport(header + translatedBody);
       } else {
         setTranslateError(data.error || "Translation failed. Please try again.");
       }
