@@ -1837,27 +1837,22 @@ function App() {
                       border: "1px solid #99f6e4", borderRadius: 8, resize: "vertical", fontFamily: "'Source Serif 4', serif" }} />
                   <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
                     <button onClick={() => {
-                        const txt = translatedReport;
-                        if (navigator.clipboard && navigator.clipboard.writeText) {
-                          navigator.clipboard.writeText(txt).catch(() => {
-                            const ta = document.createElement("textarea");
-                            ta.value = txt;
-                            document.body.appendChild(ta);
-                            ta.select();
-                            document.execCommand("copy");
-                            document.body.removeChild(ta);
-                          });
-                        } else {
-                          const ta = document.createElement("textarea");
-                          ta.value = txt;
-                          document.body.appendChild(ta);
-                          ta.select();
-                          document.execCommand("copy");
-                          document.body.removeChild(ta);
-                        }
+                        const ta = document.createElement("textarea");
+                        ta.value = translatedReport;
+                        ta.style.position = "fixed";
+                        ta.style.top = "0";
+                        ta.style.left = "0";
+                        ta.style.opacity = "0";
+                        document.body.appendChild(ta);
+                        ta.focus();
+                        ta.select();
+                        try { document.execCommand("copy"); } catch(e) {}
+                        document.body.removeChild(ta);
+                        setCopied(true);
+                        setTimeout(() => setCopied(false), 2000);
                       }}
-                      style={{ padding: "8px 16px", background: "#7c3aed", color: "white", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: 13 }}>
-                      📋 Copy Translated
+                      style={{ padding: "8px 16px", background: copied ? "#065f46" : "#7c3aed", color: "white", border: "none", borderRadius: 8, fontWeight: 700, cursor: "pointer", fontSize: 13 }}>
+                      {copied ? "✓ Copied!" : "📋 Copy Translated"}
                     </button>
                     <a href={`mailto:?body=${encodeURIComponent(translatedReport)}`}
                       style={{ padding: "8px 16px", background: "#6d28d9", color: "white", borderRadius: 8, fontWeight: 700, fontSize: 13, textDecoration: "none" }}>
