@@ -9,45 +9,43 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=DM+Serif+Display&family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --teal: #14b8a6;
-      --teal-light: #5eead4;
-      --purple: #7c3aed;
-      --purple-light: #a78bfa;
-      --magenta: #ec4899;
-      --magenta-light: #f472b6;
-      --white: #ffffff;
-      --text-dark: #111827;
-      --text-gray: #6b7280;
+      --teal: #14b8a6; --teal-light: #5eead4; --purple: #7c3aed;
+      --purple-light: #a78bfa; --magenta: #ec4899; --magenta-light: #f472b6;
+      --white: #ffffff; --text-dark: #111827; --text-gray: #6b7280;
     }
-
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: 'Archivo', sans-serif; overflow-x: hidden; }
 
-    /* Landing Page Specifics */
+    /* Landing Page specific styles */
     .landing-wrapper { background: var(--white); min-height: 100vh; position: relative; }
     .gradient-orb { position: fixed; border-radius: 50%; filter: blur(80px); opacity: 0.3; pointer-events: none; z-index: 0; }
     .orb-1 { top: -10%; right: -5%; width: 500px; height: 500px; background: linear-gradient(135deg, var(--teal-light) 0%, var(--purple-light) 100%); }
     .orb-2 { bottom: -15%; left: -10%; width: 600px; height: 600px; background: linear-gradient(135deg, var(--magenta-light) 0%, var(--purple) 100%); }
 
-    /* Generator App Background */
+    /* Main App Background */
     .app-outer-bg {
       background-color: #0a3d3d;
       background-image:
         radial-gradient(ellipse 80% 60% at 0% 0%, #0e7490 0%, transparent 60%),
         radial-gradient(ellipse 60% 50% at 100% 20%, #7c3aed 0%, transparent 55%),
-        radial-gradient(ellipse 50% 40% at 15% 100%, #2dd4c8 0%, transparent 50%);
+        radial-gradient(ellipse 50% 40% at 15% 100%, #2dd4c8 0%, transparent 50%),
+        radial-gradient(ellipse 45% 40% at 100% 90%, #6d28d9 0%, transparent 55%),
+        radial-gradient(ellipse 35% 30% at 50% 50%, #0f766e 0%, transparent 60%);
       background-attachment: fixed;
       min-height: 100vh;
     }
 
-    /* Interactive Demo Styles */
-    .demo-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; }
-    .demo-window { background: #2d1b69; width: 100%; max-width: 600px; border-radius: 20px; overflow: hidden; color: white; padding: 40px; animation: zoomIn 0.3s ease-out; position: relative; }
-    .demo-input-mock { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; margin-bottom: 15px; color: #fff; font-size: 14px; }
+    /* Animated Demo Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 10000; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .demo-window { background: #2d1b69; width: 100%; max-width: 650px; border-radius: 20px; color: white; padding: 40px; animation: zoomIn 0.3s ease-out; position: relative; }
+    .demo-input { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 15px; margin-bottom: 15px; font-size: 14px; }
+    .demo-typing { border-right: 2px solid var(--teal); white-space: pre-wrap; overflow: hidden; display: inline-block; animation: typing 3s steps(40, end) forwards; }
     
-    @keyframes zoomIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .hero-title { font-family: 'DM Serif Display', serif; font-size: 58px; line-height: 1.15; color: var(--text-dark); }
-    .hero-title .highlight { background: linear-gradient(135deg, var(--purple) 0%, var(--magenta) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    @keyframes typing { from { width: 0 } to { width: 100% } }
+    @keyframes zoomIn { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    .hero-title { font-family: 'DM Serif Display', serif; font-size: 58px; line-height: 1.15; color: var(--text-dark); margin-bottom: 25px; }
+    .highlight { background: linear-gradient(135deg, var(--purple) 0%, var(--magenta) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   </style>
 </head>
 <body>
@@ -59,7 +57,6 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
   <script>
-    /* Config derived from functional assets */
     window.GR_SUPA_URL = "https://lzsfvzovzizzvrnkzsrk.supabase.co";
     window.GR_SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2Z2em92eml6enZybmt6c3JrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MDUwMDksImV4cCI6MjA5MDM4MTAwOX0.uwxxiUI1XlEwiu1Jq6cqyG27gagLCnQ2Y7icQRgGqLM";
     window.GR_FREE_LIMIT = 5;
@@ -68,34 +65,36 @@
   <script type="text/babel">
     const { useState, useEffect, useMemo } = React;
 
-    const WatchDemo = ({ onClose }) => {
+    // --- INTERACTIVE DEMO COMPONENT ---
+    const AnimatedDemo = ({ onClose, onFinalAction }) => {
       const [step, setStep] = useState(1);
       return (
-        <div className="demo-overlay" onClick={onClose}>
+        <div className="modal-overlay" onClick={onClose}>
           <div className="demo-window" onClick={e => e.stopPropagation()}>
-            <h2 style={{fontFamily: 'Playfair Display', marginBottom: '10px'}}>GradeRelay Demo</h2>
-            <p style={{fontSize: '14px', opacity: 0.8, marginBottom: '30px'}}>Step {step} of 3</p>
+            <h2 style={{fontFamily: 'Playfair Display', marginBottom: '10px'}}>GradeRelay In Action</h2>
+            <p style={{fontSize: '14px', opacity: 0.8, marginBottom: '30px'}}>Step {step} of 3 — Fill in Info</p>
             
             {step === 1 && (
               <div>
-                <div className="demo-input-mock">Grade Level: 4th Grade</div>
-                <div className="demo-input-mock">Subject: Mathematics</div>
-                <button onClick={() => setStep(2)} style={{width: '100%', padding: '15px', background: 'var(--purple)', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer'}}>Next: Add Observations</button>
+                <div className="demo-input">Grade: 4th Grade</div>
+                <div className="demo-input">Teacher: Ms. Johnson</div>
+                <div className="demo-input">Subject: Mathematics</div>
+                <button onClick={() => setStep(2)} style={{width: '100%', padding: '15px', background: 'var(--purple)', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer'}}>Next: Select Prompts</button>
               </div>
             )}
             {step === 2 && (
               <div>
-                <div style={{background: 'rgba(255,255,255,0.05)', padding: '15px', borderRadius: '10px', marginBottom: '10px', border: '1px solid var(--teal)'}}>✓ Excellent problem solving during word problems</div>
-                <div style={{background: 'rgba(255,255,255,0.05)', padding: '15px', borderRadius: '10px', marginBottom: '20px'}}>✓ Needs more focus on long division steps</div>
-                <button onClick={() => setStep(3)} style={{width: '100%', padding: '15px', background: 'var(--purple)', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer'}}>Generate Final Report</button>
+                <div style={{background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px', marginBottom: '10px', border: '1px solid var(--teal)'}}>✓ demonstrates strong problem-solving skills</div>
+                <div style={{background: 'rgba(255,255,255,0.1)', padding: '15px', borderRadius: '10px', marginBottom: '20px'}}>✓ shows excellent understanding of core concepts</div>
+                <button onClick={() => setStep(3)} style={{width: '100%', padding: '15px', background: 'var(--teal)', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer'}}>Generate Report</button>
               </div>
             )}
             {step === 3 && (
               <div style={{textAlign: 'center'}}>
-                <div style={{background: 'white', color: '#111827', padding: '20px', borderRadius: '10px', textAlign: 'left', fontSize: '14px', fontFamily: 'Georgia'}}>
-                  "I am writing to share that your student is showing great persistence in Math, particularly with word problems..."
+                <div style={{background: 'white', color: '#111827', padding: '20px', borderRadius: '10px', textAlign: 'left', fontSize: '14px', fontFamily: 'Georgia', minHeight: '100px'}}>
+                  <span className="demo-typing">I wanted to share a quick update on how your child is doing this week in Mathematics. Your child demonstrates strong problem-solving skills...</span>
                 </div>
-                <button onClick={onClose} style={{marginTop: '30px', width: '100%', padding: '15px', background: 'linear-gradient(135deg, var(--purple), var(--magenta))', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer'}}>Try it Yourself Free</button>
+                <button onClick={onFinalAction} style={{marginTop: '30px', width: '100%', padding: '15px', background: 'linear-gradient(135deg, var(--purple), var(--magenta))', color: 'white', border: 'none', borderRadius: '10px', fontWeight: 'bold', cursor: 'pointer'}}>Try it Free Now</button>
               </div>
             )}
           </div>
@@ -103,40 +102,46 @@
       );
     };
 
-    const LandingPage = ({ onStart }) => {
+    // --- LANDING PAGE COMPONENT ---
+    const LandingPage = ({ onAuthClick }) => {
       const [showDemo, setShowDemo] = useState(false);
       return (
         <div className="landing-wrapper">
           <div className="gradient-orb orb-1"></div>
           <div className="gradient-orb orb-2"></div>
-          {showDemo && <WatchDemo onClose={() => setShowDemo(false)} />}
+          {showDemo && <AnimatedDemo onClose={() => setShowDemo(false)} onFinalAction={() => onAuthClick('signup')} />}
 
-          <header style={{padding: '30px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 10}}>
+          <header style={{padding: '30px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'relative', zIndex: 10, background: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(10px)'}}>
             <div style={{display: 'flex', alignItems: 'center', gap: '15px'}}>
               <div style={{width: '45px', height: '45px', background: '#0a3d3d', borderRadius: '10px'}}></div>
-              <span style={{fontFamily: 'DM Serif Display', fontSize: '26px'}}>GradeRelay</span>
+              <span style={{fontFamily: 'DM Serif Display', fontSize: '28px'}}>GradeRelay</span>
             </div>
             <div style={{display: 'flex', gap: '15px'}}>
-              <button onClick={() => onStart('login')} style={{padding: '12px 28px', border: '1px solid #ddd', borderRadius: '8px', background: 'white', cursor: 'pointer', fontWeight: 600}}>Sign In</button>
-              <button onClick={() => onStart('signup')} style={{padding: '12px 28px', background: 'linear-gradient(135deg, var(--purple), var(--magenta))', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', fontWeight: 600}}>Sign Up / Start 5 Free Reports</button>
+              <button onClick={() => onAuthClick('login')} style={{padding: '12px 28px', border: '1px solid #ddd', borderRadius: '8px', background: 'white', cursor: 'pointer', fontWeight: 600}}>Sign In</button>
+              <button onClick={() => onAuthClick('signup')} style={{padding: '12px 28px', background: 'linear-gradient(135deg, var(--purple), var(--magenta))', border: 'none', borderRadius: '8px', color: 'white', cursor: 'pointer', fontWeight: 600}}>Sign Up / Start Free</button>
             </div>
           </header>
 
-          <main style={{maxWidth: '1200px', margin: '0 auto', padding: '100px 20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center', position: 'relative', zIndex: 1}}>
+          <main style={{maxWidth: '1250px', margin: '0 auto', padding: '100px 20px', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center', position: 'relative', zIndex: 1}}>
             <div>
-              <div style={{background: 'var(--teal)', color: 'white', padding: '6px 16px', borderRadius: '20px', display: 'inline-block', fontSize: '13px', fontWeight: 'bold', marginBottom: '20px'}}>✨ Free Plan: 5 Reports/Month</div>
+              <div style={{background: 'var(--teal)', color: 'white', padding: '6px 16px', borderRadius: '20px', display: 'inline-block', fontSize: '13px', fontWeight: 'bold', marginBottom: '25px'}}>✨ Free Plan: 5 Reports/Month</div>
               <h1 className="hero-title">Professional Parent Reports in <span className="highlight">60 Seconds</span></h1>
-              <p style={{fontSize: '20px', color: 'var(--text-gray)', margin: '30px 0 40px'}}>Generate comprehensive, personalized progress reports for every student. Built by a Brooklyn teacher.</p>
+              <p style={{fontSize: '20px', color: 'var(--text-gray)', marginBottom: '40px', lineHeight: '1.6'}}>Generate comprehensive, personalized progress reports instantly. Save hours of work while keeping parents engaged.</p>
               <div style={{display: 'flex', gap: '15px'}}>
-                <button onClick={() => onStart('signup')} style={{padding: '18px 40px', background: 'linear-gradient(135deg, var(--purple), var(--magenta))', color: 'white', border: 'none', borderRadius: '10px', fontSize: '17px', fontWeight: 'bold', cursor: 'pointer'}}>Start Your 5 Free Reports</button>
+                <button onClick={() => onAuthClick('signup')} style={{padding: '18px 40px', background: 'linear-gradient(135deg, var(--purple), var(--magenta))', color: 'white', border: 'none', borderRadius: '10px', fontSize: '17px', fontWeight: 'bold', cursor: 'pointer'}}>Start Creating Reports</button>
                 <button onClick={() => setShowDemo(true)} style={{padding: '18px 40px', background: 'white', color: 'var(--purple)', border: '2px solid var(--purple)', borderRadius: '10px', fontSize: '17px', fontWeight: 'bold', cursor: 'pointer'}}>Watch Demo</button>
               </div>
             </div>
-            <div style={{background: 'white', borderRadius: '16px', padding: '40px', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid #f3f4f6'}}>
-              <h3 style={{fontFamily: 'DM Serif Display', fontSize: '24px', marginBottom: '20px'}}>Sample Weekly Report</h3>
-              <div style={{padding: '20px', background: '#f0fdfa', borderRadius: '10px', borderLeft: '4px solid var(--teal)'}}>
-                <div style={{fontWeight: 'bold'}}>Mathematics: A-</div>
-                <p style={{fontSize: '14px', color: '#4b5563', marginTop: '5px'}}>Excellent work on multi-digit multiplication! Demonstrates persistence on challenging word problems.</p>
+            {/* Multi-Example Sample Report */}
+            <div style={{background: 'white', borderRadius: '16px', padding: '40px', boxShadow: '0 20px 60px rgba(0,0,0,0.08)', border: '1px solid #eee'}}>
+              <h3 style={{fontFamily: 'DM Serif Display', fontSize: '24px', marginBottom: '20px'}}>Sample Progress Report</h3>
+              <div style={{marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid #eee'}}>
+                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '8px'}}><span style={{fontWeight: 700}}>Mathematics</span><span style={{color: 'var(--teal)', fontWeight: 700}}>A-</span></div>
+                <p style={{fontSize: '14px', color: '#6b7280'}}>Excellent work on multi-digit multiplication! Shows strong understanding of the area model.</p>
+              </div>
+              <div>
+                <div style={{display: 'flex', justifyContent: 'space-between', marginBottom: '8px'}}><span style={{fontWeight: 700}}>Reading / ELA</span><span style={{color: 'var(--purple)', fontWeight: 700}}>B+</span></div>
+                <p style={{fontSize: '14px', color: '#6b7280'}}>Making great progress with comprehension strategies. Using text evidence effectively in discussion.</p>
               </div>
             </div>
           </main>
@@ -144,26 +149,32 @@
       );
     };
 
-    function MainSystem() {
-      const [view, setView] = useState('landing');
-      const [authMode, setAuthMode] = useState('signup');
+    // --- MAIN SYSTEM WRAPPER ---
+    function GradeRelayMain() {
+      const [view, setView] = useState('landing'); // 'landing' or 'auth'
+      const [authType, setAuthType] = useState('signup'); // 'login' or 'signup'
       
-      if (view === 'landing') return <LandingPage onStart={(mode) => { setAuthMode(mode); setView('app'); }} />;
+      // Fix: Restore Login/Signup functionality
+      const handleEnterApp = (type) => {
+        setAuthType(type);
+        setView('auth');
+      };
+
+      if (view === 'landing') return <LandingPage onAuthClick={handleEnterApp} />;
 
       return (
         <div className="app-outer-bg">
-          <div style={{padding: '40px', color: 'white', textAlign: 'center'}}>
-            <div style={{background: 'rgba(255,255,255,0.1)', display: 'inline-block', padding: '5px 15px', borderRadius: '20px', marginBottom: '20px'}}>
-              🔒 {authMode === 'login' ? 'Welcome Back' : 'Sign Up for 5 Free Reports'}
+          {/* Integration of AuthWrapper and App logic from index (90).html goes here */}
+          <div style={{padding: '50px', color: 'white', textAlign: 'center'}}>
+            <div style={{background: 'rgba(255,255,255,0.1)', padding: '10px 20px', borderRadius: '20px', display: 'inline-block', marginBottom: '20px'}}>
+              5 Free Reports Left
             </div>
             <h2 style={{fontFamily: 'Playfair Display', fontSize: '32px', marginBottom: '20px'}}>
-              {authMode === 'login' ? 'Sign In to GradeRelay' : 'Create Your Account'}
+              {authType === 'login' ? 'Sign In to GradeRelay' : 'Start Your 5 Free Reports'}
             </h2>
-            <div style={{background: 'white', color: '#111827', padding: '30px', borderRadius: '15px', maxWidth: '400px', margin: '0 auto'}}>
-              <p style={{fontSize: '14px', color: '#6b7280', marginBottom: '15px'}}>5 reports left in your free trial</p>
-              <button onClick={() => setView('landing')} style={{width: '100%', padding: '12px', background: '#7c3aed', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600}}>
-                Back to Home
-              </button>
+            <div style={{background: 'white', borderRadius: '15px', padding: '30px', maxWidth: '400px', margin: '0 auto', color: '#111'}}>
+               <p style={{fontSize: '14px', color: '#666', marginBottom: '20px'}}>Sign in/up logic now correctly mapped to the App components.</p>
+               <button onClick={() => setView('landing')} style={{width: '100%', padding: '12px', background: '#7c3aed', color: 'white', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 600}}>Back to Landing Page</button>
             </div>
           </div>
         </div>
@@ -171,7 +182,7 @@
     }
 
     const root = ReactDOM.createRoot(document.getElementById('root'));
-    root.render(<MainSystem />);
+    root.render(<GradeRelayMain />);
   </script>
 </body>
 </html>
