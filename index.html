@@ -503,6 +503,7 @@
   width: 440px;
   flex-shrink: 0;
   min-height: 100vh;
+  transition: width 0.3s;
 }
 .container {
   padding: 20px 32px 40px !important;
@@ -635,10 +636,20 @@
     var grObs = new MutationObserver(function() {
       var root = document.getElementById('root');
       var landing = document.getElementById('gr-landing-side');
+      var loginSide = document.getElementById('gr-login-side');
       if (!root || !landing) return;
       var hasLogin = root.querySelector('input[type="email"]');
-      landing.style.display = hasLogin ? 'flex' : 'none';
-      landing.style.flexDirection = hasLogin ? 'column' : 'column';
+      if (hasLogin) {
+        landing.style.display = 'flex';
+        landing.style.flexDirection = 'column';
+        if (loginSide) loginSide.style.width = '440px';
+      } else {
+        landing.style.display = 'none';
+        if (loginSide) {
+          loginSide.style.width = '100%';
+          loginSide.style.maxWidth = '100%';
+        }
+      }
     });
     grObs.observe(document.getElementById('root'), { childList: true, subtree: true });
   </script>
