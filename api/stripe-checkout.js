@@ -7,17 +7,17 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  const { priceId, userId, email } = req.body || {};
-  if (!priceId || !userId) return res.status(400).json({ error: 'Missing required fields' });
-
-  const isOneTime = priceId === process.env.PRICE_FOUNDING;
-
   try {
+    const { priceId, userId, email } = req.body || {};
+    if (!priceId || !userId) return res.status(400).json({ error: 'Missing required fields' });
+
+    const isOneTime = priceId === process.env.PRICE_FOUNDING;
+
     const session = await stripe.checkout.sessions.create({
       mode: isOneTime ? 'payment' : 'subscription',
       line_items: [{ price: priceId, quantity: 1 }],
-      success_url: `${process.env.SITE_URL || 'https://graderelay.com'}?payment=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.SITE_URL || 'https://graderelay.com'}?payment=cancelled`,
+      success_url: 'https://graderelay.com?payment=success',
+      cancel_url: 'https://graderelay.com?payment=cancelled',
       customer_email: email,
       metadata: { userId, priceId },
       allow_promotion_codes: true,
