@@ -559,7 +559,7 @@
                     </li>
                 </ul>
 
-                <div class="trust-line" style="margin-top:16px;"><svg width="16" height="16" viewBox="0 0 20 20" fill="#0e7490"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm-2 15l-5-5 1.41-1.41L8 12.17l7.59-7.59L17 6l-9 9z"/></svg><span>No credit card required &nbsp;&middot;&nbsp; Built by a Brooklyn teacher</span></div>
+                <div class="trust-line" style="margin-top:16px;"><svg width="16" height="16" viewBox="0 0 20 20" fill="#0e7490"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm-2 15l-5-5 1.41-1.41L8 12.17l7.59-7.59L17 6l-9 9z"/></svg><span>Free to start &nbsp;&middot;&nbsp; Built by a Brooklyn teacher</span></div>
             </div>
 
             <!-- Right Side: Report Preview -->
@@ -727,7 +727,7 @@
   window.GR_SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2Z2em92eml6enZybmt6c3JrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MDUwMDksImV4cCI6MjA5MDM4MTAwOX0.uwxxiUI1XlEwiu1Jq6cqyG27gagLCnQ2Y7icQRgGqLM";
   window.GR_STRIPE_PK = "pk_live_51TBwsl3NEEAPPVNgZCg46SjUFUWYX9pJ7Bu5uGteU07stKMKm2LDyR3Ft8dVAPBIC94DzhU3f2yLOitceuyS8X5r00Ezc0nlbd";
   window.GR_PRICE_FOUNDING = "price_1TJGJT3NEEAPPVNgF5Vn68JM";
-  window.GR_PRICE_MONTHLY = "price_1TJGMo3NEEAPPVNgRV6vs3Lk";
+  window.GR_PRICE_MONTHLY = "price_1TG1fo3NEEAPPVNg9iftpTuO";
   window.GR_PRICE_ANNUAL = "price_1TG1hZ3NEEAPPVNgkrhjKGS8";
   window.GR_FREE_LIMIT = 5;
   window.GR_FOUNDING_MAX = 100;
@@ -1936,7 +1936,7 @@ function App({ onGenerateReport }) {
               </svg>
             </div>
           </div>
-          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 36, color: "white", margin: 0, textShadow: "0 2px 8px rgba(0,0,0,0.3)" }}>GradeRelay</h1>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 36, color: "#1e1b4b", margin: 0, textShadow: "0 1px 3px rgba(255,255,255,0.5)" }}>GradeRelay</h1>
           <p style={{ color: "rgba(255,255,255,0.85)", fontSize: 14, marginTop: 4 }}>Connecting Teachers &amp; Families — One Report at a Time</p>
         </div>
 
@@ -2073,6 +2073,17 @@ function App({ onGenerateReport }) {
           <label style={{ fontSize: 12, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 8 }}>CURRENT GRADE ESTIMATE (optional)</label>
           <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
             {[
+              { value: "A+", label: "A+", desc: "Outstanding / Exceeding expectations", color: "#065f46", bg: "#d1fae5" },
+              { value: "A", label: "A", desc: "Excellent / Exceeding expectations", color: "#065f46", bg: "#d1fae5" },
+              { value: "A-", label: "A-", desc: "Excellent / Strong performance", color: "#065f46", bg: "#d1fae5" },
+              { value: "B+", label: "B+", desc: "Very Good / Meeting expectations", color: "#1b4965", bg: "#caf0f8" },
+              { value: "B", label: "B", desc: "Good / Meeting expectations", color: "#1b4965", bg: "#caf0f8" },
+              { value: "B-", label: "B-", desc: "Good / Approaching expectations", color: "#1b4965", bg: "#caf0f8" },
+              { value: "C+", label: "C+", desc: "Satisfactory / Approaching expectations", color: "#3d5a00", bg: "#ecfccb" },
+              { value: "C", label: "C", desc: "Satisfactory / Needs improvement", color: "#92400e", bg: "#fef3c7" },
+              { value: "C-", label: "C-", desc: "Borderline / Needs improvement", color: "#92400e", bg: "#fef3c7" },
+              { value: "D", label: "D", desc: "Below passing / At risk", color: "#7c2d12", bg: "#fee2e2" },
+              { value: "F", label: "F", desc: "Failing / Urgent support needed", color: "#7c2d12", bg: "#fce7f3" },
               { value: "95-100", label: "95–100", desc: "Excellent / Exceeding expectations", color: "#065f46", bg: "#d1fae5" },
               { value: "85-94", label: "85–94", desc: "Very Good / Meeting expectations", color: "#1b4965", bg: "#caf0f8" },
               { value: "75-84", label: "75–84", desc: "Good / Approaching expectations", color: "#3d5a00", bg: "#ecfccb" },
@@ -2723,7 +2734,7 @@ function AuthWrapper() {
               {authLoading ? "Please wait..." : (isSignup ? "Create Account" : "Sign In")}
             </button>
           </div>
-          {isSignup && <p style={{ fontSize: 12, color: "#9ca3af", textAlign: "center", marginTop: 16 }}>Free plan: 5 reports/month. No credit card required.</p>}
+          {isSignup && <p style={{ fontSize: 12, color: "#9ca3af", textAlign: "center", marginTop: 16 }}>Free plan: 5 reports/month. No payment required to start.</p>}
           <p style={{ textAlign: "center", fontSize: 12, color: "#9ca3af", marginTop: 16 }}>🔒 FERPA compliant · No student names stored</p>
         </div>
       </div>
