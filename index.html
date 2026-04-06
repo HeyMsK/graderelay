@@ -740,7 +740,7 @@
   window.GR_SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2Z2em92eml6enZybmt6c3JrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MDUwMDksImV4cCI6MjA5MDM4MTAwOX0.uwxxiUI1XlEwiu1Jq6cqyG27gagLCnQ2Y7icQRgGqLM";
   window.GR_STRIPE_PK = "pk_live_51TBwsl3NEEAPPVNgZCg46SjUFUWYX9pJ7Bu5uGteU07stKMKm2LDyR3Ft8dVAPBIC94DzhU3f2yLOitceuyS8X5r00Ezc0nlbd";
   window.GR_PRICE_FOUNDING = "price_1TJGJT3NEEAPPVNgF5Vn68JM";
-  window.GR_PRICE_MONTHLY = "price_1TJGMo3NEEAPPVNgRV6vs3Lk";
+  window.GR_PRICE_MONTHLY = "price_1TG1fo3NEEAPPVNg9iftpTuO";
   window.GR_PRICE_ANNUAL = "price_1TG1hZ3NEEAPPVNgkrhjKGS8";
   window.GR_FREE_LIMIT = 5;
   window.GR_FOUNDING_MAX = 100;
@@ -1727,7 +1727,10 @@ function App({ onGenerateReport }) {
     const cName = className.trim() || "";
     const sName = nameBlank ? "your child, _______________" : "your child";
     const sNameFirst = nameBlank ? "Your child, _______________" : "Your child";
-    const wOf = weekOf.trim() || new Date().toLocaleDateString();
+    const rawDate = weekOf.trim();
+    const wOf = rawDate
+      ? new Date(rawDate + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      : new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
     const termLabel = isMarkingPeriod
       ? (termType === "Custom" ? "" : termType + " " + (markingPeriodDate || ""))
       : wOf;
@@ -2669,7 +2672,16 @@ function AuthWrapper() {
   };
 
   const incrementReport = async () => {
-    if (!supa || !user || !profile) return true;
+    if (!supa || !user) return true;
+    // If no profile, create one and allow
+    if (!profile) {
+      await supa.from('profiles').upsert({
+        id: user.id, email: user.email || '',
+        plan: 'free', reports_this_month: 1, reports_total: 1
+      });
+      setProfile({ plan: 'free', reports_this_month: 1, reports_total: 1 });
+      return true;
+    }
     const plan = profile.plan || 'free';
     if (plan === 'pro' || plan === 'founding') return true;
     const used = profile.reports_this_month || 0;
