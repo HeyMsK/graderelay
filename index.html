@@ -2505,7 +2505,10 @@ function PaywallModal({ onClose, foundingCount }) {
       const data = await res.json();
       if (data.url) { window.location.href = data.url; }
       else { alert('Checkout error. Please try again.'); }
-    } catch(e) { alert('Network error. Please try again.'); }
+    } catch(e) { 
+      console.error('Checkout error:', e);
+      alert('Error: ' + (e.message || 'Network error. Please try again.')); 
+    }
     setLoading(null);
   };
 
@@ -2576,11 +2579,22 @@ function AuthWrapper() {
     return null;
   }, []);
 
-  const loadProfile = React.useCallback(async (uid) => {
+  const loadProfile = React.useCallback(async (uid, email) => {
     if (!supa) return;
-    const { data } = await supa.from('profiles').select('*').eq('id', uid).single();
+    let { data } = await supa.from('profiles').select('*').eq('id', uid).single();
+    if (!data) {
+      // Create profile if it doesn't exist
+      await supa.from('profiles').upsert({
+        id: uid,
+        email: email || '',
+        plan: 'free',
+        reports_this_month: 0,
+        reports_total: 0
+      });
+      const { data: newData } = await supa.from('profiles').select('*').eq('id', uid).single();
+      data = newData;
+    }
     if (data) setProfile(data);
-    // Get founding count
     const { count } = await supa.from('profiles').select('*', { count: 'exact', head: true }).eq('plan', 'founding');
     setFoundingCount(count || 0);
   }, [supa]);
@@ -2590,7 +2604,7 @@ function AuthWrapper() {
     supa.auth.getSession().then(({ data: { session } }) => {
       if (session?.user) {
         setUser(session.user);
-        loadProfile(session.user.id);
+        loadProfile(session.user.id, session.user.email);
         setAuthStep("app");
       } else {
         setAuthStep("login");
@@ -2599,7 +2613,7 @@ function AuthWrapper() {
     const { data: { subscription } } = supa.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         setUser(session.user);
-        loadProfile(session.user.id);
+        loadProfile(session.user.id, session.user.email);
         setAuthStep("app");
       } else {
         setUser(null);
@@ -2627,8 +2641,15 @@ function AuthWrapper() {
 
   const handleLogin = async () => {
     setAuthError(""); setAuthLoading(true);
-    const { error } = await supa.auth.signInWithPassword({ email, password });
-    if (error) setAuthError(error.message);
+    const { error, data } = await supa.auth.signInWithPassword({ email, password });
+    if (error) { setAuthError(error.message); setAuthLoading(false); return; }
+    // Ensure profile exists
+    if (data?.user) {
+      const { data: existing } = await supa.from('profiles').select('id').eq('id', data.user.id).single();
+      if (!existing) {
+        await supa.from('profiles').insert({ id: data.user.id, email: data.user.email, plan: 'free', reports_this_month: 0, reports_total: 0 });
+      }
+    }
     setAuthLoading(false);
   };
 
