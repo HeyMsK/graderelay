@@ -2073,27 +2073,28 @@ function App({ onGenerateReport }) {
           <label style={{ fontSize: 12, fontWeight: 700, color: "#6b7280", display: "block", marginBottom: 8 }}>CURRENT GRADE ESTIMATE (optional)</label>
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6 }}>
             {[
-              { value: "A+", label: "A+  /  97–100", desc: "Outstanding", color: "#065f46", bg: "#d1fae5" },
-              { value: "A", label: "A  /  93–96", desc: "Excellent", color: "#065f46", bg: "#d1fae5" },
-              { value: "A-", label: "A-  /  90–92", desc: "Excellent", color: "#065f46", bg: "#d1fae5" },
-              { value: "B+", label: "B+  /  87–89", desc: "Very Good", color: "#1b4965", bg: "#caf0f8" },
-              { value: "B", label: "B  /  83–86", desc: "Good", color: "#1b4965", bg: "#caf0f8" },
-              { value: "B-", label: "B-  /  80–82", desc: "Good", color: "#1b4965", bg: "#caf0f8" },
-              { value: "C+", label: "C+  /  77–79", desc: "Satisfactory", color: "#3d5a00", bg: "#ecfccb" },
-              { value: "C", label: "C  /  73–76", desc: "Satisfactory", color: "#92400e", bg: "#fef3c7" },
-              { value: "C-", label: "C-  /  70–72", desc: "Borderline", color: "#92400e", bg: "#fef3c7" },
-              { value: "D", label: "D  /  65–69", desc: "Below passing", color: "#7c2d12", bg: "#fee2e2" },
-              { value: "F", label: "F  /  Below 65", desc: "Failing", color: "#7c2d12", bg: "#fce7f3" },
-              { value: "custom", label: "Other...", desc: "Custom grade", color: "#374151", bg: "#f3f4f6" },
-            ].map(({ value, label, desc, color, bg }) => (
+              { value: "95-100", label: "95–100", letter: "A / A+", desc: "Excellent / Exceeding", color: "#065f46", bg: "#d1fae5" },
+              { value: "85-94", label: "85–94", letter: "B / B+", desc: "Very Good / Meeting", color: "#1b4965", bg: "#caf0f8" },
+              { value: "75-84", label: "75–84", letter: "C / C+", desc: "Good / Approaching", color: "#3d5a00", bg: "#ecfccb" },
+              { value: "70-74", label: "70–74", letter: "C-", desc: "Borderline / Needs improvement", color: "#92400e", bg: "#fef3c7" },
+              { value: "65-69", label: "65–69", letter: "D", desc: "Below passing / At risk", color: "#7c2d12", bg: "#fee2e2" },
+              { value: "below-65", label: "Below 65", letter: "F", desc: "Failing / Urgent support", color: "#7c2d12", bg: "#fce7f3" },
+              { value: "custom", label: "Other...", letter: "", desc: "Enter a custom grade", color: "#374151", bg: "#f3f4f6" },
+            ].map(({ value, label, letter, desc, color, bg }) => (
               <button key={value} onClick={() => setGradeEstimate(gradeEstimate === value ? "" : value)}
-                style={{ display: "flex", alignItems: "center", gap: 8, padding: "8px 12px",
+                style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 12px",
                   borderRadius: 8, border: "2px solid", cursor: "pointer", textAlign: "left",
                   borderColor: gradeEstimate === value ? color : "#e5e7eb",
                   background: gradeEstimate === value ? bg : "white",
                   fontFamily: "'Source Serif 4', serif" }}>
-                <span style={{ fontWeight: 700, fontSize: 13, color: gradeEstimate === value ? color : "#374151", flex: 1 }}>{label}</span>
-                {gradeEstimate === value && <span style={{ color, fontSize: 12 }}>✓</span>}
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: "flex", gap: 6, alignItems: "center", marginBottom: 2 }}>
+                    <span style={{ fontWeight: 700, fontSize: 14, color: gradeEstimate === value ? color : "#374151" }}>{label}</span>
+                    {letter && <span style={{ fontSize: 12, fontWeight: 700, color: gradeEstimate === value ? color : "#9ca3af", borderLeft: "1px solid currentColor", paddingLeft: 6 }}>{letter}</span>}
+                  </div>
+                  <div style={{ fontSize: 11, color: gradeEstimate === value ? color : "#9ca3af" }}>{desc}</div>
+                </div>
+                {gradeEstimate === value && <span style={{ color, fontSize: 14 }}>✓</span>}
               </button>
             ))}
           </div>
@@ -2745,7 +2746,7 @@ function AuthWrapper() {
     <div>
       {showPaywall && <PaywallModal onClose={() => setShowPaywall(false)} foundingCount={foundingCount} />}
       {/* Top bar */}
-      <div style={{ position: "fixed", top: 4, right: 12, zIndex: 1000, display: "flex", alignItems: "center", gap: 8 }}>
+      <div style={{ position: "fixed", top: 10, right: 16, zIndex: 99999, display: "flex", alignItems: "center", gap: 8, background: "rgba(0,0,0,0.25)", borderRadius: 999, padding: "4px 8px", backdropFilter: "blur(8px)" }}>
         {!isPro && (
           <span style={{ background: "rgba(255,255,255,0.9)", borderRadius: 999, padding: "4px 12px", fontSize: 12, color: "#4c1d95", fontWeight: 700, fontFamily: "'Source Serif 4', serif" }}>
             {remaining} free {remaining === 1 ? "report" : "reports"} left
