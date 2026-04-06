@@ -11,7 +11,9 @@ module.exports = async function handler(req, res) {
     const { priceId, userId, email } = req.body || {};
     if (!priceId || !userId) return res.status(400).json({ error: 'Missing required fields' });
 
-    const isOneTime = priceId === process.env.PRICE_FOUNDING;
+    // Auto-detect if price is one-time or recurring by fetching from Stripe
+    const price = await stripe.prices.retrieve(priceId);
+    const isOneTime = price.type === 'one_time';
 
     const session = await stripe.checkout.sessions.create({
       mode: isOneTime ? 'payment' : 'subscription',
