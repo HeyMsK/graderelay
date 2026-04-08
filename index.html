@@ -727,7 +727,7 @@
   window.GR_SUPA_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx6c2Z2em92eml6enZybmt6c3JrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ4MDUwMDksImV4cCI6MjA5MDM4MTAwOX0.uwxxiUI1XlEwiu1Jq6cqyG27gagLCnQ2Y7icQRgGqLM";
   window.GR_STRIPE_PK = "pk_live_51TBwsl3NEEAPPVNgZCg46SjUFUWYX9pJ7Bu5uGteU07stKMKm2LDyR3Ft8dVAPBIC94DzhU3f2yLOitceuyS8X5r00Ezc0nlbd";
   window.GR_PRICE_FOUNDING = "price_1TJGJT3NEEAPPVNgF5Vn68JM";
-  window.GR_PRICE_MONTHLY = "price_1TJGMo3NEEAPPVNgRV6vs3Lk";
+  window.GR_PRICE_MONTHLY = "price_1TG1fo3NEEAPPVNg9iftpTuO";
   window.GR_PRICE_ANNUAL = "price_1TG1hZ3NEEAPPVNgkrhjKGS8";
   window.GR_FREE_LIMIT = 5;
   window.GR_FOUNDING_MAX = 100;
@@ -1871,13 +1871,17 @@ function App({ onGenerateReport }) {
         const rType = isMarkingPeriod ? "Marking Period Progress Report" : isDaily ? "Daily Progress Update" : "Weekly Progress Report";
         const pWord = isMarkingPeriod ? "Term" : isDaily ? "Date" : "Week of";
         const langName2 = LANGUAGES[lang]?.label || lang;
-        const divider = "─".repeat(38);
-        let header = "GradeRelay — " + rType + " (" + langName2 + ")\n" + divider + "\n";
+        const divider = "─".repeat(48);
+        let header = "GRADERELAY\n";
+        header += (isMarkingPeriod ? "Marking Period Progress Report" : isDaily ? "Daily Progress Update" : "Weekly Progress Report");
+        header += " — " + langName2 + "\n";
+        header += divider + "\n";
         header += "Student: ________________________________________________\n";
         if (tName) header += "Teacher: " + tName + "\n";
         if (cName) header += "Class: " + cName + "\n";
+        if (studentGradeLevel) header += "Grade: " + studentGradeLevel + "\n";
         if (termLabel) header += pWord + ": " + termLabel + "\n";
-        header += divider + "\n\n";
+        header += divider + "\n\n"; + "\n\n";
         setTranslatedReport(header + translatedBody);
       } else {
         setTranslateError(data.error || "Translation failed. Please try again.");
@@ -2589,17 +2593,20 @@ function AuthWrapper() {
 
   const loadProfile = React.useCallback(async (uid, email) => {
     if (!supa) return;
-    let { data } = await supa.from('profiles').select('*').eq('id', uid).single();
+    let { data, error } = await supa.from('profiles').select('*').eq('id', uid).single();
+    console.log('GR loadProfile:', { uid, data, error });
     if (!data) {
-      // Create profile if it doesn't exist
-      await supa.from('profiles').upsert({
+      console.log('GR: No profile found, creating one...');
+      const { error: upsertError } = await supa.from('profiles').upsert({
         id: uid,
         email: email || '',
         plan: 'free',
         reports_this_month: 0,
         reports_total: 0
       });
+      console.log('GR: Upsert result:', { upsertError });
       const { data: newData } = await supa.from('profiles').select('*').eq('id', uid).single();
+      console.log('GR: New profile:', newData);
       data = newData;
     }
     if (data) setProfile(data);
@@ -2609,7 +2616,13 @@ function AuthWrapper() {
 
   React.useEffect(() => {
     if (!supa) { setAuthStep("app"); return; }
-    supa.auth.getSession().then(({ data: { session } }) => {
+    supa.auth.getSession().then(({ data: { session }, error }) => {
+      if (error || !session) {
+        // Clear bad tokens and show login
+        supa.auth.signOut();
+        setAuthStep("login");
+        return;
+      }
       if (session?.user) {
         setUser(session.user);
         loadProfile(session.user.id, session.user.email);
