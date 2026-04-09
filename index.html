@@ -34,14 +34,10 @@
       animation: shimmer 3s linear infinite; z-index: 9999;
     }
     @keyframes shimmer { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
-
-    /* Page layout */
     #gr-page-wrap { display: flex; min-height: 100vh; width: 100%; position: relative; z-index: 1; }
     #gr-landing-side { flex: 1; min-width: 0; overflow-y: auto; display: flex; flex-direction: column; }
     #gr-login-side { width: 440px; flex-shrink: 0; min-height: 100vh; }
     @media(max-width: 900px) { #gr-landing-side { display: none !important; } #gr-login-side { width: 100%; } }
-
-/* Landing page styles */
 
         * {
             margin: 0;
@@ -484,8 +480,6 @@
             }
         }
     
-
-
     .container { padding: 20px 32px 40px !important; min-height: unset !important; }
     .header { display: none !important; }
     .stars { display: none !important; }
@@ -495,18 +489,117 @@
 <body style="margin:0;padding:0;">
   <div class="bg-shimmer"></div>
   <div class="bg-dots"></div>
-
   <div id="gr-page-wrap">
     <div id="gr-landing-side">
+<div class="container">
+        <div class="content-grid">
+            <!-- Left Side: Hero Content -->
+            <div class="hero-content">
+                <div class="hero-badge">✨ Free Plan: 5 Reports/Month</div>
+                
+                <h1 class="hero-title">
+                    Professional Parent Reports in <span class="highlight">60 Seconds</span>
+                </h1>
+                
+                <p class="hero-subtitle">
+                    Generate comprehensive, personalized progress reports for every student. Save hours of work while keeping parents informed and engaged.
+                </p>
 
+                <ul class="feature-list">
+                    <li class="feature-item">
+                        <div class="feature-icon">📊</div>
+                        <span><strong>Daily, Weekly & Marking Period</strong> reports ready instantly</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🎓</div>
+                        <span><strong>Pre-K through 12th grade</strong> across 12 subject areas</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🌍</div>
+                        <span><strong>Translates into 9 languages</strong> for all families</span>
+                    </li>
+                    <li class="feature-item">
+                        <div class="feature-icon">🔒</div>
+                        <span><strong>FERPA compliant</strong> — no student names stored</span>
+                    </li>
+                </ul>
+
+                <div class="cta-buttons">
+                    <button class="btn-primary" onclick="window.location.href='#signup'">
+                        Start Creating Reports
+                    </button>
+                    <button class="btn-secondary" onclick="window.location.href='#demo'">
+                        Watch Demo
+                    </button>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                <button onclick="openDemoModal()" style="background:linear-gradient(135deg,#0e7490,#7c3aed); color:white; border:none; padding:12px 28px; border-radius:10px; font-size:14px; font-family:'Source Serif 4',serif; font-weight:700; cursor:pointer; box-shadow:0 4px 20px rgba(124,58,237,0.4);">
+                  ▶ Watch Demo
+                </button>
+              </div>
+              <div class="trust-line">
+                    <svg width="20" height="20" viewBox="0 0 20 20">
+                        <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm-2 15l-5-5 1.41-1.41L8 12.17l7.59-7.59L17 6l-9 9z"/>
+                    </svg>
+                    <span>No credit card required • Cancel anytime</span>
+                </div>
+            </div>
+
+            <!-- Right Side: Report Preview -->
+            <div class="report-preview">
+                <div class="preview-window">
+                    <div class="preview-badge">Sample Report</div>
+                    
+                    <div class="preview-header">
+                        <h2 class="preview-title">Weekly Progress Report</h2>
+                        <div class="preview-meta">
+                            <span>📅 Week of March 25-29, 2026</span>
+                            <span>👤 Grade 4</span>
+                        </div>
+                    </div>
+
+                    <div class="preview-content">
+                        <div class="subject-section">
+                            <div class="subject-header">
+                                <div class="subject-name">Mathematics</div>
+                                <div class="grade-badge">A-</div>
+                            </div>
+                            <p class="subject-comment">
+                                Excellent work on multi-digit multiplication this week! Shows strong understanding of the area model and demonstrates persistence on challenging word problems.
+                            </p>
+                        </div>
+
+                        <div class="subject-section">
+                            <div class="subject-header">
+                                <div class="subject-name">Reading</div>
+                                <div class="grade-badge">B+</div>
+                            </div>
+                            <p class="subject-comment">
+                                Making great progress with comprehension strategies. Continuing to work on using text evidence to support answers during our discussion circles.
+                            </p>
+                        </div>
+
+                        <div class="subject-section">
+                            <div class="subject-header">
+                                <div class="subject-name">Science</div>
+                                <div class="grade-badge">A</div>
+                            </div>
+                            <p class="subject-comment">
+                                Outstanding participation during our ecosystems unit! Asked thoughtful questions and showed creativity in the habitat diorama project.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <div id="gr-login-side">
       <div id="root"></div>
     </div>
   </div>
-
   <script>
-    // Show/hide landing based on login state
     var grObs = new MutationObserver(function() {
       var landing = document.getElementById('gr-landing-side');
       var loginSide = document.getElementById('gr-login-side');
@@ -519,16 +612,14 @@
         if (loginSide) loginSide.style.width = '440px';
       } else if (hasApp) {
         landing.style.display = 'none';
-        if (loginSide) { loginSide.style.width = '100%'; }
+        if (loginSide) loginSide.style.width = '100%';
       }
     });
     grObs.observe(document.getElementById('root'), { childList: true, subtree: true });
   </script>
-
   <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
-
   <!-- GradeRelay styled output builder - plain JS, outside Babel -->
   <script>
   window.buildStyledReport = function(rType, tName, cName, pWord, termLabel, bodyText) {
@@ -589,8 +680,8 @@
 
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script type="text/babel" data-presets="env,react">
 const { useState } = React;
 
@@ -2649,7 +2740,6 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 root.render(React.createElement(AuthWrapper));
 </script>
-
 <!-- Demo Modal -->
 <div id="gr-demo-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999999; align-items:center; justify-content:center; padding:20px;">
   <div style="background:#1a1a2e; border:1px solid rgba(124,58,237,0.4); border-radius:20px; max-width:600px; width:100%; overflow:hidden; box-shadow:0 24px 80px rgba(0,0,0,0.6);">
@@ -2945,6 +3035,5 @@ function grDemoPrev() {
   if (grDemoStep > 1) { grDemoStep--; grShowStep(grDemoStep); if (grDemoStep === 1) grStartTyping(); }
 }
 </script>
-
 </body>
 </html>
