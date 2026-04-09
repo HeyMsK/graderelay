@@ -4,25 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>GradeRelay — Progress Reports for Teachers</title>
-  <meta name="description" content="GradeRelay — Generate professional parent progress reports in 60 seconds. Pre-K through 12th grade." />
+  <meta name="description" content="GradeRelay — Generate professional parent progress reports in 60 seconds." />
   <meta name="theme-color" content="#2d1b69" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="GradeRelay" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
   <style>
-
-    html, body { margin: 0; padding: 0; overflow-x: hidden; max-width: 100vw; }
+    html, body { margin: 0; padding: 0; overflow-x: hidden; }
     body {
       background-color: #0a3d3d;
       background-image:
         radial-gradient(ellipse 80% 60% at 0% 0%, #0e7490 0%, transparent 60%),
         radial-gradient(ellipse 60% 50% at 100% 20%, #7c3aed 0%, transparent 55%),
         radial-gradient(ellipse 50% 40% at 15% 100%, #2dd4c8 0%, transparent 50%),
-        radial-gradient(ellipse 45% 40% at 100% 90%, #6d28d9 0%, transparent 55%),
-        radial-gradient(ellipse 35% 30% at 50% 50%, #0f766e 0%, transparent 60%);
+        radial-gradient(ellipse 45% 40% at 100% 90%, #6d28d9 0%, transparent 55%);
       background-attachment: fixed;
       min-height: 100vh;
     }
@@ -39,7 +34,12 @@
       animation: shimmer 3s linear infinite; z-index: 9999;
     }
     @keyframes shimmer { 0% { background-position: 0% 0%; } 100% { background-position: 200% 0%; } }
-  
+
+    /* Page layout */
+    #gr-page-wrap { display: flex; min-height: 100vh; width: 100%; position: relative; z-index: 1; }
+    #gr-landing-side { flex: 1; min-width: 0; overflow-y: auto; display: flex; flex-direction: column; }
+    #gr-login-side { width: 440px; flex-shrink: 0; min-height: 100vh; }
+    @media(max-width: 900px) { #gr-landing-side { display: none !important; } #gr-login-side { width: 100%; } }
 
 /* Landing page styles */
 
@@ -485,39 +485,11 @@
         }
     
 
-/* Layout overrides for side-by-side */
-#gr-page-wrap {
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-#gr-landing-side {
-  flex: 1;
-  min-width: 0;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-#gr-login-side {
-  width: 440px;
-  flex-shrink: 0;
-  min-height: 100vh;
-  transition: width 0.3s;
-}
-.container {
-  padding: 20px 32px 40px !important;
-  min-height: unset !important;
-}
-.header { display: none !important; }
-.hero-title { font-size: 30px !important; line-height: 1.2 !important; }
-.stars { display: none; }
-@media(max-width: 900px) {
-  #gr-page-wrap { flex-direction: column; }
-  #gr-landing-side { display: none !important; }
-  #gr-login-side { width: 100%; min-height: 100vh; }
-}
+
+    .container { padding: 20px 32px 40px !important; min-height: unset !important; }
+    .header { display: none !important; }
+    .stars { display: none !important; }
+    .hero-title { font-size: 30px !important; line-height: 1.2 !important; }
   </style>
 </head>
 <body style="margin:0;padding:0;">
@@ -526,96 +498,7 @@
 
   <div id="gr-page-wrap">
     <div id="gr-landing-side">
-      <!-- Main Container -->
-    <div class="container">
-        <div class="content-grid">
-            <!-- Left Side: Hero Content -->
-            <div class="hero-content">
-                <div class="hero-badge">✨ Free Plan: 5 Reports/Month</div>
-                
-                <h1 class="hero-title">
-                    Professional Parent Reports in <span class="highlight">60 Seconds</span>
-                </h1>
-                
-                <p class="hero-subtitle">
-                    Generate comprehensive, personalized progress reports for every student. Save hours of work while keeping parents informed and engaged.
-                </p>
 
-                <ul class="feature-list">
-                    <li class="feature-item">
-                        <div class="feature-icon">📊</div>
-                        <span><strong>Daily, Weekly & Marking Period</strong> reports ready instantly</span>
-                    </li>
-                    <li class="feature-item">
-                        <div class="feature-icon">🎓</div>
-                        <span><strong>Pre-K through 12th grade</strong> across 12 subject areas</span>
-                    </li>
-                    <li class="feature-item">
-                        <div class="feature-icon">🌍</div>
-                        <span><strong>Translates into 9 languages</strong> for all families</span>
-                    </li>
-                    <li class="feature-item">
-                        <div class="feature-icon">🔒</div>
-                        <span><strong>FERPA compliant</strong> — no student names stored</span>
-                    </li>
-                </ul>
-
-                <div style="display:flex; gap:12px; margin-top:20px; margin-bottom:16px; flex-wrap:wrap;">
-              <button onclick="openDemoModal()" style="background:linear-gradient(135deg,#0e7490,#7c3aed); color:white; border:none; padding:12px 24px; border-radius:10px; font-size:14px; font-family:'Source Serif 4',serif; font-weight:700; cursor:pointer;">
-                ▶ Watch Demo
-              </button>
-            </div>
-            <div class="trust-line" style="margin-top:8px;"><svg width="16" height="16" viewBox="0 0 20 20" fill="#0e7490"><path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm-2 15l-5-5 1.41-1.41L8 12.17l7.59-7.59L17 6l-9 9z"/></svg><span>Free to start &nbsp;&middot;&nbsp; Built by a Brooklyn teacher</span></div>
-            </div>
-
-            <!-- Right Side: Report Preview -->
-            <div class="report-preview">
-                <div class="preview-window">
-                    <div class="preview-badge">Sample Report</div>
-                    
-                    <div class="preview-header">
-                        <h2 class="preview-title">Weekly Progress Report</h2>
-                        <div class="preview-meta">
-                            <span>📅 Week of March 25-29, 2026</span>
-                            <span>👤 Grade 4</span>
-                        </div>
-                    </div>
-
-                    <div class="preview-content">
-                        <div class="subject-section">
-                            <div class="subject-header">
-                                <div class="subject-name">Mathematics</div>
-                                <div class="grade-badge">A-</div>
-                            </div>
-                            <p class="subject-comment">
-                                Excellent work on multi-digit multiplication this week! Shows strong understanding of the area model and demonstrates persistence on challenging word problems.
-                            </p>
-                        </div>
-
-                        <div class="subject-section">
-                            <div class="subject-header">
-                                <div class="subject-name">Reading</div>
-                                <div class="grade-badge">B+</div>
-                            </div>
-                            <p class="subject-comment">
-                                Making great progress with comprehension strategies. Continuing to work on using text evidence to support answers during our discussion circles.
-                            </p>
-                        </div>
-
-                        <div class="subject-section">
-                            <div class="subject-header">
-                                <div class="subject-name">Science</div>
-                                <div class="grade-badge">A</div>
-                            </div>
-                            <p class="subject-comment">
-                                Outstanding participation during our ecosystems unit! Asked thoughtful questions and showed creativity in the habitat diorama project.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     </div>
     <div id="gr-login-side">
       <div id="root"></div>
@@ -623,41 +506,20 @@
   </div>
 
   <script>
-    
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    
-  </script>
-
-  <script>
-    // Show/hide landing side based on login state
+    // Show/hide landing based on login state
     var grObs = new MutationObserver(function() {
-      var root = document.getElementById('root');
       var landing = document.getElementById('gr-landing-side');
       var loginSide = document.getElementById('gr-login-side');
-      if (!root || !landing) return;
-      var hasLogin = root.querySelector('input[type="email"]');
-      var hasApp = root.querySelector('.primary-btn') || root.querySelector('.card');
-      if (hasLogin && !hasApp) {
-        // Login screen — show landing on left, login on right
+      var root = document.getElementById('root');
+      if (!landing || !root) return;
+      var hasEmail = root.querySelector('input[type="email"]');
+      var hasApp = root.querySelector('.card') || root.querySelector('.primary-btn');
+      if (hasEmail) {
         landing.style.display = 'flex';
-        landing.style.flexDirection = 'column';
         if (loginSide) loginSide.style.width = '440px';
-      } else if (!hasLogin && hasApp) {
-        // App screen — hide landing, full width
+      } else if (hasApp) {
         landing.style.display = 'none';
-        if (loginSide) {
-          loginSide.style.width = '100%';
-          loginSide.style.maxWidth = '100%';
-        }
+        if (loginSide) { loginSide.style.width = '100%'; }
       }
     });
     grObs.observe(document.getElementById('root'), { childList: true, subtree: true });
@@ -666,7 +528,6 @@
   <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
-  
 
   <!-- GradeRelay styled output builder - plain JS, outside Babel -->
   <script>
@@ -726,7 +587,10 @@
   window.GR_FOUNDING_MAX = 100;
   </script>
 
+
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+
 <script type="text/babel" data-presets="env,react">
 const { useState } = React;
 
@@ -2933,8 +2797,6 @@ function grDemoPrev() {
   if (grDemoStep > 1) { grDemoStep--; grShowStep(grDemoStep); if (grDemoStep === 1) grStartTyping(); }
 }
 </script>
-</body>
-</html>
 
 <!-- Demo Modal -->
 <div id="gr-demo-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.85); z-index:999999; align-items:center; justify-content:center; padding:20px;">
@@ -3083,5 +2945,6 @@ function grDemoPrev() {
   if (grDemoStep > 1) { grDemoStep--; grShowStep(grDemoStep); if (grDemoStep === 1) grStartTyping(); }
 }
 </script>
+
 </body>
 </html>
