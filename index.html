@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>GradeRelay — Progress Reports for Teachers </title>
+  <title>GradeRelay — Progress Reports for Teachers</title>
   <meta name="description" content="GradeRelay — Generate professional parent progress reports in 60 seconds. Pre-K through 12th grade." />
   <meta name="theme-color" content="#2d1b69" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -497,7 +497,8 @@
   flex: 1;
   min-width: 0;
   overflow-y: auto;
-  display: none;
+  display: flex;
+  flex-direction: column;
 }
 #gr-login-side {
   width: 440px;
@@ -644,11 +645,14 @@
       var loginSide = document.getElementById('gr-login-side');
       if (!root || !landing) return;
       var hasLogin = root.querySelector('input[type="email"]');
-      if (hasLogin) {
+      var hasApp = root.querySelector('.primary-btn') || root.querySelector('.card');
+      if (hasLogin && !hasApp) {
+        // Login screen — show landing on left, login on right
         landing.style.display = 'flex';
         landing.style.flexDirection = 'column';
         if (loginSide) loginSide.style.width = '440px';
-      } else {
+      } else if (!hasLogin && hasApp) {
+        // App screen — hide landing, full width
         landing.style.display = 'none';
         if (loginSide) {
           loginSide.style.width = '100%';
