@@ -619,7 +619,7 @@
   </script>
   <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.23.5/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.22.5/babel.min.js"></script>
   <!-- GradeRelay styled output builder - plain JS, outside Babel -->
   <script>
   window.buildStyledReport = function(rType, tName, cName, pWord, termLabel, bodyText) {
@@ -682,7 +682,7 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script type="text/babel" data-presets="env,react">
+<script type="text/babel" data-presets="env,react" data-plugins="transform-async-to-generator">
 const { useState } = React;
 
 const PROMPTS = {
