@@ -7,6 +7,7 @@ X
   <title>GradeRelay — Progress Reports for Teachers</title>
   <meta name="description" content="GradeRelay — Generate professional parent progress reports in 60 seconds." />
   <meta name="theme-color" content="#2d1b69" />
+  <link rel="manifest" href="/manifest.json" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&display=swap" rel="stylesheet" />
@@ -435,8 +436,8 @@ X
 
         .preview-badge {
             position: absolute;
-            top: 70px;
-            right: 40px;
+            top: 12px;
+            right: 16px;
             background: linear-gradient(135deg, var(--purple-light) 0%, var(--magenta-light) 100%);
             color: white;
             padding: 8px 16px;
@@ -526,8 +527,21 @@ X
                 </ul>
 
                 <div class="cta-buttons">
-                    <button class="btn-primary" onclick="window.location.href='#signup'">
-                        Start Creating Reports
+                    <button class="btn-primary" onclick="
+                      var loginSide = document.getElementById('gr-login-side');
+                      if(loginSide) loginSide.scrollIntoView({behavior:'smooth', block:'center'});
+                      setTimeout(function(){
+                        var tabs = document.querySelectorAll('#gr-login-side button');
+                        for(var i=0;i<tabs.length;i++){
+                          if(tabs[i].textContent.trim()==='Sign Up'){
+                            tabs[i].click();
+                            tabs[i].focus();
+                            break;
+                          }
+                        }
+                      }, 600);
+                    ">
+                        Start Creating Reports — It's Free to Start
                     </button>
                 </div>
 
@@ -540,7 +554,7 @@ X
                     <svg width="20" height="20" viewBox="0 0 20 20">
                         <path d="M10 0C4.48 0 0 4.48 0 10s4.48 10 10 10 10-4.48 10-10S15.52 0 10 0zm-2 15l-5-5 1.41-1.41L8 12.17l7.59-7.59L17 6l-9 9z"/>
                     </svg>
-                    <span>No credit card required • Cancel anytime</span>
+                    <span>Sign Up Now &nbsp;·&nbsp; Free to try &nbsp;·&nbsp; Plans from $5.99/month</span>
                 </div>
             </div>
 
