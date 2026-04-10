@@ -1,5 +1,7 @@
 {
   "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/api/(.*)", "destination": "/api/$1" },
+    { "source": "/manifest.json", "destination": "/manifest.json" },
+    { "source": "/((?!api|manifest).*)", "destination": "/index.html" }
   ]
 }
