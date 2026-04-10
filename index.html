@@ -684,7 +684,7 @@
     </div>
   </div>
   <script>
-    var grObs = new MutationObserver(function() {
+    function updateLayout() {
       var landing = document.getElementById('gr-landing-side');
       var loginSide = document.getElementById('gr-login-side');
       var root = document.getElementById('root');
@@ -697,9 +697,18 @@
       } else if (hasApp) {
         landing.style.display = 'none';
         if (loginSide) loginSide.style.width = '100%';
+      } else {
+        // Loading state - hide landing until we know
+        landing.style.display = 'none';
       }
-    });
+    }
+    var grObs = new MutationObserver(updateLayout);
     grObs.observe(document.getElementById('root'), { childList: true, subtree: true });
+    // Run immediately and repeatedly until stable
+    updateLayout();
+    setTimeout(updateLayout, 100);
+    setTimeout(updateLayout, 500);
+    setTimeout(updateLayout, 1000);
   </script>
   <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
@@ -2114,7 +2123,7 @@ function App({ onGenerateReport }) {
               <span className="badge" style={{ background: "#ede9fe", color: "#3b0764" }}>{totalSelected} selected</span>
             )}
           </div>
-          <p style={{ color: "#6b7280", fontSize: 14, marginTop: -8, marginBottom: 16 }}>
+          <p style={{ color: "#4b5563", fontSize: 14, marginTop: -8, marginBottom: 16 }}>
             Use the specific comment codes above for subject-focused feedback — or, looking to add more? The categories below let you include additional feedback on academics, participation, behavior, attendance, homework, and general comments. Tap any category to expand it and pick whatever fits — mix and match as many as you like!
           </p>
 
