@@ -1,4 +1,3 @@
-X
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,8 +40,11 @@ X
     #gr-login-side { width: 440px; flex-shrink: 0; min-height: 100vh; }
     @media(max-width: 900px) {
   #gr-page-wrap { flex-direction: column; }
-  #gr-landing-side { display: none !important; }
+  #gr-landing-side { display: flex !important; flex-direction: column; width: 100%; }
   #gr-login-side { width: 100%; }
+  .content-grid { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .hero-title { font-size: 26px !important; }
+  .report-preview { display: none; }
 }
 
         * {
