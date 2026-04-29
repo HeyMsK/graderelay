@@ -2271,7 +2271,7 @@ function App({ onGenerateReport }) {
         {/* FERPA Notice */}
         <div style={{ background: "rgba(255,255,255,0.1)", borderRadius: 10, padding: "10px 16px", marginBottom: 20, zIndex: 1, position: "relative" }}>
           <p style={{ color: "rgba(255,255,255,0.7)", fontSize: 12, margin: 0, textAlign: "center" }}>
-            🔒 FERPA Notice: No student names are collected or stored by GradeRelay.
+            🔒 FERPA compliant · No student names stored
           </p>
         </div>
 
@@ -2600,6 +2600,9 @@ function PaywallModal({ onClose, foundingCount }) {
           <button onClick={onClose} style={{ width: "100%", padding: "10px", background: "none", border: "1px solid #e5e7eb", borderRadius: 8, color: "#6b7280", fontSize: 13, cursor: "pointer" }}>
             Continue with free (5 reports/month)
           </button>
+          <p style={{ textAlign: "center", fontSize: 11, color: "#9ca3af", marginTop: 12, lineHeight: 1.5 }}>
+            🔒 Payments processed securely by Stripe. We never see or store your card information.
+          </p>
         </div>
       </div>
     </div>
@@ -2691,6 +2694,23 @@ function AuthWrapper() {
     setAuthLoading(false);
   };
 
+  const handleForgotPassword = async () => {
+    if (!email.trim()) {
+      setAuthError("Please enter your email address first.");
+      return;
+    }
+    setAuthError(""); setAuthLoading(true);
+    const { error } = await supa.auth.resetPasswordForEmail(email.trim(), {
+      redirectTo: 'https://graderelay.com/reset-password'
+    });
+    if (error) {
+      setAuthError(error.message);
+    } else {
+      setAuthError("✅ Password reset email sent! Check your inbox and follow the link to reset your password.");
+    }
+    setAuthLoading(false);
+  };
+
   const handleLogin = async () => {
     setAuthError(""); setAuthLoading(true);
     const { error, data } = await supa.auth.signInWithPassword({ email, password });
@@ -2768,6 +2788,18 @@ function AuthWrapper() {
               onKeyDown={e => e.key === "Enter" && (isSignup ? handleSignup() : handleLogin())}
               style={{ padding: "12px 16px", border: "2px solid #e5e7eb", borderRadius: 8, fontSize: 15, fontFamily: "'Source Serif 4', serif", outline: "none", color: "#1f2937" }} />
             {authError && <p style={{ color: authError.startsWith("✅") ? "#065f46" : "#b91c1c", fontSize: 13, margin: 0 }}>{authError}</p>}
+            {!isSignup && (
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: -4 }}>
+                <a href="mailto:support@graderelay.com?subject=Account Help"
+                  style={{ color: "#9ca3af", fontSize: 12, fontFamily: "'Source Serif 4', serif", textDecoration: "none" }}>
+                  Need help? Email us
+                </a>
+                <button onClick={handleForgotPassword} disabled={authLoading}
+                  style={{ background: "none", border: "none", color: "#7c3aed", fontSize: 13, cursor: "pointer", fontFamily: "'Source Serif 4', serif", textDecoration: "underline", padding: 0 }}>
+                  Forgot password?
+                </button>
+              </div>
+            )}
             <button onClick={isSignup ? handleSignup : handleLogin} disabled={authLoading}
               style={{ padding: "14px", background: "linear-gradient(135deg,#3b0764,#4c1d95,#7c3aed)", color: "white", border: "none", borderRadius: 10, fontSize: 16, fontFamily: "'Source Serif 4', serif", fontWeight: 700, cursor: "pointer" }}>
               {authLoading ? "Please wait..." : (isSignup ? "Create Account" : "Sign In")}
@@ -2784,7 +2816,7 @@ function AuthWrapper() {
           <div style={{ marginTop: 20, padding: "14px", background: "#f5f3ff", borderRadius: 10 }}>
             <p style={{ textAlign: "center", fontSize: 12, fontWeight: 700, color: "#4c1d95", marginBottom: 8, fontFamily: "'Playfair Display', serif" }}>What is GradeRelay?</p>
             <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-              {["📊 Daily, Weekly & Marking Period reports", "🎓 Pre-K through 12th grade", "🌍 Translates into 9 languages", "⏱️ Reports in 60 seconds", "🔒 FERPA compliant"].map((f, i) => (
+              {["📊 Daily, Weekly & Marking Period reports", "🎓 Pre-K through 12th grade", "🌍 Translates into 9 languages", "⏱️ Reports in 60 seconds", "🔒 FERPA Friendly"].map((f, i) => (
                 <div key={i} style={{ fontSize: 12, color: "#4c1d95", fontFamily: "'Source Serif 4', serif" }}>{f}</div>
               ))}
             </div>
@@ -2806,6 +2838,10 @@ function AuthWrapper() {
       {showPaywall && <PaywallModal onClose={() => setShowPaywall(false)} foundingCount={foundingCount} />}
       {/* Top bar */}
       <div style={{ position: "fixed", top: 10, right: 16, zIndex: 99999, display: "flex", alignItems: "center", gap: 8, background: "rgba(0,0,0,0.25)", borderRadius: 999, padding: "4px 8px", backdropFilter: "blur(8px)" }}>
+        <span style={{ color: "rgba(255,255,255,0.7)", fontSize: 12, fontFamily: "'Source Serif 4', serif", paddingLeft: 4 }}>
+          👋 {user?.email?.split('@')[0]}
+        </span>
+        
         {!isPro && (
           <span style={{ background: "rgba(255,255,255,0.9)", borderRadius: 999, padding: "4px 12px", fontSize: 12, color: "#4c1d95", fontWeight: 700, fontFamily: "'Source Serif 4', serif" }}>
             {remaining} free {remaining === 1 ? "report" : "reports"} left
