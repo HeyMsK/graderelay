@@ -2441,6 +2441,8 @@ function App({ onGenerateReport }) {
               }}>🗂 Google Docs</button>
             <button className="export-btn" style={{ background: "#f5f3ff", color: "#4c1d95" }}
               onClick={() => setExportPanel(exportPanel === "translate" ? null : "translate")}>🌐 Translate</button>
+            <button className="export-btn" style={{ background: exportPanel === "grammar" ? "#dcfce7" : "#f0fdf4", color: "#166534" }}
+              onClick={() => setExportPanel(exportPanel === "grammar" ? null : "grammar")}>✅ Check Grammar</button>
           </div>
 
           {/* Email Panel */}
@@ -2465,6 +2467,40 @@ function App({ onGenerateReport }) {
                 Open Messages
               </a>
               <p style={{ margin: "10px 0 0 0", fontSize: 12, color: "#6b7280" }}>Note: Long reports may be trimmed by your carrier.</p>
+            </div>
+          )}
+
+          {/* Grammar Check Panel */}
+          {exportPanel === "grammar" && (
+            <div style={{ marginTop: 14, padding: 18, background: "#f0fdf4", borderRadius: 10 }}>
+              <p style={{ margin: "0 0 10px 0", fontWeight: 700, fontSize: 14, color: "#166534" }}>✅ Grammar & Spell Check</p>
+              <p style={{ margin: "0 0 12px 0", fontSize: 13, color: "#374151" }}>Click below to check your report for grammar and spelling errors. The corrected version will appear in the editor above.</p>
+              <button onClick={async () => {
+                const text = editedReport || generateReport();
+                const btn = document.getElementById("grammar-btn");
+                if (btn) { btn.textContent = "⏳ Checking..."; btn.disabled = true; }
+                try {
+                  const res = await fetch("/api/grammar-check", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ report: text })
+                  });
+                  const data = await res.json();
+                  if (data.corrected) {
+                    setEditedReport(data.corrected);
+                    if (btn) { btn.textContent = "✅ Done! Report updated above."; }
+                    setTimeout(() => { if (btn) { btn.textContent = "✅ Check Grammar"; btn.disabled = false; } }, 3000);
+                  } else {
+                    if (btn) { btn.textContent = "⚠️ Error — try again"; btn.disabled = false; }
+                  }
+                } catch(e) {
+                  if (btn) { btn.textContent = "⚠️ Error — try again"; btn.disabled = false; }
+                }
+              }}
+                id="grammar-btn"
+                style={{ padding: "10px 20px", background: "linear-gradient(135deg,#059669,#047857)", color: "white", border: "none", borderRadius: 8, fontWeight: 700, fontSize: 14, cursor: "pointer", fontFamily: "'Source Serif 4', serif" }}>
+                ✅ Check &amp; Fix Grammar
+              </button>
             </div>
           )}
 
