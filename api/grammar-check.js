@@ -1,7 +1,3 @@
-const Anthropic = require('@anthropic-ai/sdk');
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
-
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -13,15 +9,22 @@ module.exports = async (req, res) => {
   }
 
   try {
-    const message = await client.messages.create({
-      model: 'claude-opus-4-5',
-      max_tokens: 2000,
-      messages: [
-        {
-          role: 'user',
-          content: `You are a professional proofreader for teacher-written parent progress reports. 
-          
-Please correct any grammar, spelling, punctuation, and sentence flow issues in the report below. 
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': process.env.ANTHROPIC_API_KEY,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-haiku-4-5-20251001',
+        max_tokens: 2000,
+        messages: [
+          {
+            role: 'user',
+            content: `You are a professional proofreader for teacher-written parent progress reports.
+
+Please correct any grammar, spelling, punctuation, and sentence flow issues in the report below.
 
 Rules:
 - Keep the exact same meaning and tone
@@ -32,12 +35,16 @@ Rules:
 
 Report to correct:
 ${report}`
-        }
-      ]
+          }
+        ]
+      })
     });
 
-    const corrected = message.content[0]?.text;
+    const data = await response.json();
+    const corrected = data?.content?.[0]?.text;
+
     if (!corrected) {
+      console.error('No corrected text:', JSON.stringify(data));
       return res.status(500).json({ error: 'Grammar check failed' });
     }
 
