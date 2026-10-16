@@ -714,7 +714,7 @@
   <script src="https://unpkg.com/@babel/standalone@7.22.5/babel.min.js"></script>
   <!-- GradeRelay v2.1 -->
   <script>
-   window.buildStyledReport = function(rType, tName, cName, pWord, termLabel, bodyText) {
+  window.buildStyledReport = function(rType, tName, cName, pWord, termLabel, bodyText) {
     var LOGO = '<img src="https://raw.githubusercontent.com/HeyMsK/graderelay/main/textbubbleedit.png" width="44" height="44" style="border-radius:8px;vertical-align:middle;" />';
     var esc = function(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
 
@@ -758,144 +758,6 @@
       + '<div style="margin-top:28px;padding-top:14px;border-top:1px solid #e8e8e8;font-size:11px;color:#9ca3af;text-align:center;">Generated with GradeRelay &middot; graderelay.com</div>'
       + '</div>';
   };
-  if (tName) infoParts.push('<div style="margin-bottom:12px;"><span style="font-weight:700;color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Teacher</span><div style="color:#1f2937;font-size:14px;">' + tName + '</div></div>');
-  if (cName) infoParts.push('<div style="margin-bottom:12px;"><span style="font-weight:700;color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">Class</span><div style="color:#1f2937;font-size:14px;">' + cName + '</div></div>');
-  if (termLabel) infoParts.push('<div><span style="font-weight:700;color:#6b7280;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;">' + pWord + '</span><div style="color:#1f2937;font-size:14px;">' + termLabel + '</div></div>');
-  var infoSection = infoParts.join('');
-
-  // Parse body text to identify sections and bullet points
-  // Expected format: "Section Title\n• bullet point\n• bullet point\n\nNext Section\n• bullet"
-  var sections = [];
-  var paragraphs = bodyText.split("\n\n").filter(function(p) { return p.trim().length > 0; });
-
-  var currentSection = null;
-  var currentBullets = [];
-
-  paragraphs.forEach(function(para) {
-    var lines = para.split("\n");
-
-    lines.forEach(function(line) {
-      line = line.trim();
-
-      // Check if line is a section header (all caps, ends with colon, or short title-like)
-      if (line.match(/^[A-Z][A-Z\s]+:?$/) && line.length < 50 && !line.match(/^[A-Z][a-z]/)) {
-        // Save previous section
-        if (currentSection) {
-          sections.push({ title: currentSection, bullets: currentBullets });
-        }
-        currentSection = line.replace(/:$/, '');
-        currentBullets = [];
-      }
-      // Check if it's already a bullet point
-      else if (line.match(/^[•\-\*]\s+/)) {
-        currentBullets.push(line.replace(/^[•\-\*]\s+/, ''));
-      }
-      // Check if it's a regular sentence (starts with capital, has period)
-      else if (line.match(/^[A-Z].*[.!?]$/) && !currentSection && line.length > 20) {
-        // This is intro text or closing, not a bullet
-        if (currentSection === null) {
-          sections.push({ type: 'paragraph', text: line });
-        }
-      }
-      // Otherwise treat as part of current section's bullets
-      else if (line.length > 5 && currentSection) {
-        currentBullets.push(line);
-      }
-    });
-  });
-
-  if (currentSection) {
-    sections.push({ title: currentSection, bullets: currentBullets });
-  }
-
-  // Build HTML sections
-  var htmlSections = '';
-  sections.forEach(function(section) {
-    if (section.type === 'paragraph') {
-      htmlSections += '<p style="font-size:14px;color:#333;line-height:1.6;margin-bottom:20px;">' + section.text + '</p>';
-    } else if (section.bullets && section.bullets.length > 0) {
-      htmlSections += '<div style="margin-bottom:24px;">';
-      htmlSections += '<div style="font-size:13px;font-weight:700;color:#667eea;text-transform:uppercase;letter-spacing:0.8px;margin-bottom:12px;">' + section.title + '</div>';
-      htmlSections += '<ul style="list-style:none;padding:0;margin:0;">';
-      section.bullets.forEach(function(bullet) {
-        if (bullet.trim().length > 0) {
-          htmlSections += '<li style="font-size:14px;color:#333;margin-bottom:10px;padding-left:22px;position:relative;line-height:1.5;">';
-          htmlSections += '<span style="position:absolute;left:8px;color:#667eea;font-weight:bold;">•</span>';
-          htmlSections += bullet.trim();
-          htmlSections += '</li>';
-        }
-      });
-      htmlSections += '</ul>';
-      htmlSections += '</div>';
-    }
-  });
-
-  // Escape special HTML characters
-  var safeBody = bodyText
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-
-  // Build the final styled HTML
-  var html =
-    '<div style="font-family:-apple-system, BlinkMacSystemFont, \'Segoe UI\', \'Roboto\', sans-serif; max-width:800px; background:white; padding:40px; margin:0 auto;">' +
-
-      // Header with logo
-      '<div style="display:flex; align-items:center; gap:16px; margin-bottom:30px;">' +
-        '<div>' + LOGO_IMG + '</div>' +
-        '<div>' +
-          '<div style="font-family:Arial,sans-serif; font-size:11px; font-weight:700; color:#667eea; letter-spacing:2px; text-transform:uppercase; margin-bottom:4px;">GradeRelay</div>' +
-          '<div style="font-size:14px; color:#666; font-weight:500;">Professional Parent Reports</div>' +
-        '</div>' +
-      '</div>' +
-
-      // Title
-      '<h1 style="font-size:24px; font-weight:600; color:#1a1a1a; margin:0 0 30px 0;">' + rType + '</h1>' +
-
-      // Info section (Student, Teacher, Class, Date)
-      '<div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:30px; padding-bottom:20px; border-bottom:1px solid #e8e8e8;">' +
-        infoSection +
-      '</div>' +
-
-      // Main content with sections and bullets
-      '<div style="font-size:14px; color:#333; line-height:1.8; margin-bottom:30px;">' +
-        htmlSections +
-      '</div>' +
-
-      // Footer
-      '<div style="margin-top:30px; padding-top:20px; border-top:1px solid #e8e8e8; font-size:12px; color:#666; text-align:center;">' +
-        '<div style="margin-bottom:8px;">Generated with GradeRelay</div>' +
-        '<div style="font-size:11px; color:#999;">Professional parent communication • FERPA Compliant • Secure</div>' +
-      '</div>' +
-    '</div>';
-
-  return html;
-};
-
-// ============================================================
-// Usage Instructions:
-// ============================================================
-// Replace the existing buildStyledReport function (line 717)
-// with the code above.
-//
-// The function now:
-// 1. Shows logo at the top with "GradeRelay" branding
-// 2. Automatically detects section headers in the text
-// 3. Converts bullet points (•, -, *) to styled bullet lists
-// 4. Organizes content into professional sections
-// 5. Matches the sample report format
-//
-// Example text format that works well:
-//
-// ACADEMIC PERFORMANCE
-// • Student demonstrates strong understanding
-// • Student shows good progress this week
-//
-// BEHAVIOR & PARTICIPATION
-// • Excellent self-regulation
-// • Positive classroom presence
-//
-// ============================================================
 
   window.copyStyledReport = function(rType, tName, cName, pWord, termLabel, bodyText) {
     var html = window.buildStyledReport(rType, tName, cName, pWord, termLabel, bodyText);
@@ -1925,6 +1787,16 @@ function App({ onGenerateReport }) {
     return { tName, cName, sName, sNameFirst, wOf, termLabel, isDaily, isMarkingPeriod };
   };
 
+  const CATEGORY_LABELS = {
+    positive_academic: "ACADEMIC PERFORMANCE",
+    needs_support_academic: "ACADEMIC PERFORMANCE",
+    positive_participation: "PARTICIPATION",
+    needs_support_participation: "PARTICIPATION",
+    positive_behavior: "BEHAVIOR",
+    needs_support_behavior: "BEHAVIOR",
+    attendance: "ATTENDANCE",
+  };
+
   const generateReport = () => {
     const { tName, cName, sName, sNameFirst, wOf, termLabel } = getNames();
     const T = TRANSLATIONS["en"] || {};
@@ -1968,11 +1840,17 @@ function App({ onGenerateReport }) {
     }
 
     // ── General prompts (grouped by category) ────────────
+    const printedHeaders = new Set();
     Object.entries(selectedPrompts).forEach(([cat, prompts]) => {
       if (prompts && prompts.length > 0) {
-        prompts.forEach((p, idx) => {
+        const label = CATEGORY_LABELS[cat] || cat.toUpperCase();
+        if (!printedHeaders.has(label)) {
+          lines.push(label);
+          printedHeaders.add(label);
+        }
+        prompts.forEach((p) => {
           const cap = sNameFirst.charAt(0).toUpperCase() + sNameFirst.slice(1);
-          lines.push(`${cap} ${p}.`);
+          lines.push(`• ${cap} ${p}.`);
         });
         lines.push("");
       }
