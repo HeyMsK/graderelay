@@ -715,48 +715,19 @@
   <!-- GradeRelay v2.1 -->
   <script>
   window.buildStyledReport = function(rType, tName, cName, pWord, termLabel, bodyText) {
-    var LOGO = '<img src="https://raw.githubusercontent.com/HeyMsK/graderelay/main/textbubbleedit.png" width="44" height="44" style="border-radius:8px;vertical-align:middle;" />';
-    var esc = function(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+    var SVG_ICON = '<img src="https://raw.githubusercontent.com/HeyMsK/graderelay/main/textbubbleedit.png" width="36" height="36" style="border-radius:8px;vertical-align:middle;flex-shrink:0;" />';
+    var infoparts = [];
+    if (tName) infoparts.push('<b>Teacher:</b> ' + tName);
+    if (cName) infoparts.push('<b>Class:</b> ' + cName);
+    if (termLabel) infoparts.push('<b>' + pWord + ':</b> ' + termLabel);
+    var infoLine = infoparts.join(' &nbsp;|&nbsp; ');
 
-    var infoCell = function(label, value) {
-      return '<div style="margin-bottom:12px;"><div style="font-size:11px;font-weight:700;color:#6b7280;text-transform:uppercase;letter-spacing:0.5px;">' + label + '</div><div style="font-size:14px;color:#1f2937;">' + esc(value) + '</div></div>';
-    };
-    var info = '';
-    if (tName) info += infoCell('Teacher', tName);
-    if (cName) info += infoCell('Class', cName);
-    if (termLabel) info += infoCell(pWord, termLabel);
+    var safeBody = bodyText
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
 
-    // Walk the lines in order: ALL-CAPS lines are section headers,
-    // lines starting with a bullet become <li>, everything else is a paragraph.
-    var blocks = [];
-    var openList = null;
-    var closeList = function() { if (openList) { blocks.push('</ul>'); openList = null; } };
-
-    String(bodyText).split('\n').forEach(function(raw) {
-      var line = raw.trim();
-      if (!line) { closeList(); return; }
-
-      if (/^[A-Z][A-Z &\/\-]+$/.test(line) && line.length < 45) {
-        closeList();
-        blocks.push('<div style="font-size:13px;font-weight:700;color:#667eea;text-transform:uppercase;letter-spacing:0.8px;margin:22px 0 10px 0;">' + esc(line) + '</div>');
-      } else if (/^[•\-\*]\s+/.test(line)) {
-        if (!openList) { blocks.push('<ul style="list-style:none;padding:0;margin:0 0 8px 0;">'); openList = true; }
-        blocks.push('<li style="font-size:14px;color:#333;margin-bottom:10px;padding-left:22px;position:relative;line-height:1.5;"><span style="position:absolute;left:6px;color:#667eea;font-weight:bold;">&bull;</span>' + esc(line.replace(/^[•\-\*]\s+/, '')) + '</li>');
-      } else {
-        closeList();
-        blocks.push('<p style="font-size:14px;color:#333;line-height:1.7;margin:0 0 12px 0;">' + esc(line) + '</p>');
-      }
-    });
-    closeList();
-
-    return '<div style="font-family:-apple-system,BlinkMacSystemFont,\'Segoe UI\',Roboto,sans-serif;max-width:800px;background:#ffffff;padding:36px;">'
-      + '<div style="margin-bottom:24px;">' + LOGO
-      +   ' <span style="font-size:12px;font-weight:700;color:#0e7490;letter-spacing:2px;text-transform:uppercase;vertical-align:middle;margin-left:8px;">GradeRelay</span></div>'
-      + '<h1 style="font-size:24px;font-weight:600;color:#1a1a1a;margin:0 0 20px 0;">' + esc(rType) + '</h1>'
-      + '<div style="display:flex;flex-wrap:wrap;gap:24px;padding-bottom:18px;margin-bottom:20px;border-bottom:1px solid #e8e8e8;">' + info + '</div>'
-      + '<div>' + blocks.join('') + '</div>'
-      + '<div style="margin-top:28px;padding-top:14px;border-top:1px solid #e8e8e8;font-size:11px;color:#9ca3af;text-align:center;">Generated with GradeRelay &middot; graderelay.com</div>'
-      + '</div>';
+    return '<div style="font-family:Georgia,serif;max-width:660px;background:white;padding:20px 32px;">'      + '<table style="border-collapse:collapse;width:100%;margin-bottom:8px;" align="left"><tr>'        + '<td style="width:44px;vertical-align:middle;padding-right:10px;" align="left">' + SVG_ICON + '</td>'        + '<td style="vertical-align:middle;text-align:left;" align="left"><span style="font-family:Arial,sans-serif;font-size:11px;font-weight:700;color:#0e7490;letter-spacing:2px;text-transform:uppercase;">GRADERELAY</span></td>'      + '</tr></table>'      + '<h1 style="font-family:Georgia,serif;font-size:26px;font-weight:800;color:#1e1b4b;margin:0 0 10px 0;line-height:1.1;">' + rType + '</h1>'      + '<table style="border-collapse:collapse;margin-bottom:10px;font-family:Arial,sans-serif;font-size:13px;">'        + '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;padding-bottom:4px;white-space:nowrap;">STUDENT</td>'        + '<td style="padding-bottom:4px;color:#1f2937;"></td></tr>'        + (tName ? '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;padding-bottom:4px;white-space:nowrap;min-width:90px;">TEACHER</td><td style="padding-bottom:4px;color:#1f2937;">' + tName + '</td></tr>' : '')        + (cName ? '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;padding-bottom:4px;white-space:nowrap;min-width:90px;">CLASS</td><td style="padding-bottom:4px;color:#1f2937;">' + cName + '</td></tr>' : '')        + (termLabel ? '<tr><td style="color:#6b7280;font-weight:700;padding-right:16px;white-space:nowrap;min-width:90px;">' + pWord.toUpperCase() + '</td><td style="color:#1f2937;">' + termLabel + '</td></tr>' : '')      + '</table>'      + '<div style="font-family:Georgia,serif;font-size:13px;line-height:1.7;color:#1f2937;">' + safeBody.split("\n\n").map(function(para){return '<p style="margin:0 0 10px 0;font-family:Georgia,serif;font-size:13px;line-height:1.7;">' + para.replace(/\n/g,"<br/>") + '</p>';}).join("") + '</div>'      + '<div style="margin-top:14px;padding-top:8px;border-top:1px solid #e5e7eb;">'        + '<span style="font-family:Arial,sans-serif;font-size:11px;color:#9ca3af;">&#128172; Generated by GradeRelay &middot; graderelay.com</span>'      + '</div>'      + '</div>';
   };
 
   window.copyStyledReport = function(rType, tName, cName, pWord, termLabel, bodyText) {
@@ -1787,16 +1758,6 @@ function App({ onGenerateReport }) {
     return { tName, cName, sName, sNameFirst, wOf, termLabel, isDaily, isMarkingPeriod };
   };
 
-  const CATEGORY_LABELS = {
-    positive_academic: "ACADEMIC PERFORMANCE",
-    needs_support_academic: "ACADEMIC PERFORMANCE",
-    positive_participation: "PARTICIPATION",
-    needs_support_participation: "PARTICIPATION",
-    positive_behavior: "BEHAVIOR",
-    needs_support_behavior: "BEHAVIOR",
-    attendance: "ATTENDANCE",
-  };
-
   const generateReport = () => {
     const { tName, cName, sName, sNameFirst, wOf, termLabel } = getNames();
     const T = TRANSLATIONS["en"] || {};
@@ -1840,17 +1801,11 @@ function App({ onGenerateReport }) {
     }
 
     // ── General prompts (grouped by category) ────────────
-    const printedHeaders = new Set();
     Object.entries(selectedPrompts).forEach(([cat, prompts]) => {
       if (prompts && prompts.length > 0) {
-        const label = CATEGORY_LABELS[cat] || cat.toUpperCase();
-        if (!printedHeaders.has(label)) {
-          lines.push(label);
-          printedHeaders.add(label);
-        }
-        prompts.forEach((p) => {
+        prompts.forEach((p, idx) => {
           const cap = sNameFirst.charAt(0).toUpperCase() + sNameFirst.slice(1);
-          lines.push(`• ${cap} ${p}.`);
+          lines.push(`${cap} ${p}.`);
         });
         lines.push("");
       }
