@@ -1805,6 +1805,13 @@ function App({ onGenerateReport }) {
     const T = TRANSLATIONS["en"] || {};
     const schoolLine = schoolName.trim() ? schoolName.trim() : "";
     const lines = [];
+    // Text helpers (defined first so every block below can use them)
+    const sent = (s) => (/[.!?]$/.test(s) ? s : s + ".");
+    const cap1 = (s) => s.charAt(0).toUpperCase() + s.slice(1);
+    const varyChild = (s, i) => s
+      .replace(/your child's/g, "their")
+      .replace(/your child/g, i % 2 === 0 ? "your child" : "your student");
+    const printedHeaders = new Set();
 
     // ── Greeting ─────────────────────────────────────────
     lines.push(T.greeting || "Dear Parent/Guardian,");
@@ -1843,12 +1850,6 @@ function App({ onGenerateReport }) {
     }
 
     // ── General prompts (grouped by category) ────────────
-    const sent = (s) => (/[.!?]$/.test(s) ? s : s + ".");
-    const cap1 = (s) => s.charAt(0).toUpperCase() + s.slice(1);
-    const varyChild = (s, i) => s
-      .replace(/your child's/g, "their")
-      .replace(/your child/g, i % 2 === 0 ? "your child" : "your student");
-    const printedHeaders = new Set();
     Object.entries(selectedPrompts).forEach(([cat, prompts]) => {
       if (prompts && prompts.length > 0 && cat.startsWith("general")) {
         prompts.forEach((p, i) => lines.push(sent(cap1(varyChild(p, i)))));
