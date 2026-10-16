@@ -1812,10 +1812,10 @@ function App({ onGenerateReport }) {
 
     // ── Intro sentence ───────────────────────────────────
     const introVariants = [
-      `I wanted to share a quick update on how ${sName} is doing this week in ${classRef || "class"}.`,
-      `Here is a look at how ${sName} has been doing in ${classRef || "class"} this week.`,
-      `I am writing with a brief update on how ${sName} is progressing in ${classRef || "class"} this week.`,
-      `Below is an update on how things are going in ${classRef || "class"} this week.`,
+      `I wanted to share a quick update on how ${sName} is doing this week in ${cName || "class"}.`,
+      `Here is a look at how ${sName} has been doing in ${cName || "class"} this week.`,
+      `I am writing with a brief update on how ${sName} is progressing in ${cName || "class"} this week.`,
+      `Below is an update on how things are going in ${cName || "class"} this week.`,
     ];
     const introPick = (tName.length + (cName || "").length) % introVariants.length;
     const classRef = cName ? cName : "class";
