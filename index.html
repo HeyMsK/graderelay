@@ -2708,6 +2708,8 @@ function AuthWrapper() {
   const [password, setPassword] = React.useState("");
   const [authError, setAuthError] = React.useState("");
   const [authLoading, setAuthLoading] = React.useState(false);
+  const [recovering, setRecovering] = React.useState(false);
+  const [newPassword, setNewPassword] = React.useState("");
   const [user, setUser] = React.useState(null);
   const [profile, setProfile] = React.useState(null);
   const [showPaywall, setShowPaywall] = React.useState(false);
@@ -2743,6 +2745,7 @@ function AuthWrapper() {
   React.useEffect(() => {
     if (!supa) { setAuthStep("app"); return; }
     supa.auth.getSession().then(({ data: { session }, error }) => {
+      if (session && window.location.hash.includes("type=recovery")) { setRecovering(true); setAuthStep("login"); return; }
       if (error || !session) {
         // Clear bad tokens and show login
         supa.auth.signOut();
@@ -2758,6 +2761,7 @@ function AuthWrapper() {
       }
     });
     const { data: { subscription } } = supa.auth.onAuthStateChange((_event, session) => {
+      if (_event === "PASSWORD_RECOVERY") { setRecovering(true); setAuthStep("login"); return; }
       if (session?.user) {
         setUser(session.user);
         loadProfile(session.user.id, session.user.email);
@@ -2801,6 +2805,20 @@ function AuthWrapper() {
       setAuthError("✅ Password reset email sent! Check your inbox and follow the link to reset your password.");
     }
     setAuthLoading(false);
+  };
+
+  const handleSetNewPassword = async () => {
+    if (newPassword.length < 6) { setAuthError("Password must be at least 6 characters."); return; }
+    setAuthError(""); setAuthLoading(true);
+    const { error } = await supa.auth.updateUser({ password: newPassword });
+    if (error) { setAuthError(error.message); setAuthLoading(false); return; }
+    await supa.auth.signOut();
+    setRecovering(false);
+    setNewPassword("");
+    setPassword("");
+    setAuthError("✅ Password updated. Sign in with your new password.");
+    setAuthLoading(false);
+    setAuthStep("login");
   };
 
   const handleLogin = async () => {
@@ -2850,6 +2868,20 @@ function AuthWrapper() {
     return (
       <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
         <div style={{ color: "white", fontSize: 18, fontFamily: "'Source Serif 4', serif" }}>Loading...</div>
+      </div>
+    );
+  }
+
+  if (recovering) {
+    return (
+      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <div style={{ background: "rgba(255,255,255,0.97)", borderRadius: 20, padding: "40px 32px", maxWidth: 400, width: "100%", boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}>
+          <h1 style={{ fontFamily: "'Playfair Display', serif", fontSize: 26, color: "#1e1b4b", margin: "0 0 8px 0", textAlign: "center" }}>Set a new password</h1>
+          <p style={{ color: "#6b7280", fontSize: 14, textAlign: "center", marginBottom: 24 }}>Enter a new password for your account.</p>
+          <input type="password" placeholder="New password (at least 6 characters)" value={newPassword} onChange={e => setNewPassword(e.target.value)} style={{ width: "100%", padding: "12px 14px", borderRadius: 10, border: "2px solid #e5e7eb", fontSize: 15, marginBottom: 12, boxSizing: "border-box" }} />
+          {authError && <p style={{ color: authError.startsWith("✅") ? "#047857" : "#b91c1c", fontSize: 14, marginBottom: 12 }}>{authError}</p>}
+          <button onClick={handleSetNewPassword} disabled={authLoading} style={{ width: "100%", padding: 14, borderRadius: 10, border: "none", background: "#4c1d95", color: "white", fontSize: 16, fontWeight: 700, cursor: "pointer" }}>{authLoading ? "Saving..." : "Save new password"}</button>
+        </div>
       </div>
     );
   }
