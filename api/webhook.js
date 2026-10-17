@@ -1,14 +1,21 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const { createClient } = require('@supabase/supabase-js');
 
-module.exports = async function handler(req, res) {
+async function readRawBody(req) {
+  const chunks = [];
+  for await (const chunk of req) chunks.push(typeof chunk === 'string' ? Buffer.from(chunk) : chunk);
+  return Buffer.concat(chunks);
+}
+
+async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).end();
 
   const sig = req.headers['stripe-signature'];
   let event;
 
   try {
-    event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET);
+    const rawBody = await readRawBody(req);
+    event = stripe.webhooks.constructEvent(rawBody, sig, process.env.STRIPE_WEBHOOK_SECRET);
   } catch (err) {
     console.error('Webhook signature error:', err.message);
     return res.status(400).json({ error: 'Invalid signature' });
@@ -22,9 +29,7 @@ module.exports = async function handler(req, res) {
     const priceId = session.metadata?.priceId;
     if (!userId) return res.status(200).json({ received: true });
 
-    const PRICE_FOUNDING = process.env.PRICE_FOUNDING;
-    const PRICE_MONTHLY = process.env.PRICE_MONTHLY;
-    const PRICE_ANNUAL = process.env.PRICE_ANNUAL;
+    const PRICE_FOUNDING = process.env.PRICE_FOUNDING || 'price_1TJGJT3NEEAPPVNgF5Vn68JM';
 
     let plan = 'pro';
     if (priceId === PRICE_FOUNDING) plan = 'founding';
@@ -50,3 +55,6 @@ module.exports = async function handler(req, res) {
 
   return res.status(200).json({ received: true });
 };
+
+handler.config = { api: { bodyParser: false } };
+module.exports = handler;
