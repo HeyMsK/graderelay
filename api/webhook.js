@@ -22,39 +22,59 @@ async function handler(req, res) {
   }
 
   const supa = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_SERVICE_KEY);
+  const PRICE_FOUNDING = process.env.PRICE_FOUNDING || 'price_1TJGJT3NEEAPPVNgF5Vn68JM';
 
-  if (event.type === 'checkout.session.completed') {
-    const session = event.data.object;
-    const userId = session.metadata?.userId;
-    const priceId = session.metadata?.priceId;
-    if (!userId) return res.status(200).json({ received: true });
+  try {
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object;
+      const userId = session.metadata?.userId;
+      const priceId = session.metadata?.priceId;
+      const email = session.customer_details?.email || session.customer_email || null;
+      if (!userId) {
+        console.warn('checkout completed with no userId', session.id);
+        return res.status(200).json({ received: true, note: 'no userId' });
+      }
 
-    const PRICE_FOUNDING = process.env.PRICE_FOUNDING || 'price_1TJGJT3NEEAPPVNgF5Vn68JM';
+      const plan = priceId === PRICE_FOUNDING ? 'founding' : 'pro';
 
-    let plan = 'pro';
-    if (priceId === PRICE_FOUNDING) plan = 'founding';
+      // 1. Set the plan. Create the row if it doesn't exist yet.
+      const { error: planError } = await supa.from('profiles').upsert(
+        { id: userId, email, plan },
+        { onConflict: 'id' }
+      );
+      if (planError) {
+        console.error('Plan update failed for', userId, planError.message);
+        return res.status(500).json({ error: 'Plan update failed', detail: planError.message });
+      }
 
-    await supa.from('profiles').update({
-      plan,
-      stripe_customer_id: session.customer,
-      stripe_subscription_id: session.subscription || null,
-      plan_updated_at: new Date().toISOString(),
-    }).eq('id', userId);
+      // 2. Optional extra fields. Failure here should not block the plan.
+      const { error: extraError } = await supa.from('profiles').update({
+        stripe_customer_id: session.customer,
+        stripe_subscription_id: session.subscription || null,
+        plan_updated_at: new Date().toISOString(),
+      }).eq('id', userId);
+      if (extraError) console.warn('Extra fields not saved:', extraError.message);
 
-    console.log(`Updated user ${userId} to plan: ${plan}`);
-  }
-
-  if (event.type === 'customer.subscription.deleted') {
-    const sub = event.data.object;
-    const { data: profiles } = await supa.from('profiles')
-      .select('id').eq('stripe_subscription_id', sub.id).single();
-    if (profiles) {
-      await supa.from('profiles').update({ plan: 'free' }).eq('id', profiles.id);
+      console.log(`Updated user ${userId} to plan: ${plan}`);
     }
+
+    if (event.type === 'customer.subscription.deleted') {
+      const sub = event.data.object;
+      const { data: row, error: findError } = await supa.from('profiles')
+        .select('id').eq('stripe_subscription_id', sub.id).maybeSingle();
+      if (findError) throw new Error(findError.message);
+      if (row) {
+        const { error: downError } = await supa.from('profiles').update({ plan: 'free' }).eq('id', row.id);
+        if (downError) throw new Error(downError.message);
+      }
+    }
+  } catch (err) {
+    console.error('Webhook handler error:', err.message);
+    return res.status(500).json({ error: err.message });
   }
 
   return res.status(200).json({ received: true });
-};
+}
 
 handler.config = { api: { bodyParser: false } };
 module.exports = handler;
