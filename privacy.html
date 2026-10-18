@@ -1,1 +1,34 @@
- 
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+
+module.exports = async function handler(req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+
+  try {
+    const { priceId, userId, email } = req.body || {};
+    if (!priceId || !userId) return res.status(400).json({ error: 'Missing required fields' });
+
+    // Auto-detect if price is one-time or recurring by fetching from Stripe
+    const price = await stripe.prices.retrieve(priceId);
+    const isOneTime = price.type === 'one_time';
+
+    const session = await stripe.checkout.sessions.create({
+      mode: isOneTime ? 'payment' : 'subscription',
+      line_items: [{ price: priceId, quantity: 1 }],
+      success_url: 'https://graderelay.com?payment=success',
+      cancel_url: 'https://graderelay.com?payment=cancelled',
+      customer_email: email,
+      metadata: { userId, priceId },
+      allow_promotion_codes: true,
+      // Skip the card form when the total is $0 (e.g., a 100% off code)
+      payment_method_collection: 'if_required',
+    });
+    return res.status(200).json({ url: session.url });
+  } catch (err) {
+    console.error('Stripe error:', err.message);
+    return res.status(500).json({ error: err.message });
+  }
+}; 
