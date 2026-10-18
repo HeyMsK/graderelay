@@ -37,11 +37,17 @@ written permission from Khali Gap Media LLC.
 
 FERPA & PRIVACY
 ---------------
-GradeRelay is designed to be FERPA-compliant by not collecting or storing
-any student personally identifiable information (PII). Users of this software
-are solely responsible for ensuring their use complies with applicable
-federal, state, and local student privacy laws, including but not limited
-to FERPA (Family Educational Rights and Privacy Act).
+GradeRelay is designed to avoid collecting student information. The report
+form does not request student names, and generated report text is not saved
+to our database. Teacher account and subscription information is stored.
+Text sent to the optional AI translate and grammar-check features is
+processed by a third-party AI service.
+
+Users of this software are solely responsible for ensuring their use complies
+with applicable federal, state, and local student privacy laws, including but
+not limited to FERPA (Family Educational Rights and Privacy Act). Nothing in
+this license is a representation that GradeRelay is certified or approved
+under any privacy law.
 
 DISCLAIMER
 ----------
@@ -56,9 +62,12 @@ CONTACT
 For licensing inquiries, commercial use requests, or partnership opportunities:
 
   Khali Gap Media LLC
-  Brooklyn, New York
   support@graderelay.com
   graderelay.com
+
+---
+
+GradeRelay is part of the Echo Keepers Media platform.
 
 ---
 
