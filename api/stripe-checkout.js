@@ -24,7 +24,7 @@ module.exports = async function handler(req, res) {
       metadata: { userId, priceId },
       allow_promotion_codes: true,
       // Skip the card form when the total is $0 (e.g., a 100% off code)
-      payment_method_collection: 'if_required',
+    ...(mode === 'subscription' ? { payment_method_collection: 'if_required' } : {}),
     });
     return res.status(200).json({ url: session.url });
   } catch (err) {
