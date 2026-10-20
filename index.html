@@ -2984,7 +2984,26 @@ function AuthWrapper() {
         )}
         <button onClick={handleUpgrade}>Upgrade</button>
 
-← paste the Manage subscription code here, on its own line
+<button
+  onClick={async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) { alert("Please sign in first."); return; }
+      const r = await fetch("/api/billing-portal", {
+        method: "POST",
+        headers: { Authorization: "Bearer " + session.access_token },
+      });
+      const j = await r.json();
+      if (j.url) window.location.href = j.url;
+      else alert(j.error || "Could not open billing page.");
+    } catch (e) {
+      alert("Could not open billing page. Please try again.");
+    }
+  }}
+  style={{ padding: "8px 14px", borderRadius: 8, border: "1px solid #d1d5db", background: "#fff", cursor: "pointer", fontSize: 14 }}
+>
+  Manage subscription
+</button>
 
 <button onClick={handleSignOut}>Sign Out</button>
         <button onClick={handleSignout}
