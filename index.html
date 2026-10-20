@@ -2982,12 +2982,10 @@ function AuthWrapper() {
             Upgrade
           </button>
         )}
-        <button onClick={handleUpgrade}>Upgrade</button>
-
 <button
   onClick={async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
+      const { data: { session } } = await supa.auth.getSession();
       if (!session) { alert("Please sign in first."); return; }
       const r = await fetch("/api/billing-portal", {
         method: "POST",
